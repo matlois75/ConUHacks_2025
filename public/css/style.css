@@ -2,13 +2,14 @@
    GENERAL RESETS & BASE STYLES
 ----------------------------------- */
 html, body {
-    margin: 0;
-    padding: 0;
     /* Concordia often uses Gill Sans / GillSansMTPro, fallback to sans-serif */
     font-family: "Gill Sans", "GillSansMTProBook", Arial, sans-serif;
     color: #111;
     background-color: #fff;
     line-height: 1.6;
+    max-width: 1800px;
+    margin: 0 auto;
+    padding: 0 2rem;
 }
 
 #main-content {
@@ -57,15 +58,8 @@ img {
 /* -----------------------------------
    HERO BANNER
 ----------------------------------- */
-.hero {
-    position: relative;
-    background-color: #000; /* fallback if no image loads */
-    background-position: center top;
-    background-size: cover;
-    background-repeat: no-repeat;
-    padding: 4rem 1rem; /* top/bottom padding around text */
-    color: #fff;
-}
+
+
 
 .hero .hero-text {
     max-width: 800px;
@@ -81,18 +75,6 @@ img {
 .hero-subtitle {
     font-size: 1.5rem;
     margin-top: 1rem;
-}
-
-@media (max-width: 767px) {
-    .hero {
-        padding: 3rem 1rem;
-    }
-    .hero-title {
-        font-size: 2rem;
-    }
-    .hero-subtitle {
-        font-size: 1.25rem;
-    }
 }
 
 /* -----------------------------------
@@ -193,28 +175,6 @@ h2 {
     margin-bottom: 1.5rem;
 }
 
-/* Extra spacing for images + text block */
-.c-wysiwyg {
-    margin-bottom: 2rem;
-}
-.c-wysiwyg .rte p {
-    margin-bottom: 1rem;
-}
-
-/* -----------------------------------
-   IFRAMES (PANORAMAS, ETC.)
------------------------------------ */
-.external.parbase.section iframe {
-    width: 100%;
-    height: 500px;
-    border: none;
-}
-@media (max-width: 767px) {
-    .external.parbase.section iframe {
-        height: 300px;
-    }
-}
-
 /* -----------------------------------
    BREADCRUMB
 ----------------------------------- */
@@ -311,40 +271,6 @@ footer .container.width1200 {
     padding: 0;
     box-sizing: border-box;
 }
-
-body {
-    font-family: "Gill Sans", "GillSansMTProBook", Arial, sans-serif;
-}
-
-/* --- Header layout --- */
-.c-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    /* The top bar style: white background, slight shadow, etc. */
-    background-color: #fff;
-    border-bottom: 1px solid #ddd;
-    padding: 0.5rem 1rem;
-}
-
-/* Left side: Concordia logo */
-.c-header__left {
-    display: flex;
-    align-items: center;
-}
-.c-header__logo {
-    height: 40px; /* Adjust as needed */
-    width: auto;
-    display: block;
-}
-
-/* Right side: language toggle, user bubble, hamburger */
-.c-header__right {
-    display: flex;
-    align-items: center;
-    gap: 1rem; /* space between items */
-}
-
 /* Language toggle button */
 .lang-toggle {
     border: 1px solid #ccc;
