@@ -3,13 +3,13 @@ class RoomManager {
         this.rooms = {
             'library': {
                 name: 'Main Library',
-                modelUrl: 'assets/models/library.splat',
+                modelUrl: '../assets/models/ben-room-30k.splat',
                 description: 'A spacious study area with extensive resources',
                 features: ['Silent study zones', 'Group study rooms', 'Digital resources']
             },
             'lecture-hall': {
                 name: 'Lecture Hall A',
-                modelUrl: 'assets/models/lecture-hall.splat',
+                modelUrl: 'assets/models/concordia.splat',
                 description: 'Modern lecture theater with multimedia capabilities',
                 features: ['300 seat capacity', 'Advanced AV system', 'Wheelchair accessible']
             }
