@@ -1,145 +1,293 @@
 :root {
-    --primary-color: #912238;
-    --secondary-color: #3498db;
-    --background-color: #f5f6fa;
-    --text-color: #000000;
-    --header-height: 60px;
+  --primary-color: #912238;
+  --secondary-color: #3498db;
+  --background-color: #f5f6fa;
+  --text-color: #000000;
+  --header-height: 60px;
 }
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: 'Arial', sans-serif;
-    line-height: 1.6;
-    color: var(--text-color);
-    background-color: var(--background-color);
+  font-family: "Arial", sans-serif;
+  line-height: 1.6;
+  color: var(--text-color);
+  background-color: var(--background-color);
 }
 
 .site-header {
-    background-color: var(--primary-color);
-    color: white;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 1000;
-    height: var(--header-height);
+  background-color: var(--primary-color);
+  color: white;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+  height: var(--header-height);
 }
 
 .main-nav {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
 }
 
 .nav-links {
-    display: flex;
-    list-style: none;
-    gap: 20px;
+  display: flex;
+  list-style: none;
+  gap: 20px;
 }
 
 .nav-links a {
-    color: white;
-    text-decoration: none;
-    padding: 5px 10px;
+  color: white;
+  text-decoration: none;
+  padding: 5px 10px;
 }
 
 .main-content {
-    margin-top: var(--header-height);
-    padding: 20px;
-    max-width: 1200px;
-    margin: var(--header-height) auto 0;
+  margin-top: var(--header-height);
+  padding: 20px;
+  max-width: 1200px;
+  margin: var(--header-height) auto 0;
 }
 
 .section {
-    margin-bottom: 40px;
-    padding: 20px;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin-bottom: 40px;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .rooms-section {
-    display: grid;
-    grid-template-columns: 300px 1fr;
-    gap: 20px;
-    min-height: 600px;
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 20px;
+  min-height: 600px;
 }
 
 .room-list {
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
 }
 
 .room-card {
-    padding: 15px;
-    margin: 10px 0;
-    border: 1px solid #eee;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: all 0.3s ease;
+  padding: 15px;
+  margin: 10px 0;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .room-card:hover {
-    background-color: #f5f5f5;
-    transform: translateY(-2px);
+  background-color: #f5f5f5;
+  transform: translateY(-2px);
 }
 
 .viewer-container {
-    position: relative;
-    background: white;
-    border-radius: 8px;
-    overflow: hidden;
+  position: relative;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 #viewer-wrapper {
-    position: relative;
-    width: 100%;
-    height: 500px;
-    background: #000;
-    border-radius: 8px;
-    overflow: hidden;
-    touch-action: none; 
-    cursor: grab; 
+  position: relative;
+  width: 100%;
+  height: 500px;
+  background: #000;
+  border-radius: 8px;
+  overflow: hidden;
+  touch-action: none;
+  cursor: grab;
 }
 
 #viewer-wrapper:active {
-    cursor: grabbing;
+  cursor: grabbing;
 }
 
 .viewer-controls {
-    padding: 15px;
-    background: #f8f9fa;
-    border-top: 1px solid #eee;
+  padding: 15px;
+  background: #f8f9fa;
+  border-top: 1px solid #eee;
 }
 
 .controls-text {
-    font-size: 0.9em;
-    color: #666;
+  font-size: 0.9em;
+  color: #666;
 }
 
 .site-footer {
-    background: var(--primary-color);
-    color: white;
-    text-align: center;
-    padding: 20px;
-    margin-top: 40px;
+  background: var(--primary-color);
+  color: white;
+  text-align: center;
+  padding: 20px;
+  margin-top: 40px;
 }
 
 #canvas {
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    touch-action: none;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+}
+
+.fact-overlay {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  max-width: 350px;
+  background-color: rgba(0, 0, 0, 0.7); /* More transparent */
+  border-radius: 12px;
+  padding: 8px 12px; /* Reduced padding */
+  color: white;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1000;
+  backdrop-filter: blur(8px); /* Adds a subtle blur effect */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.fact-content {
+  display: flex;
+  align-items: center; /* Changed from flex-start */
+  gap: 8px; /* Reduced gap */
+}
+
+.fact-icon {
+  background: none;
+  border-radius: 50%;
+  width: 24px; /* Smaller icon */
+  height: 24px; /* Smaller icon */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  padding: 3px;
+}
+
+.fact-icon-img {
+  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+#fact-text {
+  margin: 0;
+  font-size: 13px; /* Smaller text */
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.fact-overlay.visible {
+  opacity: 1;
+}
+
+.left-panel {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.tab-navigation {
+  display: flex;
+  border-bottom: 2px solid #eee;
+}
+
+.tab-button {
+  flex: 1;
+  padding: 16px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 500;
+  color: #666;
+  transition: all 0.3s ease;
+}
+
+.tab-button:hover {
+  background-color: #f5f5f5;
+}
+
+.tab-button.active {
+  color: var(--primary-color);
+  border-bottom: 2px solid var(--primary-color);
+  margin-bottom: -2px;
+}
+
+.tab-content {
+  display: none;
+  padding: 20px;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+.chat-interface {
+  display: flex;
+  flex-direction: column;
+  height: 60%;
+}
+
+.chat-messages {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 10px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.chat-input {
+  flex-grow: 1;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  resize: none; /* Prevents manual resizing */
+  min-height: 44px; /* Matches the original input height */
+  max-height: 200px; /* Prevents it from growing too tall */
+  line-height: 1.4;
+  overflow-y: hidden; /* Hides scrollbar while auto-growing */
+  font-family: inherit; /* Matches the site's font */
+}
+
+.chat-input-area {
+  display: flex;
+  gap: 8px;
+  align-items: flex-end; /* Aligns button to bottom of growing textarea */
+}
+
+.chat-send {
+  padding: 12px 24px;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.chat-send:hover {
+  background-color: #7a1d2e;
 }
