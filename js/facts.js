@@ -25,6 +25,18 @@ class FactDisplay {
     }, 5000);
 
     setInterval(() => this.showFact(), 15000); // Show new fact every 15 seconds
+
+    // Add click handler to fact overlay
+    this.overlay.addEventListener("click", () => {
+      // Find and click the Sting tab
+      const stingTab = document.querySelector('.tab-button[data-tab="chat"]');
+      if (stingTab) {
+        stingTab.click();
+      }
+    });
+
+    // Make the fact overlay appear clickable
+    this.overlay.style.cursor = "pointer";
   }
 
   selectFact() {
@@ -109,9 +121,11 @@ document.addEventListener("DOMContentLoaded", () => {
       const tabId = `${button.dataset.tab}-tab`;
       document.getElementById(tabId).classList.add("active");
 
-      // If switching to chat tab, adjust textarea height
+      // If switching to chat tab, adjust textarea height and focus input
       if (button.dataset.tab === "chat") {
         adjustHeight();
+        const chatInput = document.querySelector(".chat-input");
+        chatInput.focus();
       }
     });
   });
