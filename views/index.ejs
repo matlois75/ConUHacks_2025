@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Concordia - EJS Example</title>
+    <!-- Your global style -->
+    <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body class="full-window concordia page basicpage">
+
+
+<%- include('partials/header', {
+title: 'Home',
+css: '/css/header.css'
+}) %>
+
+<div id="sgw_banner">
+    <img
+            src="/assets/sgw_banner.png"
+            alt="Sir George Williams Campus Banner"
+            class="full-width" />
+</div>
+
+<main id="main-content">
+
+
+    <section class="content">
+        <h1>Welcome to Concordia University</h1>
+        <p>
+            Concordia University is a public comprehensive university located in Montreal, Quebec, Canada on unceded Indigenous lands. Founded in 1974 following the merger of Loyola College and Sir George Williams University, Concordia is one of the three universities in Quebec where English is the primary language of instruction.
+        </p>
+        <p>
+            Concordia is a diverse and inclusive community committed to teaching, research and service to society. Our university is a place where innovation and creativity are encouraged and celebrated. We are committed to providing an open and accessible environment to all members of our community.
+        </p>
+        <p>
+            We offer a wide range of undergraduate and graduate programs in the arts, humanities, social sciences, engineering, computer science, business, and the natural and applied sciences. Our programs are designed to prepare students for the challenges and opportunities of the 21st century.
+        </p>
+        <p>
+            We invite you to explore our website to learn more about our programs, research, and community engagement activities. We look forward to welcoming you to our campus and to our community.
+        </p>
+</main>
+
+
+<%- include('partials/footer') %>
+
+</body>
+</html>

@@ -1,0 +1,387 @@
+/* -----------------------------------
+   GENERAL RESETS & BASE STYLES
+----------------------------------- */
+html, body {
+    margin: 0;
+    padding: 0;
+    /* Concordia often uses Gill Sans / GillSansMTPro, fallback to sans-serif */
+    font-family: "Gill Sans", "GillSansMTProBook", Arial, sans-serif;
+    color: #111;
+    background-color: #fff;
+    line-height: 1.6;
+}
+
+#main-content {
+    max-width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+
+a {
+    color: #912338;
+    text-decoration: none;
+}
+a:hover,
+a:focus {
+    text-decoration: underline;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 0;
+    margin-bottom: 0.5em;
+    font-weight: normal;
+}
+p {
+    margin-top: 0;
+    margin-bottom: 1em;
+}
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Container utility (like .container in Bootstrap) */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* For general sections */
+.section {
+    padding: 2rem 0;
+}
+
+/* -----------------------------------
+   HERO BANNER
+----------------------------------- */
+.hero {
+    position: relative;
+    background-color: #000; /* fallback if no image loads */
+    background-position: center top;
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 4rem 1rem; /* top/bottom padding around text */
+    color: #fff;
+}
+
+.hero .hero-text {
+    max-width: 800px;
+    margin: 0 auto; /* center horizontally */
+    text-align: left; /* or center if you prefer */
+}
+.hero-title {
+    font-size: 3.5rem; /* large hero text */
+    line-height: 1.1;
+    font-weight: bold; /* emulate “bold-reg-xlarge” style */
+    margin-bottom: 1rem;
+}
+.hero-subtitle {
+    font-size: 1.5rem;
+    margin-top: 1rem;
+}
+
+@media (max-width: 767px) {
+    .hero {
+        padding: 3rem 1rem;
+    }
+    .hero-title {
+        font-size: 2rem;
+    }
+    .hero-subtitle {
+        font-size: 1.25rem;
+    }
+}
+
+/* -----------------------------------
+   “Back to all tours” link
+----------------------------------- */
+.btn-simple-back {
+    display: inline-block;
+    margin: 1.5rem 0;
+    font-weight: normal;
+    position: relative;
+    padding-left: 30px; /* space for arrow icon */
+}
+
+/* a left arrow as a pseudo-element */
+.btn-simple-back::before {
+    content: "←";  /* or use a background image of an arrow */
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #912338;
+}
+
+/* -----------------------------------
+   PINK (LIGHT BURGUNDY) INTRO BLOCK
+----------------------------------- */
+.black-link {
+    background-color: #E9D3D7; /* the pinkish color */
+    padding: 2rem 1rem;
+    color: #111111;
+}
+
+.black-link p {
+    margin-bottom: 1rem;
+    font-size: 1.125rem; /* ~18px */
+    line-height: 1.5;
+}
+
+.black-link h2,
+.black-link h3 {
+    color: #111;
+    margin-top: 0;
+}
+
+/* -----------------------------------
+   STEP NAVIGATION (RED/WHITE PILLS)
+----------------------------------- */
+.c-step-navigation__container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+.c-step-navigation__step {
+    list-style: none;
+}
+.c-step-navigation__link {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 600;
+}
+.c-step-navigation__link-block {
+    padding: 0.5rem 1.5rem;
+    border-radius: 9999px; /* pill shape */
+    background-color: #f3f3f3;
+    color: #912338;
+    transition: background-color 0.2s, color 0.2s;
+}
+.c-step-navigation__link-block:hover,
+.c-step-navigation__link-block:focus {
+    background-color: #ddd;
+}
+.c-step-navigation__step--active .c-step-navigation__link-block {
+    background-color: #912338;
+    color: #fff;
+}
+
+/* optional small triangle below the active item, if you like */
+.c-step-navigation__triangle {
+    display: none; /* hidden on large screens in Concordia theme */
+}
+
+/* -----------------------------------
+   CONTENT HEADINGS & TEXT
+----------------------------------- */
+/* e.g. “Hall and Library Buildings” heading style */
+h2 {
+    font-size: 2rem;
+    font-weight: 700; /* mimic bold, but Concordia’s style is “bold condensed” */
+    margin: 2rem 0 0.5rem;
+}
+.xlarge-text {
+    font-size: 1.25rem; /* about 20px */
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+}
+
+/* Extra spacing for images + text block */
+.c-wysiwyg {
+    margin-bottom: 2rem;
+}
+.c-wysiwyg .rte p {
+    margin-bottom: 1rem;
+}
+
+/* -----------------------------------
+   IFRAMES (PANORAMAS, ETC.)
+----------------------------------- */
+.external.parbase.section iframe {
+    width: 100%;
+    height: 500px;
+    border: none;
+}
+@media (max-width: 767px) {
+    .external.parbase.section iframe {
+        height: 300px;
+    }
+}
+
+/* -----------------------------------
+   BREADCRUMB
+----------------------------------- */
+.breadcrumb {
+    font-size: 0.875rem;
+    color: #111111;
+    padding: 1rem 0;
+    margin: 0;
+    font-weight: bold;
+}
+.breadcrumb a {
+    color: #912338;
+    text-decoration: underline;
+}
+.breadcrumb a:hover {
+    text-decoration: none;
+}
+.breadcrumb .breadcrumb-item + .breadcrumb-item::before {
+    content: ">";
+    color: #111111;
+    margin: 0 0.5rem;
+}
+
+/* -----------------------------------
+   FOOTER (EXAMPLE)
+----------------------------------- */
+footer.c-footer.custom {
+    background-color: #f8f8f8;
+    color: #111111;
+    padding: 2rem 0;
+    margin-top: 2rem;
+    font-size: 0.875rem;
+}
+footer .container.width1200 {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+.deep-footer-phone,
+.deep-footer-links,
+.deep-footer-copyright {
+    margin-bottom: 1rem;
+}
+.deep-footer-links li {
+    display: inline-block;
+    margin-right: 1rem;
+}
+
+/* Example “Concordia Social” block within the footer */
+.c-social-media__container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+}
+.c-social-media__container .title-container h2 {
+    font-size: 1.5rem;
+    color: #fff; /* if the background is burgundy, text is white */
+}
+.link-container .social-media-links li {
+    margin-right: 1rem;
+}
+
+/* -----------------------------------
+   RESPONSIVE TWEAKS
+----------------------------------- */
+/* Adjust some spacing on smaller screens */
+@media (max-width: 767px) {
+    .section {
+        padding: 1.5rem 1rem;
+    }
+    h2 {
+        font-size: 1.5rem;
+        margin: 1rem 0;
+    }
+    .xlarge-text {
+        font-size: 1.125rem; /* ~18px */
+    }
+    .black-link {
+        padding: 1.5rem 1rem;
+    }
+    .c-step-navigation__container {
+        margin-top: 1rem;
+    }
+    .breadcrumb {
+        padding: 0.5rem 0;
+    }
+}
+
+/* HEADER */
+/* Basic reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Gill Sans", "GillSansMTProBook", Arial, sans-serif;
+}
+
+/* --- Header layout --- */
+.c-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* The top bar style: white background, slight shadow, etc. */
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+    padding: 0.5rem 1rem;
+}
+
+/* Left side: Concordia logo */
+.c-header__left {
+    display: flex;
+    align-items: center;
+}
+.c-header__logo {
+    height: 40px; /* Adjust as needed */
+    width: auto;
+    display: block;
+}
+
+/* Right side: language toggle, user bubble, hamburger */
+.c-header__right {
+    display: flex;
+    align-items: center;
+    gap: 1rem; /* space between items */
+}
+
+/* Language toggle button */
+.lang-toggle {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    padding: 0.4rem 0.6rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: #111111;
+}
+.lang-toggle:hover {
+    background: #f6f6f6;
+}
+
+/* User bubble (e.g. “RR”) */
+.user-bubble {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: #912338; /* Concordia burgundy */
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Sidebar (hamburger) button */
+.sidebar-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 4px; /* spacing between lines */
+}
