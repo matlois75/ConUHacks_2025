@@ -958,7 +958,7 @@ async function main() {
         activeKeys = [];
     });
 
-    window.addEventListener(
+    canvas.addEventListener(
         "wheel",
         (e) => {
             carousel = false;
