@@ -1482,3 +1482,60 @@ main().catch((err) => {
     document.getElementById("spinner").style.display = "none";
     document.getElementById("message").innerText = err.toString();
 });
+
+// Expose the loadNewModel function globally
+window.loadNewModel = async function(modelUrl) {
+    try {
+        const req = await fetch(modelUrl, {
+            mode: "cors",
+            credentials: "omit"
+        });
+        
+        if (req.status != 200) {
+            throw new Error(`${req.status} Unable to load ${req.url}`);
+        }
+
+        // Reset current state
+        vertexCount = 0;
+        buffer = null;
+        
+        // Read and process the new model
+        const reader = req.body.getReader();
+        let splatData = new Uint8Array(req.headers.get("content-length"));
+        
+        let bytesRead = 0;
+        let lastVertexCount = -1;
+
+        while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
+
+            splatData.set(value, bytesRead);
+            bytesRead += value.length;
+
+            if (vertexCount > lastVertexCount) {
+                if (!isPly(splatData)) {
+                    worker.postMessage({
+                        buffer: splatData.buffer,
+                        vertexCount: Math.floor(bytesRead / rowLength)
+                    });
+                }
+                lastVertexCount = vertexCount;
+            }
+        }
+
+        if (isPly(splatData)) {
+            worker.postMessage({ ply: splatData.buffer, save: false });
+        } else {
+            worker.postMessage({
+                buffer: splatData.buffer,
+                vertexCount: Math.floor(bytesRead / rowLength)
+            });
+        }
+
+        return true;
+    } catch (error) {
+        console.error('Error loading model:', error);
+        throw error;
+    }
+};
