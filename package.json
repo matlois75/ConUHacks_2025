@@ -2,7 +2,7 @@
   "name": "conuhacks-2025",
   "version": "1.0.0",
   "description": "SGW Campus - Academic Buildings and Learning Spaces",
-  "main": "src/index.js",
+  "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
