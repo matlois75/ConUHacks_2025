@@ -149,28 +149,28 @@ body {
   bottom: 16px;
   right: 16px;
   max-width: 350px;
-  background-color: rgba(0, 0, 0, 0.7); /* More transparent */
+  background-color: rgba(0, 0, 0, 0.7);
   border-radius: 12px;
-  padding: 8px 12px; /* Reduced padding */
+  padding: 8px 12px;
   color: white;
   opacity: 0;
   transition: opacity 0.3s ease;
   z-index: 1000;
-  backdrop-filter: blur(8px); /* Adds a subtle blur effect */
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  backdrop-filter: blur(8px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .fact-content {
   display: flex;
-  align-items: center; /* Changed from flex-start */
-  gap: 8px; /* Reduced gap */
+  align-items: center;
+  gap: 8px;
 }
 
 .fact-icon {
   background: none;
   border-radius: 50%;
-  width: 24px; /* Smaller icon */
-  height: 24px; /* Smaller icon */
+  width: 24px;
+  height: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -187,7 +187,7 @@ body {
 
 #fact-text {
   margin: 0;
-  font-size: 13px; /* Smaller text */
+  font-size: 13px;
   line-height: 1.4;
   color: rgba(255, 255, 255, 0.95);
 }
@@ -246,13 +246,15 @@ body {
 .chat-interface {
   display: flex;
   flex-direction: column;
-  height: 60%;
+  height: 100%;
+  max-height: 600px;
+  background: #ffffff;
 }
 
 .chat-messages {
   flex-grow: 1;
   overflow-y: auto;
-  padding: 10px;
+  padding: 20px;
   background: #f8f9fa;
   border-radius: 8px;
   margin-bottom: 16px;
@@ -264,18 +266,21 @@ body {
   border: 1px solid #ddd;
   border-radius: 6px;
   font-size: 14px;
-  resize: none; /* Prevents manual resizing */
-  min-height: 44px; /* Matches the original input height */
-  max-height: 200px; /* Prevents it from growing too tall */
+  resize: none;
+  min-height: 44px;
+  max-height: 200px;
   line-height: 1.4;
-  overflow-y: hidden; /* Hides scrollbar while auto-growing */
-  font-family: inherit; /* Matches the site's font */
+  overflow-y: hidden;
+  font-family: inherit;
 }
 
 .chat-input-area {
   display: flex;
   gap: 8px;
-  align-items: flex-end; /* Aligns button to bottom of growing textarea */
+  padding: 16px;
+  background: #ffffff;
+  border-top: 1px solid #eee;
+  align-items: flex-end;
 }
 
 .chat-send {
@@ -290,4 +295,37 @@ body {
 
 .chat-send:hover {
   background-color: #7a1d2e;
+}
+
+.message {
+  margin-bottom: 16px;
+  max-width: 80%;
+  padding: 8px 12px;
+  border-radius: 12px;
+  line-height: 1.4;
+}
+
+.user-message {
+  background-color: #e3f2fd;
+  margin-left: auto;
+  color: #1565c0;
+}
+
+.sting-message {
+  background-color: #f5f5f5;
+  margin-right: auto;
+  color: #333;
+}
+
+.message-name {
+  font-weight: bold;
+  margin-bottom: 4px;
+  color: #912238;
+}
+
+.typing-indicator {
+  color: #666;
+  font-style: italic;
+  margin: 8px 0;
+  padding-left: 12px;
 }

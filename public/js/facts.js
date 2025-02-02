@@ -1,21 +1,25 @@
 class FactDisplay {
   constructor() {
-    this.facts = [
-      "The Hall Building was inaugurated in 1966 as part of Sir George Williams University, before it merged with Loyola College to form Concordia University.",
-      "The iconic brutalist architecture of the Hall Building represents a significant period in Montreal's architectural history.",
-      "LB Clarke Theatre, located on the first floor, hosts numerous student performances and university events throughout the year.",
-      "The Hall Building's first floor houses Le Gym, Concordia's main fitness center offering state-of-the-art equipment and facilities to students.",
-      "The Welcome Center on the first floor serves as the primary information hub for visitors, prospective students, and campus tours.",
-      "The Hall Building's first floor connects directly to the Guy-Concordia metro station through an underground tunnel.",
-      "The massive windows on the first floor allow abundant natural light and offer views of the bustling downtown Montreal streetscape.",
-      "The People's Potato, a vegan soup kitchen run by students, operates from the Hall Building and serves free lunches to the Concordia community.",
-      "The first floor houses various student service offices, making it a central hub for administrative support and student resources.",
-      "The Security Desk on the first floor operates 24/7, ensuring campus safety and providing assistance to students and visitors.",
-    ];
+    this.facts = [];
     this.recentFacts = new Set();
     this.overlay = document.getElementById("fact-overlay");
     this.factText = document.getElementById("fact-text");
-    this.init();
+    this.fetchFacts();
+  }
+
+  async fetchFacts() {
+    try {
+      const response = await fetch("js/concordia-info.json");
+      const data = await response.json();
+      if (data["hall-floor-1"]) {
+        this.facts = data["hall-floor-1"];
+      } else {
+        console.error("No facts found in JSON.");
+      }
+      this.init(); // Initialize after facts are loaded
+    } catch (err) {
+      console.error("Error loading facts:", err);
+    }
   }
 
   init() {
@@ -26,7 +30,6 @@ class FactDisplay {
 
     setInterval(() => this.showFact(), 15000); // Show new fact every 15 seconds
 
-    // Add click handler to fact overlay
     this.overlay.addEventListener("click", () => {
       // Find and click the Sting tab
       const stingTab = document.querySelector('.tab-button[data-tab="chat"]');
@@ -77,7 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   tabButtons.forEach((button) => {
     button.addEventListener("click", () => {
-      // Remove active class from all buttons and contents
+      // Remove active class from all buttons and contents when tab is not open
       document
         .querySelectorAll(".tab-button")
         .forEach((btn) => btn.classList.remove("active"));
@@ -85,7 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
         .querySelectorAll(".tab-content")
         .forEach((content) => content.classList.remove("active"));
 
-      // Add active class to clicked button and corresponding content
+      // Add active class to clicked button and corresponding content when tab is open
       button.classList.add("active");
       const tabId = `${button.dataset.tab}-tab`;
       document.getElementById(tabId).classList.add("active");
@@ -108,7 +111,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   tabButtons.forEach((button) => {
     button.addEventListener("click", () => {
-      // Remove active class from all buttons and contents
       document
         .querySelectorAll(".tab-button")
         .forEach((btn) => btn.classList.remove("active"));
@@ -116,7 +118,6 @@ document.addEventListener("DOMContentLoaded", () => {
         .querySelectorAll(".tab-content")
         .forEach((content) => content.classList.remove("active"));
 
-      // Add active class to clicked button and corresponding content
       button.classList.add("active");
       const tabId = `${button.dataset.tab}-tab`;
       document.getElementById(tabId).classList.add("active");
@@ -130,7 +131,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Regular textarea event listeners
   textarea.addEventListener("input", adjustHeight);
   textarea.addEventListener("focus", adjustHeight);
 
@@ -138,8 +138,8 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       // Trigger send action here
-      textarea.value = ""; // Clear input
-      adjustHeight(); // Adjust height after clearing
+      textarea.value = "";
+      adjustHeight();
     }
   });
 });
