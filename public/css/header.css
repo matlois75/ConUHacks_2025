@@ -1,0 +1,100 @@
+.header-container{
+    max-width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+/* HEADER CONTAINER */
+.c-header {
+    width: 100%;
+    background: white;
+    padding: 10px 20px;
+}
+
+/* FLEX CONTAINER: Aligns logo and buttons on the same row */
+.c-header__container {
+    display: flex;
+    justify-content: space-between; /* Pushes logo left, buttons right */
+    align-items: center; /* Ensures everything is vertically aligned */
+    width: 100%;
+}
+
+/* LOGO */
+.c-header__logo {
+    height: 10%;
+    width: auto;
+    padding-top:0;
+
+}
+
+/* RIGHT SECTION (BUTTONS) */
+.c-header__right {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Space between buttons */
+}
+
+/* BUTTON STYLES */
+.btn-lang, .btn-user, .btn-hamburger {
+    background: none;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 10px 10px;
+    border-radius: 5px;
+}
+
+/* User initials bubble */
+.btn-user {
+    background: #800000; /* Concordia burgundy */
+    color: white;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+
+}
+
+/* DIVIDER LINE */
+.c-header-divider {
+    border: none;
+    height: 1px;
+    background-color: #ccc;
+    margin: 0;
+
+}
+
+/* BREADCRUMB NAVIGATION */
+.c-breadcrumb {
+    width: 100%;
+    text-align: left; /* Aligns navbar to the left */
+    padding: 10px 20px;
+    font-weight: bold;
+}
+
+.breadcrumb {
+    display: flex;
+    justify-content: flex-start; /* Makes the breadcrumb glued to the left */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.breadcrumb-item {
+    font-size: 14px;
+}
+
+.breadcrumb-item:hover{
+    text-decoration: underline;
+
+}
+
+/* Apply correct `/` separator between breadcrumb items */
+.breadcrumb-item + .breadcrumb-item::before {
+    content: " / "; /* Now correctly displays '/' */
+    padding: 0 5px;
+    color: #555;
+}
+
+.breadcrumb-item a {
+    text-decoration: none;
+    color: #800000;
+}

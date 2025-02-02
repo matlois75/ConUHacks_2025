@@ -156,17 +156,6 @@ let cameras = [
 ];
 
 let camera = cameras[0];
-let worker; // Declare worker globally
-let vertexCount = 0;
-const rowLength = 3 * 4 + 3 * 4 + 4 + 4;
-let buffer = null;
-
-window.isPly = function(splatData) {
-    return splatData[0] == 112 &&
-           splatData[1] == 108 &&
-           splatData[2] == 121 &&
-           splatData[3] == 10;
-};
 
 function getProjectionMatrix(fx, fy, width, height) {
     const znear = 0.2;
@@ -754,7 +743,12 @@ async function main() {
         viewMatrix = JSON.parse(decodeURIComponent(location.hash.slice(1)));
         carousel = false;
     } catch (err) {}
-    const url = new URL("../assets/models/ben-room-30k.splat", location.href);
+    const url = new URL(
+        // "nike.splat",
+        // location.href,
+        params.get("url") || "train.splat",
+        "https://huggingface.co/cakewalk/splat-data/resolve/main/",
+    );
     const req = await fetch(url, {
         mode: "cors", // no-cors, *cors, same-origin
         credentials: "omit", // include, *same-origin, omit
@@ -771,7 +765,7 @@ async function main() {
         splatData.length / rowLength > 500000 ? 1 : 1 / devicePixelRatio;
     // console.log(splatData.length / rowLength, downsample);
 
-    worker = new Worker(
+    const worker = new Worker(
         URL.createObjectURL(
             new Blob(["(", createWorker.toString(), ")(self)"], {
                 type: "application/javascript",
@@ -964,7 +958,7 @@ async function main() {
         activeKeys = [];
     });
 
-    canvas.addEventListener(
+    window.addEventListener(
         "wheel",
         (e) => {
             carousel = false;
@@ -1387,6 +1381,12 @@ async function main() {
 
     frame();
 
+    const isPly = (splatData) =>
+        splatData[0] == 112 &&
+        splatData[1] == 108 &&
+        splatData[2] == 121 &&
+        splatData[3] == 10;
+
     const selectFile = (file) => {
         const fr = new FileReader();
         if (/\.json$/i.test(file.name)) {
@@ -1482,59 +1482,3 @@ main().catch((err) => {
     document.getElementById("spinner").style.display = "none";
     document.getElementById("message").innerText = err.toString();
 });
-
-// Expose the loadNewModel function globally
-window.loadNewModel = async function(modelUrl) {
-    try {
-        const req = await fetch(modelUrl, {
-            mode: "cors",
-            credentials: "omit"
-        });
-        
-        if (req.status != 200) {
-            throw new Error(`${req.status} Unable to load ${req.url}`);
-        }
-
-        // Reset states
-        vertexCount = 0;
-        buffer = null;
-        
-        const reader = req.body.getReader();
-        let splatData = new Uint8Array(req.headers.get("content-length"));
-        
-        let bytesRead = 0;
-        let lastVertexCount = -1;
-        
-        while (true) {
-            const { done, value } = await reader.read();
-            if (done) break;
-
-            splatData.set(value, bytesRead);
-            bytesRead += value.length;
-
-            if (vertexCount > lastVertexCount) {
-                if (!window.isPly(splatData)) {
-                    worker.postMessage({
-                        buffer: splatData.buffer,
-                        vertexCount: Math.floor(bytesRead / rowLength)
-                    });
-                }
-                lastVertexCount = vertexCount;
-            }
-        }
-
-        if (window.isPly(splatData)) {
-            worker.postMessage({ ply: splatData.buffer, save: false });
-        } else {
-            worker.postMessage({
-                buffer: splatData.buffer,
-                vertexCount: Math.floor(bytesRead / rowLength)
-            });
-        }
-
-        return true;
-    } catch (error) {
-        console.error('Error loading model:', error);
-        throw error;
-    }
-};
