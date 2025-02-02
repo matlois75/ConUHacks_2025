@@ -131,6 +131,13 @@ class RoomManager {
     }
 }
 
+// Prevent arrow keys from scrolling the page
+window.addEventListener('keydown', (e) => {
+    if(['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.code)) {
+        e.preventDefault();
+    }
+});
+
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     const roomManager = new RoomManager();
