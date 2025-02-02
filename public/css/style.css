@@ -1,4 +1,7 @@
-/* Ensure a clean, flexible layout */
+:root {
+  --primary-color: #912238; /* Concordia's primary red color */
+}
+
 html,
 body {
   font-family: "Gill Sans", "GillSansMTProBook", Arial, sans-serif;
@@ -38,8 +41,6 @@ body {
 
 /* Room list styling */
 .room-list {
-  flex: 1;
-  min-width: 300px;
   padding: 20px;
   background: #f9f9f9;
   border-radius: 8px;
@@ -206,6 +207,8 @@ body {
 }
 
 .left-panel {
+  flex: 1;
+  min-width: 300px;
   background: white;
   border-radius: 8px;
   overflow: hidden;
@@ -258,6 +261,7 @@ body {
   height: 100%;
   max-height: 600px;
   background: #ffffff;
+  padding: 20px;
 }
 
 .chat-messages {

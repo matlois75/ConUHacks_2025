@@ -25,32 +25,41 @@
     </section>
 
     <section id="rooms" class="section rooms-section">
-      <div class="room-list">
-        <h2>Available Rooms</h2>
-        <div class="room-selector">
-          <div class="room-card" data-room="library">
-            <h3>Main Library</h3>
-            <p>A spacious study area with extensive resources</p>
-          </div>
-          <div class="room-card" data-room="lecture-hall">
-            <h3>Lecture Hall A</h3>
-            <p>Modern lecture theater with multimedia capabilities</p>
-          </div>
-          <!-- Add more room cards as needed -->
+      <div class="left-panel">
+        <!-- Tab Navigation -->
+        <div class="tab-navigation">
+          <button class="tab-button active" data-tab="rooms">
+            Available Rooms
+          </button>
+          <button class="tab-button" data-tab="chat">Sting: Tour Expert</button>
         </div>
-      </div>
 
-      <!-- Chat Tab Content -->
-      <div class="tab-content" id="chat-tab">
-        <div class="chat-interface">
-          <div class="chat-messages"></div>
-          <div class="chat-input-area">
-            <textarea
-              class="chat-input"
-              placeholder="Ask me anything about the tour..."
-              rows="1"
-            ></textarea>
-            <button class="chat-send">Send</button>
+        <!-- Rooms Tab Content -->
+        <div class="tab-content active" id="rooms-tab">
+          <div class="room-selector">
+            <div class="room-card" data-room="library">
+              <h3>Main Library</h3>
+              <p>A spacious study area with extensive resources</p>
+            </div>
+            <div class="room-card" data-room="lecture-hall">
+              <h3>Lecture Hall A</h3>
+              <p>Modern lecture theater with multimedia capabilities</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chat Tab Content -->
+        <div class="tab-content" id="chat-tab">
+          <div class="chat-interface">
+            <div class="chat-messages"></div>
+            <div class="chat-input-area">
+              <textarea
+                class="chat-input"
+                placeholder="Ask me anything about the tour..."
+                rows="1"
+              ></textarea>
+              <button class="chat-send">Send</button>
+            </div>
           </div>
         </div>
       </div>
