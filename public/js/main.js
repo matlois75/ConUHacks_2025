@@ -6,39 +6,31 @@ if (!gl) {
 }
 
 class RoomManager {
-  constructor() {
-    this.rooms = {
-      "library-lobby": {
-        name: "Webster Library Lobby",
-        modelUrl: "/assets/models/library-lobby.splat",
-        description: "A spacious study area with extensive resources",
-        features: [
-          "Silent study zones",
-          "Group study rooms",
-          "Digital resources",
-        ],
-      },
-      "lecture-hall": {
-        name: "Hall Building Entrance",
-        modelUrl: "/assets/models/hall2.splat",
-        description: "Modern building with multimedia capabilities",
-        features: ["12 floors", "Advanced AV system", "Wheelchair accessible"],
-      },
-      "library-second-floor": {
-        name: "Webster Library Second Floor",
-        modelUrl: "/assets/models/library-2nd.splat",
-        description: "Quiet study area with a view of the city",
-        features: [
-          "Silent Rooms",
-          "Computer workstations",
-          "Printing Stations",
-        ],
-      },
-    };
-    this.initializeEventListeners();
-    this.currentRoom = null;
-    this.updateRoomList(); // Ensure the room list is populated before adding event listeners
-  }
+    constructor() {
+        this.rooms = {
+            'library-second-floor': {
+            name: 'Webster Library Second Floor',
+                modelUrl: '/assets/models/library-2nd.splat',
+                description: 'Quiet study area with a view of the city',
+                features: ['Silent Rooms', 'Computer workstations', 'Printing Stations']
+            },
+            'library-lobby': {
+                name: 'Webster Library Lobby',
+                modelUrl: '/assets/models/library-lobby.splat',
+                description: 'A spacious study area with extensive resources',
+                features: ['Silent study zones', 'Group study rooms', 'Digital resources']
+            },
+            'lecture-hall': {
+                name: 'Hall Building Entrance',
+                modelUrl: '/assets/models/hall2.splat',
+                description: 'Modern building with multimedia capabilities',
+                features: ['12 floors', 'Advanced AV system', 'Wheelchair accessible']
+            }
+        };
+        this.initializeEventListeners();
+        this.currentRoom = null;
+        this.updateRoomList(); // Ensure the room list is populated before adding event listeners
+    }
 
   initializeEventListeners() {
     document.querySelectorAll(".room-card").forEach((card) => {

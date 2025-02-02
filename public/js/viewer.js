@@ -737,25 +737,21 @@ let defaultViewMatrix = [
 ];
 let viewMatrix = defaultViewMatrix;
 async function main() {
-  let carousel = false;
-  const params = new URLSearchParams(location.search);
-  try {
-    viewMatrix = JSON.parse(decodeURIComponent(location.hash.slice(1)));
-    carousel = false;
-  } catch (err) {}
-  let url = new URL(
-    // "nike.splat",
-    // location.href,
-    params.get("url") || "train.splat",
-    "https://huggingface.co/cakewalk/splat-data/resolve/main/"
-  );
-  const req = await fetch(url, {
-    mode: "cors", // no-cors, *cors, same-origin
-    credentials: "omit", // include, *same-origin, omit
-  });
-  console.log(req);
-  if (req.status != 200)
-    throw new Error(req.status + " Unable to load " + req.url);
+
+    let carousel = false;
+    const params = new URLSearchParams(location.search);
+    try {
+        viewMatrix = JSON.parse(decodeURIComponent(location.hash.slice(1)));
+        carousel = false;
+    } catch (err) {}
+    const url = new URL("../assets/models/library-2nd.splat", location.href);
+    const req = await fetch(url, {
+        mode: "cors", // no-cors, *cors, same-origin
+        credentials: "omit", // include, *same-origin, omit
+    });
+    console.log(req);
+    if (req.status != 200)
+        throw new Error(req.status + " Unable to load " + req.url);
 
   const rowLength = 3 * 4 + 3 * 4 + 4 + 4;
   const reader = req.body.getReader();
