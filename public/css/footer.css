@@ -14,7 +14,7 @@ html, body {
 .c-footer {
     background-color: #912338;
     color: white;
-    padding: 20px 5%;
+
     font-family: Arial, sans-serif;
     width: 100%;
 }
@@ -47,6 +47,8 @@ html, body {
     justify-content: space-between;
     flex-wrap: wrap;
     align-items: flex-start;
+    margin-left: 10%;
+    margin-right: 10%;
 }
 
 /* Footer Columns */
@@ -86,13 +88,15 @@ html, body {
     text-decoration: underline;
 }
 
-/* Territorial Acknowledgment Box */
+/* Territorial Acknowledgment Box - Aligned to the Right */
 .footer-territory {
     background-color: rgba(255, 255, 255, 0.1);
     padding: 15px;
     border-radius: 5px;
-    width: 28%;
+    width: 25%;
     text-align: left;
+    align-self: flex-start; /* Ensures it stays aligned at the top */
+    margin-left: auto; /* Pushes it to the right */
 }
 
 .footer-territory h3 {
@@ -147,4 +151,22 @@ html, body {
 .footer-right img {
     width: 80%;
     height: auto;
+}
+
+/* Responsive Tweaks */
+@media (max-width: 900px) {
+    .footer-links-container {
+        flex-direction: column;
+    }
+
+    .footer-columns {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .footer-territory {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 20px;
+    }
 }

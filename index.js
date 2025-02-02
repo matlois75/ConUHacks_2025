@@ -9,10 +9,11 @@ app.set('view engine', 'ejs');
 
 // Serve static files from "public" (CSS, images, etc.)
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/js', express.static(path.join(__dirname, 'js')));
 
 // Route for home page
 app.get('/', (req, res) => {
-    res.render('index2');
+    res.render('index');
 });
 
 // Catch-all route for undefined paths

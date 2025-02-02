@@ -1,255 +1,121 @@
-/* -----------------------------------
-   GENERAL RESETS & BASE STYLES
------------------------------------ */
+/* Ensure a clean, flexible layout */
 html, body {
-    /* Concordia often uses Gill Sans / GillSansMTPro, fallback to sans-serif */
     font-family: "Gill Sans", "GillSansMTProBook", Arial, sans-serif;
     color: #111;
     background-color: #fff;
     line-height: 1.6;
-    max-width: 1800px;
-    margin: 0 auto;
-    padding: 0 2rem;
-}
-
-#main-content {
-    max-width: 80%;
-    margin-left: 10%;
-    margin-right: 10%;
-}
-
-
-
-a {
-    color: #912338;
-    text-decoration: none;
-}
-a:hover,
-a:focus {
-    text-decoration: underline;
-}
-
-h1, h2, h3, h4, h5, h6 {
-    margin-top: 0;
-    margin-bottom: 0.5em;
-    font-weight: normal;
-}
-p {
-    margin-top: 0;
-    margin-bottom: 1em;
-}
-img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-}
-
-/* Container utility (like .container in Bootstrap) */
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1rem;
-}
-
-/* For general sections */
-.section {
-    padding: 2rem 0;
-}
-
-/* -----------------------------------
-   “Back to all tours” link
------------------------------------ */
-.btn-simple-back {
-    display: inline-block;
-    margin: 1.5rem 0;
-    font-weight: normal;
-    position: relative;
-    padding-left: 30px; /* space for arrow icon */
-}
-
-/* a left arrow as a pseudo-element */
-.btn-simple-back::before {
-    content: "←";  /* or use a background image of an arrow */
-    position: absolute;
-    left: 0;
-    top: 0;
-    font-size: 1rem;
-    line-height: 1.5;
-    color: #912338;
-}
-
-/* -----------------------------------
-   PINK (LIGHT BURGUNDY) INTRO BLOCK
------------------------------------ */
-.black-link {
-    background-color: #E9D3D7; /* the pinkish color */
-    padding: 2rem 1rem;
-    color: #111111;
-}
-
-.black-link p {
-    margin-bottom: 1rem;
-    font-size: 1.125rem; /* ~18px */
-    line-height: 1.5;
-}
-
-.black-link h2,
-.black-link h3 {
-    color: #111;
-    margin-top: 0;
-}
-
-/* -----------------------------------
-   STEP NAVIGATION (RED/WHITE PILLS)
------------------------------------ */
-.c-step-navigation__container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    margin-top: 1.5rem;
-}
-.c-step-navigation__step {
-    list-style: none;
-}
-.c-step-navigation__link {
-    display: inline-flex;
-    align-items: center;
-    text-decoration: none;
-    font-size: 1rem;
-    font-weight: 600;
-}
-.c-step-navigation__link-block {
-    padding: 0.5rem 1.5rem;
-    border-radius: 9999px; /* pill shape */
-    background-color: #f3f3f3;
-    color: #912338;
-    transition: background-color 0.2s, color 0.2s;
-}
-.c-step-navigation__link-block:hover,
-.c-step-navigation__link-block:focus {
-    background-color: #ddd;
-}
-.c-step-navigation__step--active .c-step-navigation__link-block {
-    background-color: #912338;
-    color: #fff;
-}
-
-/* optional small triangle below the active item, if you like */
-.c-step-navigation__triangle {
-    display: none; /* hidden on large screens in Concordia theme */
-}
-
-/* -----------------------------------
-   CONTENT HEADINGS & TEXT
------------------------------------ */
-/* e.g. “Hall and Library Buildings” heading style */
-h2 {
-    font-size: 2rem;
-    font-weight: 700; /* mimic bold, but Concordia’s style is “bold condensed” */
-    margin: 2rem 0 0.5rem;
-}
-.xlarge-text {
-    font-size: 1.25rem; /* about 20px */
-    line-height: 1.5;
-    margin-bottom: 1.5rem;
-}
-
-/* -----------------------------------
-   BREADCRUMB
------------------------------------ */
-.breadcrumb {
-    font-size: 0.875rem;
-    color: #111111;
-    padding: 1rem 0;
-    margin: 0;
-    font-weight: bold;
-}
-.breadcrumb a {
-    color: #912338;
-    text-decoration: underline;
-}
-.breadcrumb a:hover {
-    text-decoration: none;
-}
-.breadcrumb .breadcrumb-item + .breadcrumb-item::before {
-    content: ">";
-    color: #111111;
-    margin: 0 0.5rem;
-}
-
-
-
-/* -----------------------------------
-   RESPONSIVE TWEAKS
------------------------------------ */
-/* Adjust some spacing on smaller screens */
-@media (max-width: 767px) {
-    .section {
-        padding: 1.5rem 1rem;
-    }
-    h2 {
-        font-size: 1.5rem;
-        margin: 1rem 0;
-    }
-    .xlarge-text {
-        font-size: 1.125rem; /* ~18px */
-    }
-    .black-link {
-        padding: 1.5rem 1rem;
-    }
-    .c-step-navigation__container {
-        margin-top: 1rem;
-    }
-    .breadcrumb {
-        padding: 0.5rem 0;
-    }
-}
-
-/* HEADER */
-/* Basic reset */
-* {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-}
-/* Language toggle button */
-.lang-toggle {
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background: #fff;
-    padding: 0.4rem 0.6rem;
-    cursor: pointer;
-    font-size: 0.9rem;
-    color: #111111;
-}
-.lang-toggle:hover {
-    background: #f6f6f6;
 }
 
-/* User bubble (e.g. “RR”) */
-.user-bubble {
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    background-color: #912338; /* Concordia burgundy */
-    color: #fff;
+/* Sections spacing */
+.section {
+    padding: 2rem 0;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Header and banner section */
+#sgw_banner {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+#sgw_banner img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Room section layout */
+.rooms-section {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+/* Room list styling */
+.room-list {
+    flex: 1;
+    min-width: 300px;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Room card styling */
+.room-card {
+    padding: 15px;
+    margin-bottom: 10px;
+    background: white;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.room-card:hover {
+    background-color: #eee;
+    transform: translateY(-2px);
+}
+
+/* Viewer container styling */
+.viewer-container {
+    flex: 2;
+    min-width: 600px;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Ensures the viewer-wrapper has flexible size */
+#viewer-wrapper {
+    width: 100%;
+    height: auto;
+    min-height: 500px;
+    background-color: black;
+    border-radius: 8px;
+    overflow: hidden;
+    touch-action: none;
+    cursor: grab;
+    display: flex;
+    justify-content: center;
     align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    cursor: pointer;
 }
 
-/* Sidebar (hamburger) button */
-.sidebar-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0.25rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-end;
-    gap: 4px; /* spacing between lines */
+#viewer-wrapper:active {
+    cursor: grabbing;
 }
 
+/* Ensures the canvas fits dynamically */
+#canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+    touch-action: none;
+}
+
+/* Viewer controls */
+.viewer-controls {
+    margin-top: 15px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Mobile responsive tweaks */
+@media (max-width: 900px) {
+    .rooms-section {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .room-list, .viewer-container {
+        width: 100%;
+        min-width: unset;
+    }
+}

@@ -59,6 +59,7 @@
     height: 1px;
     background-color: #ccc;
     margin: 0;
+
 }
 
 /* BREADCRUMB NAVIGATION */
@@ -66,6 +67,7 @@
     width: 100%;
     text-align: left; /* Aligns navbar to the left */
     padding: 10px 20px;
+    font-weight: bold;
 }
 
 .breadcrumb {
