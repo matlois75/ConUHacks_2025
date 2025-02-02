@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Concordia University - Campus Tour</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/viewer.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="main-nav">
+        <div class="logo">Concordia University - Campus Tour</div>
+        <ul class="nav-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#rooms">Rooms</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="main-content">
+      <section id="about" class="section">
+        <h1>Explore Our University Spaces</h1>
+        <p>
+          Welcome to our interactive 3D room explorer. Navigate through
+          different spaces and learn about their features and purposes.
+        </p>
+      </section>
+
+      <section id="rooms" class="section rooms-section">
+        <div class="left-panel">
+          <!-- Tab Navigation -->
+          <div class="tab-navigation">
+            <button class="tab-button active" data-tab="rooms">
+              Available Rooms
+            </button>
+            <button class="tab-button" data-tab="chat">
+              Sting: Tour Expert
+            </button>
+          </div>
+
+          <!-- Rooms Tab Content -->
+          <div class="tab-content active" id="rooms-tab">
+            <div class="room-selector">
+              <div class="room-card" data-room="library">
+                <h3>Main Library</h3>
+                <p>A spacious study area with extensive resources</p>
+                <ul class="room-features">
+                  <li>Silent study zones</li>
+                  <li>Group study rooms</li>
+                  <li>Digital resources</li>
+                </ul>
+              </div>
+              <div class="room-card" data-room="lecture-hall">
+                <h3>Lecture Hall A</h3>
+                <p>Modern lecture theater with multimedia capabilities</p>
+                <ul class="room-features">
+                  <li>300 seat capacity</li>
+                  <li>Advanced AV system</li>
+                  <li>Wheelchair accessible</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Chat Tab Content -->
+          <div class="tab-content" id="chat-tab">
+            <div class="chat-interface">
+              <div class="chat-messages"></div>
+              <div class="chat-input-area">
+                <textarea
+                  class="chat-input"
+                  placeholder="Ask me anything about the tour..."
+                  rows="1"
+                ></textarea>
+                <button class="chat-send">Send</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="viewer-container">
+          <div id="viewer-wrapper">
+            <div id="fact-overlay" class="fact-overlay">
+              <div class="fact-content">
+                <div class="fact-icon">
+                  <img
+                    src="assets/Concordia_Logo.png"
+                    alt="Concordia Logo"
+                    class="fact-icon-img"
+                  />
+                </div>
+                <p id="fact-text"></p>
+              </div>
+            </div>
+
+            <canvas id="canvas"></canvas>
+            <div id="progress"></div>
+            <div id="message"></div>
+            <div id="spinner" class="scene">
+              <div class="cube-wrapper">
+                <div class="cube">
+                  <div class="cube-faces">
+                    <div class="cube-face bottom"></div>
+                    <div class="cube-face top"></div>
+                    <div class="cube-face left"></div>
+                    <div class="cube-face right"></div>
+                    <div class="cube-face back"></div>
+                    <div class="cube-face front"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div id="quality"><span id="fps"></span></div>
+            <div id="caminfo"><span id="camid"></span></div>
+          </div>
+          <div class="viewer-controls">
+            <h3>Navigation Controls</h3>
+            <div id="instructions" class="controls-text">
+              Mouse: Click and drag to look around Keyboard: Arrow keys to move,
+              WASD to look around Touch: Pinch to zoom, drag to look around
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="section">
+        <h2>Contact Information</h2>
+        <p>For more information about our facilities, please contact us.</p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>&copy; Concordia University. Montreal, QC, Canada</p>
+    </footer>
+
+    <script src="js/viewer.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/chat-manager.js"></script>
+    <script src="js/facts.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        window.chatManager = new ChatManager();
+      });
+    </script>
+  </body>
+</html>
