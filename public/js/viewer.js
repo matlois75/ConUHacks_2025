@@ -1264,33 +1264,33 @@ async function main() {
       }
     }
 
-    if (["KeyJ", "KeyK", "KeyL", "KeyI"].some((k) => activeKeys.includes(k))) {
-      let d = 4;
-      inv = translate4(inv, 0, 0, d);
-      inv = rotate4(
-        inv,
-        activeKeys.includes("KeyJ")
-          ? -0.05
-          : activeKeys.includes("KeyL")
-          ? 0.05
-          : 0,
-        0,
-        1,
-        0
-      );
-      inv = rotate4(
-        inv,
-        activeKeys.includes("KeyI")
-          ? 0.05
-          : activeKeys.includes("KeyK")
-          ? -0.05
-          : 0,
-        1,
-        0,
-        0
-      );
-      inv = translate4(inv, 0, 0, -d);
-    }
+    // if (["KeyJ", "KeyK", "KeyL", "KeyI"].some((k) => activeKeys.includes(k))) {
+    //   let d = 4;
+    //   inv = translate4(inv, 0, 0, d);
+    //   inv = rotate4(
+    //     inv,
+    //     activeKeys.includes("KeyJ")
+    //       ? -0.05
+    //       : activeKeys.includes("KeyL")
+    //       ? 0.05
+    //       : 0,
+    //     0,
+    //     1,
+    //     0
+    //   );
+    //   inv = rotate4(
+    //     inv,
+    //     activeKeys.includes("KeyI")
+    //       ? 0.05
+    //       : activeKeys.includes("KeyK")
+    //       ? -0.05
+    //       : 0,
+    //     1,
+    //     0,
+    //     0
+    //   );
+    //   inv = translate4(inv, 0, 0, -d);
+    // }
 
     viewMatrix = invert4(inv);
 
