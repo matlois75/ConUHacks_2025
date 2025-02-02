@@ -133,13 +133,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
   textarea.addEventListener("input", adjustHeight);
   textarea.addEventListener("focus", adjustHeight);
-
-  textarea.addEventListener("keydown", (e) => {
-    if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault();
-      // Trigger send action here
-      textarea.value = "";
-      adjustHeight();
-    }
-  });
 });

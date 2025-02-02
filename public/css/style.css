@@ -156,9 +156,10 @@ body {
 
 .fact-overlay {
   position: absolute;
-  bottom: 16px;
-  right: 16px;
-  max-width: 350px;
+  top: 10px;
+  right: auto;
+  left: auto;
+  max-height: 70px;
   background-color: rgba(0, 0, 0, 0.7);
   border-radius: 12px;
   padding: 8px 12px;
