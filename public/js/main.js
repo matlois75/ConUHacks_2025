@@ -144,7 +144,6 @@ class RoomManager {
             </div>
             <div class="controls-text">
                 <h4>Navigation Controls:</h4>
-                Mouse: Click and drag to look around<br>
                 Keyboard: Arrow keys to move, WASD to look around<br>
                 Touch: Pinch to zoom, drag to look around
             </div>
