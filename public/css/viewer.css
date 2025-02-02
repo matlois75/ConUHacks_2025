@@ -1,0 +1,123 @@
+
+#progress {
+    position: absolute;
+    top: 0;
+    height: 5px;
+    background: blue;
+    z-index: 99;
+    transition: width 0.1s ease-in-out;
+}
+
+#message {
+    position: absolute;
+    display: flex;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 2;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    font-weight: bold;
+    font-size: large;
+    color: red;
+}
+
+.scene {
+    position: absolute;
+    display: flex;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 2;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Loading cube animation styles */
+.cube-wrapper {
+    transform-style: preserve-3d;
+}
+
+.cube {
+    transform-style: preserve-3d;
+    transform: rotateX(45deg) rotateZ(45deg);
+    animation: rotation 2s infinite;
+}
+
+.cube-faces {
+    transform-style: preserve-3d;
+    height: 80px;
+    width: 80px;
+    position: relative;
+    transform-origin: 0 0;
+    transform: translateX(0) translateY(0) translateZ(-40px);
+}
+
+.cube-face {
+    position: absolute;
+    inset: 0;
+    background: #0017ff;
+    border: solid 1px #ffffff;
+}
+
+.cube-face.top {
+    transform: translateZ(80px);
+}
+
+.cube-face.front {
+    transform-origin: 0 50%;
+    transform: rotateY(-90deg);
+}
+
+.cube-face.back {
+    transform-origin: 0 50%;
+    transform: rotateY(-90deg) translateZ(-80px);
+}
+
+.cube-face.right {
+    transform-origin: 50% 0;
+    transform: rotateX(-90deg) translateY(-80px);
+}
+
+.cube-face.left {
+    transform-origin: 50% 0;
+    transform: rotateX(-90deg) translateY(-80px) translateZ(80px);
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotateX(45deg) rotateY(0) rotateZ(45deg);
+        animation-timing-function: cubic-bezier(0.17, 0.84, 0.44, 1);
+    }
+    50% {
+        transform: rotateX(45deg) rotateY(0) rotateZ(225deg);
+        animation-timing-function: cubic-bezier(0.76, 0.05, 0.86, 0.06);
+    }
+    100% {
+        transform: rotateX(45deg) rotateY(0) rotateZ(405deg);
+        animation-timing-function: cubic-bezier(0.17, 0.84, 0.44, 1);
+    }
+}
+
+#quality {
+    position: absolute;
+    bottom: 10px;
+    z-index: 999;
+    right: 10px;
+    color: white;
+}
+
+#caminfo {
+    position: absolute;
+    top: 10px;
+    z-index: 999;
+    right: 10px;
+    color: white;
+}

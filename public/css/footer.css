@@ -1,0 +1,172 @@
+/* Ensure footer is at the bottom */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-content {
+    flex: 1; /* Pushes the footer down */
+}
+
+.c-footer {
+    background-color: #912338;
+    color: white;
+
+    font-family: Arial, sans-serif;
+    width: 100%;
+}
+
+/* Social Media Section */
+.footer-social {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.social-icons a {
+    color: white;
+    font-size: 1.5rem;
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+/* Footer Divider */
+.footer-divider {
+    border: none;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.3);
+    margin: 20px 0;
+}
+
+/* Footer Content Layout */
+.footer-links-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+/* Footer Columns */
+.footer-columns {
+    display: flex;
+    flex-wrap: wrap;
+    width: 70%; /* Takes 70% of the width */
+    justify-content: space-between;
+}
+
+.footer-column {
+    width: 30%;
+}
+
+.footer-column h3 {
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-column ul li {
+    margin-bottom: 5px;
+}
+
+.footer-column ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 0.8rem;
+}
+
+.footer-column ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Territorial Acknowledgment Box - Aligned to the Right */
+.footer-territory {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    border-radius: 5px;
+    width: 25%;
+    text-align: left;
+    align-self: flex-start; /* Ensures it stays aligned at the top */
+    margin-left: auto; /* Pushes it to the right */
+}
+
+.footer-territory h3 {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.footer-territory p {
+    font-size: 0.8rem;
+    line-height: 1.4;
+}
+
+/* Footer Bottom Section */
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+}
+
+.footer-left {
+    text-align: left;
+}
+
+.footer-contact {
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+}
+
+.footer-nav-links {
+    font-size: 0.8rem;
+}
+
+.footer-nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 0.8rem;
+    margin: 0 5px;
+}
+
+.footer-nav-links a:hover {
+    text-decoration: underline;
+}
+
+.footer-copyright {
+    margin-top: 5px;
+    font-size: 0.8rem;
+}
+
+/* Concordia 50th Logo */
+.footer-right img {
+    width: 80%;
+    height: auto;
+}
+
+/* Responsive Tweaks */
+@media (max-width: 900px) {
+    .footer-links-container {
+        flex-direction: column;
+    }
+
+    .footer-columns {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .footer-territory {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 20px;
+    }
+}
