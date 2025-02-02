@@ -19,6 +19,7 @@ html, body {
 }
 
 
+
 a {
     color: #912338;
     text-decoration: none;
@@ -53,28 +54,6 @@ img {
 /* For general sections */
 .section {
     padding: 2rem 0;
-}
-
-/* -----------------------------------
-   HERO BANNER
------------------------------------ */
-
-
-
-.hero .hero-text {
-    max-width: 800px;
-    margin: 0 auto; /* center horizontally */
-    text-align: left; /* or center if you prefer */
-}
-.hero-title {
-    font-size: 3.5rem; /* large hero text */
-    line-height: 1.1;
-    font-weight: bold; /* emulate “bold-reg-xlarge” style */
-    margin-bottom: 1rem;
-}
-.hero-subtitle {
-    font-size: 1.5rem;
-    margin-top: 1rem;
 }
 
 /* -----------------------------------
@@ -198,45 +177,7 @@ h2 {
     margin: 0 0.5rem;
 }
 
-/* -----------------------------------
-   FOOTER (EXAMPLE)
------------------------------------ */
-footer.c-footer.custom {
-    background-color: #f8f8f8;
-    color: #111111;
-    padding: 2rem 0;
-    margin-top: 2rem;
-    font-size: 0.875rem;
-}
-footer .container.width1200 {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1rem;
-}
-.deep-footer-phone,
-.deep-footer-links,
-.deep-footer-copyright {
-    margin-bottom: 1rem;
-}
-.deep-footer-links li {
-    display: inline-block;
-    margin-right: 1rem;
-}
 
-/* Example “Concordia Social” block within the footer */
-.c-social-media__container {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 1rem;
-}
-.c-social-media__container .title-container h2 {
-    font-size: 1.5rem;
-    color: #fff; /* if the background is burgundy, text is white */
-}
-.link-container .social-media-links li {
-    margin-right: 1rem;
-}
 
 /* -----------------------------------
    RESPONSIVE TWEAKS
@@ -311,3 +252,4 @@ footer .container.width1200 {
     align-items: flex-end;
     gap: 4px; /* spacing between lines */
 }
+

@@ -12,7 +12,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Route for home page
 app.get('/', (req, res) => {
-    res.render('index');
+    res.render('index2');
 });
 
 // Catch-all route for undefined paths

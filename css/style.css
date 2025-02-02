@@ -1,0 +1,145 @@
+:root {
+    --primary-color: #912238;
+    --secondary-color: #3498db;
+    --background-color: #f5f6fa;
+    --text-color: #000000;
+    --header-height: 60px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--background-color);
+}
+
+.site-header {
+    background-color: var(--primary-color);
+    color: white;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    height: var(--header-height);
+}
+
+.main-nav {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    padding: 5px 10px;
+}
+
+.main-content {
+    margin-top: var(--header-height);
+    padding: 20px;
+    max-width: 1200px;
+    margin: var(--header-height) auto 0;
+}
+
+.section {
+    margin-bottom: 40px;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.rooms-section {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 20px;
+    min-height: 600px;
+}
+
+.room-list {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.room-card {
+    padding: 15px;
+    margin: 10px 0;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.room-card:hover {
+    background-color: #f5f5f5;
+    transform: translateY(-2px);
+}
+
+.viewer-container {
+    position: relative;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+#viewer-wrapper {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    background: #000;
+    border-radius: 8px;
+    overflow: hidden;
+    touch-action: none; 
+    cursor: grab; 
+}
+
+#viewer-wrapper:active {
+    cursor: grabbing;
+}
+
+.viewer-controls {
+    padding: 15px;
+    background: #f8f9fa;
+    border-top: 1px solid #eee;
+}
+
+.controls-text {
+    font-size: 0.9em;
+    color: #666;
+}
+
+.site-footer {
+    background: var(--primary-color);
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+}
+
+#canvas {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    touch-action: none;
+}
