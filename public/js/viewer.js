@@ -1,3 +1,6 @@
+let gl;
+let worker;
+
 let cameras = [
     {
         id: 0,
@@ -433,7 +436,7 @@ function createWorker(self) {
             lastVertexCount = vertexCount;
         }
 
-        console.time("sort");
+        //console.time("sort");
         let maxDepth = -Infinity;
         let minDepth = Infinity;
         let sizeList = new Int32Array(vertexCount);
@@ -463,7 +466,7 @@ function createWorker(self) {
         for (let i = 0; i < vertexCount; i++)
             depthIndex[starts0[sizeList[i]]++] = i;
 
-        console.timeEnd("sort");
+        //console.timeEnd("sort");
 
         lastProj = viewProj;
         self.postMessage({ depthIndex, viewProj, vertexCount }, [
@@ -538,9 +541,9 @@ function createWorker(self) {
         }
         console.timeEnd("calculate importance");
 
-        console.time("sort");
+        //Uncomment if you need the time console.time("sort");
         sizeIndex.sort((b, a) => sizeList[a] - sizeList[b]);
-        console.timeEnd("sort");
+        //console.timeEnd("sort");
 
         // 6*4 + 4 + 4 = 8*4
         // XYZ - Position (Float32)
@@ -743,7 +746,7 @@ async function main() {
         viewMatrix = JSON.parse(decodeURIComponent(location.hash.slice(1)));
         carousel = false;
     } catch (err) {}
-    const url = new URL(
+    let url = new URL(
         // "nike.splat",
         // location.href,
         params.get("url") || "train.splat",
@@ -765,13 +768,7 @@ async function main() {
         splatData.length / rowLength > 500000 ? 1 : 1 / devicePixelRatio;
     console.log(splatData.length / rowLength, downsample);
 
-    const worker = new Worker(
-        URL.createObjectURL(
-            new Blob(["(", createWorker.toString(), ")(self)"], {
-                type: "application/javascript",
-            }),
-        ),
-    );
+    worker = new Worker( URL.createObjectURL(new Blob(["(", createWorker.toString(), ")(self)"], { type: "application/javascript" })) );
 
     const canvas = document.getElementById("canvas");
     const fps = document.getElementById("fps");
@@ -1487,3 +1484,40 @@ main().catch((err) => {
     document.getElementById("spinner").style.display = "none";
     document.getElementById("message").innerText = err.toString();
 });
+
+window.loadNewModel = async function (modelUrl) {
+    console.log("Loading new model from:", modelUrl);
+
+    try {
+        if (!modelUrl) throw new Error("Model URL is missing.");
+
+        // Fetch new model
+        let response = await fetch(modelUrl);
+        if (!response.ok) throw new Error(`Failed to fetch model: ${response.statusText}`);
+
+        let modelData = await response.arrayBuffer();
+        console.log("New model loaded successfully:", modelData.byteLength, "bytes");
+
+        // 🛑 Clear the WebGL context before rendering new model
+        if (gl) {
+            gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+        }
+
+        // Reset WebGL worker processing
+        worker.postMessage({ buffer: null, vertexCount: 0 });
+
+        // Send new model data to the WebGL worker
+        // rowLength might be the size of each vertex's data row in bytes
+        const rowLength = 3*4 + 3*4 + 4 + 4;
+        worker.postMessage({
+            buffer: modelData,
+            vertexCount: Math.floor(modelData.byteLength / rowLength),
+        });
+
+        console.log("New model rendering started.");
+
+    } catch (error) {
+        console.error("Error loading model:", error);
+    }
+};
+

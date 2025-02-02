@@ -1,28 +1,32 @@
+const canvas = document.getElementById("canvas");
+gl = canvas.getContext("webgl2", { antialias: false });
+
+if (!gl) {
+    console.error("WebGL2 is not supported on this browser.");
+}
+
 class RoomManager {
     constructor() {
         this.rooms = {
             'library': {
                 name: 'Main Library',
-                modelUrl: '../assets/models/ben-room-30k.splat',
+                modelUrl: '/assets/models/ben-room-30k.splat',
                 description: 'A spacious study area with extensive resources',
                 features: ['Silent study zones', 'Group study rooms', 'Digital resources']
             },
             'lecture-hall': {
                 name: 'Lecture Hall A',
-                modelUrl: 'assets/models/concordia.splat',
+                modelUrl: '/assets/models/concordia.splat',
                 description: 'Modern lecture theater with multimedia capabilities',
                 features: ['300 seat capacity', 'Advanced AV system', 'Wheelchair accessible']
             }
-            // Add more rooms as needed
         };
-        
-        this.currentRoom = null;
         this.initializeEventListeners();
-        this.updateRoomList();
+        this.currentRoom = null;
+        this.updateRoomList(); // Ensure the room list is populated before adding event listeners
     }
 
     initializeEventListeners() {
-        // Handle room selection
         document.querySelectorAll('.room-card').forEach(card => {
             card.addEventListener('click', (e) => {
                 const roomId = e.currentTarget.dataset.room;
@@ -33,14 +37,18 @@ class RoomManager {
 
     updateRoomList() {
         const roomList = document.querySelector('.room-selector');
+        if (!roomList) {
+            console.error("Room selector element not found.");
+            return;
+        }
+
         roomList.innerHTML = ''; // Clear existing content
 
-        // Create room cards
         Object.entries(this.rooms).forEach(([roomId, roomData]) => {
             const roomCard = document.createElement('div');
             roomCard.className = 'room-card';
             roomCard.dataset.room = roomId;
-            
+
             roomCard.innerHTML = `
                 <h3>${roomData.name}</h3>
                 <p>${roomData.description}</p>
@@ -52,7 +60,7 @@ class RoomManager {
             roomList.appendChild(roomCard);
         });
 
-        // Reattach event listeners after updating the list
+        // Attach event listeners to dynamically created elements
         this.initializeEventListeners();
     }
 
@@ -62,33 +70,34 @@ class RoomManager {
             return;
         }
 
-        // Update UI to show selected room
+        // Remove previous selection
         document.querySelectorAll('.room-card').forEach(card => {
             card.classList.toggle('active', card.dataset.room === roomId);
         });
 
         try {
-            // Update room info panel
+            // Update UI
             this.updateRoomInfo(roomId);
-            
-            // Load the 3D model
+
+            // Load the 3D model using the function from viewer.js
             await this.loadRoomModel(roomId);
-            
-            // Update URL without page reload
+
+            // Update URL
             window.history.pushState({ roomId }, '', `#${roomId}`);
-            
+
             this.currentRoom = roomId;
         } catch (error) {
             console.error('Error loading room:', error);
-            // Show error message to user
             document.getElementById('message').textContent = 'Error loading room model';
         }
     }
 
+
     updateRoomInfo(roomId) {
         const room = this.rooms[roomId];
         const infoPanel = document.querySelector('.viewer-controls');
-        
+        if (!infoPanel) return;
+
         infoPanel.innerHTML = `
             <h3>${room.name}</h3>
             <p>${room.description}</p>
@@ -109,21 +118,38 @@ class RoomManager {
 
     async loadRoomModel(roomId) {
         const modelUrl = this.rooms[roomId].modelUrl;
-        
-        // Show loading indicator
-        document.getElementById('spinner').style.display = 'flex';
-        
+        const spinner = document.getElementById('spinner');
+
+        if (!spinner) return;
+
+        spinner.style.display = 'flex'; // Show loading indicator
+
         try {
-            // This function needs to be implemented in viewer.js
-            // It should handle loading the new .splat file
-            await window.loadNewModel(modelUrl);
+            if (typeof window.loadNewModel === 'function') {
+                +           await window.loadNewModel(modelUrl);
+
+            } else {
+                throw new Error('loadNewModel function is not defined.');
+            }
+        } catch (error) {
+            console.error('Failed to load model:', error);
         } finally {
-            // Hide loading indicator
-            document.getElementById('spinner').style.display = 'none';
+            spinner.style.display = 'none'; // Hide loading indicator
+
+            const frame = (now) => {
+                if (vertexCount === 0) {
+                    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+                    document.getElementById("spinner").style.display = "block";
+                } else {
+                    document.getElementById("spinner").style.display = "none";
+                    gl.uniformMatrix4fv(u_view, false, actualViewMatrix);
+                    gl.drawArraysInstanced(gl.TRIANGLE_FAN, 0, 4, vertexCount);
+                }
+                requestAnimationFrame(frame);
+            };
         }
     }
 
-    // Handle browser back/forward buttons
     handlePopState(event) {
         if (event.state?.roomId) {
             this.selectRoom(event.state.roomId);
@@ -131,44 +157,46 @@ class RoomManager {
     }
 }
 
-// Prevent arrow keys from scrolling the page
+// Prevent arrow keys from scrolling the page (fixed syntax)
 window.addEventListener('keydown', (e) => {
-
-    ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.code)
-        e.preventDefswault();
-
+    if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.code)) {
+        e.preventDefault();
+    }
 });
 
-
-// Initialize when DOM is loaded
+// Initialize RoomManager when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     const roomManager = new RoomManager();
-    
-    // Handle browser navigation
+
     window.addEventListener('popstate', (e) => roomManager.handlePopState(e));
-    
+
     // Load initial room if specified in URL
     const initialRoom = window.location.hash.slice(1);
     if (initialRoom && roomManager.rooms[initialRoom]) {
         roomManager.selectRoom(initialRoom);
     } else {
-        // Load first room as default
         const firstRoomId = Object.keys(roomManager.rooms)[0];
         roomManager.selectRoom(firstRoomId);
     }
 });
 
+// Toggle fullscreen mode properly
 function toggleFullscreen() {
     let viewer = document.getElementById('viewer-wrapper');
+
+    if (!viewer) {
+        console.error("Viewer wrapper not found.");
+        return;
+    }
 
     if (!document.fullscreenElement) {
         if (viewer.requestFullscreen) {
             viewer.requestFullscreen();
-        } else if (viewer.mozRequestFullScreen) { // Firefox
+        } else if (viewer.mozRequestFullScreen) {
             viewer.mozRequestFullScreen();
-        } else if (viewer.webkitRequestFullscreen) { // Chrome, Safari, and Opera
+        } else if (viewer.webkitRequestFullscreen) {
             viewer.webkitRequestFullscreen();
-        } else if (viewer.msRequestFullscreen) { // IE/Edge
+        } else if (viewer.msRequestFullscreen) {
             viewer.msRequestFullscreen();
         }
         viewer.classList.add('fullscreen-active');
