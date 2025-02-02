@@ -12,19 +12,22 @@ class RoomManager {
             name: 'Webster Library Second Floor',
                 modelUrl: '/assets/models/library-2nd.splat',
                 description: 'Quiet study area with a view of the city',
-                features: ['Silent Rooms', 'Computer workstations', 'Printing Stations']
+                features: ['Silent Rooms', 'Computer workstations', 'Printing Stations'],
+                picture: '/assets/library-2ndF-picture.jpg'
             },
             'library-lobby': {
                 name: 'Webster Library Lobby',
                 modelUrl: '/assets/models/library-lobby.splat',
                 description: 'A spacious study area with extensive resources',
-                features: ['Silent study zones', 'Group study rooms', 'Digital resources']
+                features: ['Silent study zones', 'Group study rooms', 'Digital resources'],
+                picture: '/assets/library-picture.jpg'
             },
             'lecture-hall': {
                 name: 'Hall Building Entrance',
                 modelUrl: '/assets/models/hall2.splat',
                 description: 'Modern building with multimedia capabilities',
-                features: ['12 floors', 'Advanced AV system', 'Wheelchair accessible']
+                features: ['12 floors', 'Advanced AV system', 'Wheelchair accessible'],
+                picture: '/assets/hall-building-picture.jpg'
             }
         };
         this.initializeEventListeners();
@@ -56,14 +59,10 @@ class RoomManager {
       roomCard.dataset.room = roomId;
 
       roomCard.innerHTML = `
-                <h3>${roomData.name}</h3>
-                <p>${roomData.description}</p>
-                <ul class="room-features">
-                    ${roomData.features
-                      .map((feature) => `<li>${feature}</li>`)
-                      .join("")}
-                </ul>
-            `;
+        <h3>${roomData.name}</h3>
+        <p>${roomData.description}</p>
+        <img src="${roomData.picture}" alt="${roomData.name}" />
+      `;
 
       roomList.appendChild(roomCard);
     });

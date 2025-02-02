@@ -150,3 +150,19 @@ html, body {
     left: 0 !important;
     z-index: 1000 !important;
 }
+.room-card {
+    display: flex;
+    flex-direction: column; /* stack everything top-to-bottom */
+}
+
+/* Put .room-info (title, description) on top with order: 1,
+   and .room-card img at the bottom with order: 2 */
+.room-info {
+    order: 1;
+}
+.room-card img {
+    order: 2;
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+}
