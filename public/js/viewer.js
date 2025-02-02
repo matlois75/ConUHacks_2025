@@ -7,7 +7,7 @@ let cameras = [
     img_name: "00001",
     width: 1959,
     height: 1090,
-    position: [-3.0089893469241797, -0.11086489695181866, -3.7527640949141428],
+    position: [0.01, 0.01, 0.01],
     rotation: [
       [0.876134201218856, 0.06925962026449776, 0.47706599800804744],
       [-0.04747421839895102, 0.9972110940209488, -0.057586739349882114],
@@ -718,12 +718,26 @@ void main () {
 `.trim();
 
 let defaultViewMatrix = [
-  0.47, 0.04, 0.88, 0, -0.11, 0.99, 0.02, 0, -0.88, -0.11, 0.47, 0, 0.07, 0.03,
-  6.55, 1,
+  0.999,
+  0,
+  0.034,
+  0, // Right vector (≈2° from X axis)
+  0,
+  1,
+  0,
+  0, // Up vector (aligned with Y)
+  -0.034,
+  0,
+  0.999,
+  0, // Forward vector (≈2° from Z axis)
+  0,
+  0,
+  0,
+  1, // Translation
 ];
 let viewMatrix = defaultViewMatrix;
 async function main() {
-  let carousel = true;
+  let carousel = false;
   const params = new URLSearchParams(location.search);
   try {
     viewMatrix = JSON.parse(decodeURIComponent(location.hash.slice(1)));
@@ -1155,19 +1169,19 @@ async function main() {
       if (shiftKey) {
         inv = translate4(inv, 0, -0.03, 0);
       } else {
-        inv = translate4(inv, 0, 0, 0.02);
+        inv = translate4(inv, 0, 0, 0.015);
       }
     }
     if (activeKeys.includes("ArrowDown")) {
       if (shiftKey) {
         inv = translate4(inv, 0, 0.03, 0);
       } else {
-        inv = translate4(inv, 0, 0, -0.02);
+        inv = translate4(inv, 0, 0, -0.015);
       }
     }
-    if (activeKeys.includes("ArrowLeft")) inv = translate4(inv, -0.02, 0, 0);
+    if (activeKeys.includes("ArrowLeft")) inv = translate4(inv, -0.015, 0, 0);
     //
-    if (activeKeys.includes("ArrowRight")) inv = translate4(inv, 0.02, 0, 0);
+    if (activeKeys.includes("ArrowRight")) inv = translate4(inv, 0.015, 0, 0);
     // inv = rotate4(inv, 0.01, 0, 1, 0);
     if (activeKeys.includes("KeyA")) inv = rotate4(inv, -0.01, 0, 1, 0);
     if (activeKeys.includes("KeyD")) inv = rotate4(inv, 0.01, 0, 1, 0);
