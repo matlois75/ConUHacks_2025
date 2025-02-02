@@ -1,5 +1,5 @@
 const canvas = document.getElementById("canvas");
-gl = canvas.getContext("webgl2", { antialias: false });
+window.gl = canvas.getContext("webgl2", { antialias: false });
 
 if (!gl) {
     console.error("WebGL2 is not supported on this browser.");
@@ -8,17 +8,23 @@ if (!gl) {
 class RoomManager {
     constructor() {
         this.rooms = {
-            'library': {
-                name: 'Main Library',
-                modelUrl: '/assets/models/ben-room-30k.splat',
+            'library-lobby': {
+                name: 'Webster Library Lobby',
+                modelUrl: '/assets/models/library-lobby-luma.splat',
                 description: 'A spacious study area with extensive resources',
                 features: ['Silent study zones', 'Group study rooms', 'Digital resources']
             },
             'lecture-hall': {
-                name: 'Lecture Hall A',
-                modelUrl: '/assets/models/concordia.splat',
-                description: 'Modern lecture theater with multimedia capabilities',
-                features: ['300 seat capacity', 'Advanced AV system', 'Wheelchair accessible']
+                name: 'Hall Building Entrance',
+                modelUrl: '/assets/models/hall2-30k-edited.splat',
+                description: 'Modern building with multimedia capabilities',
+                features: ['12 floors', 'Advanced AV system', 'Wheelchair accessible']
+            },
+            'library-second-floor': {
+                name: 'Webster Library Second Floor',
+                modelUrl: '/assets/models/library-2nd-luma.splat',
+                description: 'Quiet study area with a view of the city',
+                features: ['Silent Rooms', 'Computer workstations', 'Printing Stations']
             }
         };
         this.initializeEventListeners();

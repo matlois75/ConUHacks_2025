@@ -1,4 +1,4 @@
-let gl;
+let gl=null;
 let worker;
 
 let cameras = [
@@ -740,6 +740,7 @@ let defaultViewMatrix = [
 ];
 let viewMatrix = defaultViewMatrix;
 async function main() {
+
     let carousel = true;
     const params = new URLSearchParams(location.search);
     try {
@@ -1485,7 +1486,7 @@ main().catch((err) => {
     document.getElementById("message").innerText = err.toString();
 });
 
-window.loadNewModel = async function (modelUrl) {
+window.loadNewModel = async function (modelUrl,gl) {
     console.log("Loading new model from:", modelUrl);
 
     try {
