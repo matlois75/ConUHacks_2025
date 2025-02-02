@@ -3,6 +3,7 @@ window.gl = canvas.getContext("webgl2", { antialias: false });
 
 if (!gl) {
   console.error("WebGL2 is not supported on this browser.");
+  console.error("WebGL2 is not supported on this browser.");
 }
 
 class RoomManager {
@@ -10,7 +11,7 @@ class RoomManager {
     this.rooms = {
       "library-second-floor": {
         name: "Webster Library Second Floor",
-        modelUrl: "/assets/models/library-2nd-luma.splat",
+        modelUrl: "/assets/models/library-2nd.splat",
         description: "Quiet study area with a view of the city",
         features: [
           "Silent Rooms",
@@ -20,7 +21,7 @@ class RoomManager {
       },
       "library-lobby": {
         name: "Webster Library Lobby",
-        modelUrl: "/assets/models/library-lobby-luma.splat",
+        modelUrl: "/assets/models/library-lobby.splat",
         description: "A spacious study area with extensive resources",
         features: [
           "Silent study zones",
@@ -30,7 +31,7 @@ class RoomManager {
       },
       "lecture-hall": {
         name: "Hall Building Entrance",
-        modelUrl: "/assets/models/hall2-30k-edited.splat",
+        modelUrl: "/assets/models/hall2.splat",
         description: "Modern building with multimedia capabilities",
         features: ["12 floors", "Advanced AV system", "Wheelchair accessible"],
       },
@@ -40,6 +41,14 @@ class RoomManager {
     this.updateRoomList(); // Ensure the room list is populated before adding event listeners
   }
 
+  initializeEventListeners() {
+    document.querySelectorAll(".room-card").forEach((card) => {
+      card.addEventListener("click", (e) => {
+        const roomId = e.currentTarget.dataset.room;
+        this.selectRoom(roomId);
+      });
+    });
+  }
   initializeEventListeners() {
     document.querySelectorAll(".room-card").forEach((card) => {
       card.addEventListener("click", (e) => {
