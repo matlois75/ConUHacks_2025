@@ -73,10 +73,11 @@ html, body {
 
 /* Ensures the viewer-wrapper has flexible size */
 #viewer-wrapper {
+    position: relative; /* This makes the button position relative to this div */
+    background: black;
     width: 100%;
     height: auto;
     min-height: 500px;
-    background-color: black;
     border-radius: 8px;
     overflow: hidden;
     touch-action: none;
@@ -118,4 +119,34 @@ html, body {
         width: 100%;
         min-width: unset;
     }
+}
+
+/* Fullscreen Button inside viewer-wrapper */
+#fullscreen-btn {
+    position: absolute;
+    bottom: 10px;  /* Positioned relative to the canvas */
+    right: 10px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 1rem;
+    border-radius: 5px;
+    z-index: 10;
+    transition: background 0.3s;
+}
+
+#fullscreen-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Fullscreen Mode */
+.fullscreen-active {
+    width: 100vw !important;
+    height: 100vh !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    z-index: 1000 !important;
 }

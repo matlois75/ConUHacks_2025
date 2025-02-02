@@ -11,36 +11,10 @@
 	<div id="sgw_banner">
 		<img src="/assets/sgw_banner.png" alt="Sir George Williams Campus Banner" class="full-width" />
 	</div>
-
-	<style>
-
-		#canvas {
-			display: block;
-			width: 800px;
-			height: 500px;
-			background: #222;
-			border: 2px solid white;
-		}
-
-		#info {
-			z-index: 100;
-			position: absolute;
-			top: 10px;
-			left: 15px;
-		}
-
-		h3 {
-			margin: 5px 0;
-		}
-
-		p {
-			margin: 5px 0;
-			font-size: small;
-		}
-	</style>
 </head>
 
-<body><section id="about" class="section">
+<body>
+<section id="about" class="section">
 	<h1>Explore Our University Spaces</h1>
 	<p>Welcome to our interactive 3D room explorer. Navigate through different spaces and learn about their features and purposes.</p>
 </section>
@@ -64,6 +38,7 @@
 	<div class="viewer-container">
 		<div id="viewer-wrapper">
 			<canvas id="canvas"></canvas>
+			<button id="fullscreen-btn" onclick="toggleFullscreen()">⛶ Fullscreen</button>
 			<div id="progress"></div>
 			<div id="message"></div>
 			<div id="spinner" class="scene">
@@ -86,11 +61,9 @@
 		<div class="viewer-controls">
 			<h3>Navigation Controls</h3>
 			<p id="instructions" class="controls-text">
-
-				Mouse: Click and drag to look around
-				<br>Keyboard: Arrow keys to move, WASD to look around
-				<br>Touch: Pinch to zoom, drag to look around
-
+				Mouse: Click and drag to look around<br>
+				Keyboard: Arrow keys to move, WASD to look around<br>
+				Touch: Pinch to zoom, drag to look around
 			</p>
 		</div>
 	</div>
@@ -98,5 +71,36 @@
 
 <%- include('partials/footer') %>
 
+<script src="js/main.js"></script>
+
+<script>
+	function toggleFullscreen() {
+		let viewer = document.getElementById('viewer-wrapper');
+
+		if (!document.fullscreenElement) {
+			if (viewer.requestFullscreen) {
+				viewer.requestFullscreen();
+			} else if (viewer.mozRequestFullScreen) { // Firefox
+				viewer.mozRequestFullScreen();
+			} else if (viewer.webkitRequestFullscreen) { // Chrome, Safari, and Opera
+				viewer.webkitRequestFullscreen();
+			} else if (viewer.msRequestFullscreen) { // IE/Edge
+				viewer.msRequestFullscreen();
+			}
+			viewer.classList.add('fullscreen-active');
+		} else {
+			if (document.exitFullscreen) {
+				document.exitFullscreen();
+			} else if (document.mozCancelFullScreen) {
+				document.mozCancelFullScreen();
+			} else if (document.webkitExitFullscreen) {
+				document.webkitExitFullscreen();
+			} else if (document.msExitFullscreen) {
+				document.msExitFullscreen();
+			}
+			viewer.classList.remove('fullscreen-active');
+		}
+	}
+</script>
 </body>
 </html>
