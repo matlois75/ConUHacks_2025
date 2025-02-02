@@ -2,6 +2,8 @@
 <html lang="en" dir="ltr">
 <head>
 	<link rel="stylesheet" href="css/style.css" />
+	<link rel="stylesheet" href="css/viewer.css" />
+
 
 	<%- include('partials/header', {
 	title: 'Home',
@@ -72,35 +74,7 @@
 <%- include('partials/footer') %>
 
 <script src="js/main.js"></script>
+<script src="js/viewer.js"></script>
 
-<script>
-	function toggleFullscreen() {
-		let viewer = document.getElementById('viewer-wrapper');
-
-		if (!document.fullscreenElement) {
-			if (viewer.requestFullscreen) {
-				viewer.requestFullscreen();
-			} else if (viewer.mozRequestFullScreen) { // Firefox
-				viewer.mozRequestFullScreen();
-			} else if (viewer.webkitRequestFullscreen) { // Chrome, Safari, and Opera
-				viewer.webkitRequestFullscreen();
-			} else if (viewer.msRequestFullscreen) { // IE/Edge
-				viewer.msRequestFullscreen();
-			}
-			viewer.classList.add('fullscreen-active');
-		} else {
-			if (document.exitFullscreen) {
-				document.exitFullscreen();
-			} else if (document.mozCancelFullScreen) {
-				document.mozCancelFullScreen();
-			} else if (document.webkitExitFullscreen) {
-				document.webkitExitFullscreen();
-			} else if (document.msExitFullscreen) {
-				document.msExitFullscreen();
-			}
-			viewer.classList.remove('fullscreen-active');
-		}
-	}
-</script>
 </body>
 </html>

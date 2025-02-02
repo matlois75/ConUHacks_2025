@@ -133,10 +133,12 @@ class RoomManager {
 
 // Prevent arrow keys from scrolling the page
 window.addEventListener('keydown', (e) => {
-    if(['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.code)) {
-        e.preventDefault();
-    }
+
+    ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.code)
+        e.preventDefswault();
+
 });
+
 
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
@@ -155,3 +157,31 @@ document.addEventListener('DOMContentLoaded', () => {
         roomManager.selectRoom(firstRoomId);
     }
 });
+
+function toggleFullscreen() {
+    let viewer = document.getElementById('viewer-wrapper');
+
+    if (!document.fullscreenElement) {
+        if (viewer.requestFullscreen) {
+            viewer.requestFullscreen();
+        } else if (viewer.mozRequestFullScreen) { // Firefox
+            viewer.mozRequestFullScreen();
+        } else if (viewer.webkitRequestFullscreen) { // Chrome, Safari, and Opera
+            viewer.webkitRequestFullscreen();
+        } else if (viewer.msRequestFullscreen) { // IE/Edge
+            viewer.msRequestFullscreen();
+        }
+        viewer.classList.add('fullscreen-active');
+    } else {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.mozCancelFullScreen) {
+            document.mozCancelFullScreen();
+        } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+        } else if (document.msExitFullscreen) {
+            document.msExitFullscreen();
+        }
+        viewer.classList.remove('fullscreen-active');
+    }
+}
