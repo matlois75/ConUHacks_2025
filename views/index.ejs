@@ -1,80 +1,162 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-<head>
-	<link rel="stylesheet" href="css/style.css" />
-	<link rel="stylesheet" href="css/viewer.css" />
+  <head>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/viewer.css" />
 
+    <%- include('partials/header', { title: 'Home', css: 'public/css/header.css'
+    }) %>
 
-	<%- include('partials/header', {
-	title: 'Home',
-	css: 'public/css/header.css'
-	}) %>
+    <div id="sgw_banner">
+      <img
+        src="/assets/sgw_banner.png"
+        alt="Sir George Williams Campus Banner"
+        class="full-width"
+      />
+    </div>
+  </head>
 
-	<div id="sgw_banner">
-		<img src="/assets/sgw_banner.png" alt="Sir George Williams Campus Banner" class="full-width" />
-	</div>
-</head>
+  <body>
+    <section id="about" class="section">
+      <h1>Explore Our University Spaces</h1>
+      <p>
+        Welcome to our interactive 3D room explorer. Navigate through different
+        spaces and learn about their features and purposes.
+      </p>
+    </section>
 
-<body>
-<section id="about" class="section">
-	<h1>Explore Our University Spaces</h1>
-	<p>Welcome to our interactive 3D room explorer. Navigate through different spaces and learn about their features and purposes.</p>
-</section>
+    <section id="rooms" class="section rooms-section">
+      <div class="left-panel">
+        <!-- Tab Navigation -->
+        <div class="tab-navigation">
+          <button class="tab-button active" data-tab="rooms">
+            Available Rooms
+          </button>
+          <button class="tab-button" data-tab="chat">Sting: Tour Expert</button>
+        </div>
 
-<section id="rooms" class="section rooms-section">
-	<div class="room-list">
-		<h2>Available Rooms</h2>
-		<div class="room-selector">
-			<div class="room-card" data-room="library">
-				<h3>Main Library</h3>
-				<p>A spacious study area with extensive resources</p>
-			</div>
-			<div class="room-card" data-room="lecture-hall">
-				<h3>Lecture Hall A</h3>
-				<p>Modern lecture theater with multimedia capabilities</p>
-			</div>
-			<!-- Add more room cards as needed -->
-		</div>
-	</div>
+        <!-- Rooms Tab Content -->
+        <div class="tab-content active" id="rooms-tab">
+          <div class="room-selector">
+            <div class="room-card" data-room="library">
+              <h3>Main Library</h3>
+              <p>A spacious study area with extensive resources</p>
+            </div>
+            <div class="room-card" data-room="lecture-hall">
+              <h3>Lecture Hall A</h3>
+              <p>Modern lecture theater with multimedia capabilities</p>
+            </div>
+          </div>
+        </div>
 
-	<div class="viewer-container">
-		<div id="viewer-wrapper">
-			<canvas id="canvas"></canvas>
-			<button id="fullscreen-btn" onclick="toggleFullscreen()">⛶ Fullscreen</button>
-			<div id="progress"></div>
-			<div id="message"></div>
-			<div id="spinner" class="scene">
-				<div class="cube-wrapper">
-					<div class="cube">
-						<div class="cube-faces">
-							<div class="cube-face bottom"></div>
-							<div class="cube-face top"></div>
-							<div class="cube-face left"></div>
-							<div class="cube-face right"></div>
-							<div class="cube-face back"></div>
-							<div class="cube-face front"></div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div id="quality"><span id="fps"></span></div>
-			<div id="caminfo"><span id="camid"></span></div>
-		</div>
-		<div class="viewer-controls">
-			<h3>Navigation Controls</h3>
-			<p id="instructions" class="controls-text">
-				Mouse: Click and drag to look around<br>
-				Keyboard: Arrow keys to move, WASD to look around<br>
-				Touch: Pinch to zoom, drag to look around
-			</p>
-		</div>
-	</div>
-</section>
+        <!-- Chat Tab Content -->
+        <div class="tab-content" id="chat-tab">
+          <div class="chat-interface">
+            <div class="chat-messages"></div>
+            <div class="chat-input-area">
+              <textarea
+                class="chat-input"
+                placeholder="Ask me anything about the tour..."
+                rows="1"
+              ></textarea>
+              <button class="chat-send">Send</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
-<%- include('partials/footer') %>
+      <div class="viewer-container">
+        <div id="viewer-wrapper">
+          <div id="fact-overlay" class="fact-overlay">
+            <div class="fact-content">
+              <div class="fact-icon">
+                <img
+                  src="assets/Concordia_Logo.png"
+                  alt="Concordia Logo"
+                  class="fact-icon-img"
+                />
+              </div>
+              <p id="fact-text"></p>
+            </div>
+          </div>
 
-<script src="/js/main.js"></script>
-<script src="/js/viewer.js"></script>
+          <canvas id="canvas"></canvas>
+          <button id="fullscreen-btn" onclick="toggleFullscreen()">
+            ⛶ Fullscreen
+          </button>
+          <div id="progress"></div>
+          <div id="message"></div>
+          <div id="spinner" class="scene">
+            <div class="cube-wrapper">
+              <div class="cube">
+                <div class="cube-faces">
+                  <div class="cube-face bottom"></div>
+                  <div class="cube-face top"></div>
+                  <div class="cube-face left"></div>
+                  <div class="cube-face right"></div>
+                  <div class="cube-face back"></div>
+                  <div class="cube-face front"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="quality"><span id="fps"></span></div>
+          <div id="caminfo"><span id="camid"></span></div>
+        </div>
+        <div class="viewer-controls">
+          <h3>Navigation Controls</h3>
+          <p id="instructions" class="controls-text">
+            Mouse: Click and drag to look around<br />
+            Keyboard: Arrow keys to move, WASD to look around<br />
+            Touch: Pinch to zoom, drag to look around
+          </p>
+        </div>
+      </div>
+    </section>
 
-</body>
+    <%- include('partials/footer') %>
+
+    <script>
+      function toggleFullscreen() {
+        let viewer = document.getElementById("viewer-wrapper");
+
+        if (!document.fullscreenElement) {
+          if (viewer.requestFullscreen) {
+            viewer.requestFullscreen();
+          } else if (viewer.mozRequestFullScreen) {
+            // Firefox
+            viewer.mozRequestFullScreen();
+          } else if (viewer.webkitRequestFullscreen) {
+            // Chrome, Safari, and Opera
+            viewer.webkitRequestFullscreen();
+          } else if (viewer.msRequestFullscreen) {
+            // IE/Edge
+            viewer.msRequestFullscreen();
+          }
+          viewer.classList.add("fullscreen-active");
+        } else {
+          if (document.exitFullscreen) {
+            document.exitFullscreen();
+          } else if (document.mozCancelFullScreen) {
+            document.mozCancelFullScreen();
+          } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+          } else if (document.msExitFullscreen) {
+            document.msExitFullscreen();
+          }
+          viewer.classList.remove("fullscreen-active");
+        }
+      }
+    </script>
+    <script src="js/chat-manager.js"></script>
+    <script src="js/facts.js"></script>
+    <script src="js/viewer.js"></script>
+    <script src="js/main.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        window.chatManager = new ChatManager();
+      });
+    </script>
+  </body>
 </html>

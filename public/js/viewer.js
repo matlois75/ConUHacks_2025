@@ -452,7 +452,7 @@ function createWorker(self) {
     for (let i = 0; i < vertexCount; i++)
       depthIndex[starts0[sizeList[i]]++] = i;
 
-    //console.timeEnd("sort");
+    // console.timeEnd("sort");
 
     lastProj = viewProj;
     self.postMessage({ depthIndex, viewProj, vertexCount }, [
@@ -469,7 +469,7 @@ function createWorker(self) {
     if (header_end_index < 0)
       throw new Error("Unable to read .ply file header");
     const vertexCount = parseInt(/element vertex (\d+)\n/.exec(header)[1]);
-    console.log("Vertex Count", vertexCount);
+    // console.log("Vertex Count", vertexCount);
     let row_offset = 0,
       offsets = {},
       types = {};
@@ -492,7 +492,7 @@ function createWorker(self) {
       offsets[name] = row_offset;
       row_offset += parseInt(arrayType.replace(/[^\d]/g, "")) / 8;
     }
-    console.log("Bytes per row", row_offset, types, offsets);
+    // console.log("Bytes per row", row_offset, types, offsets);
 
     let dataView = new DataView(
       inputBuffer,
@@ -509,7 +509,7 @@ function createWorker(self) {
       }
     );
 
-    console.time("calculate importance");
+    // console.time("calculate importance");
     let sizeList = new Float32Array(vertexCount);
     let sizeIndex = new Uint32Array(vertexCount);
     for (row = 0; row < vertexCount; row++) {
@@ -522,11 +522,11 @@ function createWorker(self) {
       const opacity = 1 / (1 + Math.exp(-attrs.opacity));
       sizeList[row] = size * opacity;
     }
-    console.timeEnd("calculate importance");
+    // console.timeEnd("calculate importance");
 
-    //Uncomment if you need the time console.time("sort");
+    // console.time("sort");
     sizeIndex.sort((b, a) => sizeList[a] - sizeList[b]);
-    //console.timeEnd("sort");
+    // console.timeEnd("sort");
 
     // 6*4 + 4 + 4 = 8*4
     // XYZ - Position (Float32)
@@ -536,7 +536,7 @@ function createWorker(self) {
     const rowLength = 3 * 4 + 3 * 4 + 4 + 4;
     const buffer = new ArrayBuffer(rowLength * vertexCount);
 
-    console.time("build buffer");
+    // console.time("build buffer");
     for (let j = 0; j < vertexCount; j++) {
       row = sizeIndex[j];
 
@@ -600,7 +600,7 @@ function createWorker(self) {
         rgba[3] = 255;
       }
     }
-    console.timeEnd("build buffer");
+    // console.timeEnd("build buffer");
     return buffer;
   }
 
@@ -737,21 +737,20 @@ let defaultViewMatrix = [
 ];
 let viewMatrix = defaultViewMatrix;
 async function main() {
-
-    let carousel = false;
-    const params = new URLSearchParams(location.search);
-    try {
-        viewMatrix = JSON.parse(decodeURIComponent(location.hash.slice(1)));
-        carousel = false;
-    } catch (err) {}
-    const url = new URL("../assets/models/library-2nd.splat", location.href);
-    const req = await fetch(url, {
-        mode: "cors", // no-cors, *cors, same-origin
-        credentials: "omit", // include, *same-origin, omit
-    });
-    console.log(req);
-    if (req.status != 200)
-        throw new Error(req.status + " Unable to load " + req.url);
+  let carousel = false;
+  const params = new URLSearchParams(location.search);
+  try {
+    viewMatrix = JSON.parse(decodeURIComponent(location.hash.slice(1)));
+    carousel = false;
+  } catch (err) {}
+  const url = new URL("../assets/models/library-2nd.splat", location.href);
+  const req = await fetch(url, {
+    mode: "cors", // no-cors, *cors, same-origin
+    credentials: "omit", // include, *same-origin, omit
+  });
+  console.log(req);
+  if (req.status != 200)
+    throw new Error(req.status + " Unable to load " + req.url);
 
   const rowLength = 3 * 4 + 3 * 4 + 4 + 4;
   const reader = req.body.getReader();
@@ -759,7 +758,7 @@ async function main() {
 
   const downsample =
     splatData.length / rowLength > 500000 ? 1 : 1 / devicePixelRatio;
-  console.log(splatData.length / rowLength, downsample);
+  // console.log(splatData.length / rowLength, downsample);
 
   worker = new Worker(
     URL.createObjectURL(
