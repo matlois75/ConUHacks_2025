@@ -8,6 +8,12 @@ if (!gl) {
 class RoomManager {
     constructor() {
         this.rooms = {
+            'library-second-floor': {
+            name: 'Webster Library Second Floor',
+                modelUrl: '/assets/models/library-2nd-luma.splat',
+                description: 'Quiet study area with a view of the city',
+                features: ['Silent Rooms', 'Computer workstations', 'Printing Stations']
+            },
             'library-lobby': {
                 name: 'Webster Library Lobby',
                 modelUrl: '/assets/models/library-lobby-luma.splat',
@@ -19,12 +25,6 @@ class RoomManager {
                 modelUrl: '/assets/models/hall2-30k-edited.splat',
                 description: 'Modern building with multimedia capabilities',
                 features: ['12 floors', 'Advanced AV system', 'Wheelchair accessible']
-            },
-            'library-second-floor': {
-                name: 'Webster Library Second Floor',
-                modelUrl: '/assets/models/library-2nd-luma.splat',
-                description: 'Quiet study area with a view of the city',
-                features: ['Silent Rooms', 'Computer workstations', 'Printing Stations']
             }
         };
         this.initializeEventListeners();
