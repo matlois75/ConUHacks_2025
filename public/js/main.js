@@ -29,7 +29,7 @@ class RoomManager {
           "Group study rooms",
           "Digital resources",
         ],
-        picture: '/assets/hall-building-picture.jpg'
+        picture: '/assets/library-picture.jpg'
         
       },
       "lecture-hall": {
@@ -37,7 +37,7 @@ class RoomManager {
         modelUrl: "/assets/models/hall2.splat",
         description: "Modern building with multimedia capabilities",
         features: ["12 floors", "Advanced AV system", "Wheelchair accessible"],
-        picture: '/assets/library-picture.jpg'
+        picture: '/assets/hall-building-picture.jpg'
       },
     };
     this.initializeEventListeners();
