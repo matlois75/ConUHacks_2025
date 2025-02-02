@@ -1,0 +1,205 @@
+{
+    "concordia-general-info": {
+        "history": [
+            "Founded in 1974 from the merger of Loyola College (1896) and Sir George Williams University (1926)",
+            "Named after the motto \"Concordia salus\" meaning \"well-being through harmony\""
+        ],
+        "campuses": [
+            "Sir George Williams Campus (Downtown)",
+            "Loyola Campus (Notre-Dame-de-Grâce)"
+        ],
+        "downtown_buildings": {
+            "hall_building": [
+                "Main classroom building",
+                "Houses many departments and student services",
+                "Connected to Guy-Concordia metro station"
+            ],
+            "jmsb_building": [
+                "John Molson School of Business",
+                "Home to undergraduate and graduate business programs",
+                "Features state-of-the-art facilities and study spaces"
+            ],
+            "webster_library": [
+                "Main library on the downtown campus",
+                "Offers extensive print and digital collections",
+                "Provides study spaces and research support"
+            ],
+            "ev-building": [
+                "Engineering, Computer Science, and Visual Arts building",
+                "Hosts labs, studios, and classrooms for various programs",
+                "Home to Le Gym, Concordia's main fitness center"
+            ],
+            "gm-building": [
+                "Guy-Metro Building",
+                "Houses the Cinema, Communications, and Journalism departments",
+                "Features a cinema screening room and media production facilities"
+            ],
+            "faubourg_building": [
+                "Faubourg Building",
+                "Home to the Faculty of Fine Arts",
+                "Includes art studios, galleries, and performance spaces"
+            ],
+            "grey_nuns_building": [
+                "Grey Nuns Building",
+                "Hosts the School of Community and Public Affairs",
+                "Features classrooms, offices, and community engagement spaces"
+            ]
+        },
+        "loyola_buildings": {
+            "ad_building": [
+                "Administration Building",
+                "Main administrative offices for the Loyola Campus",
+                "Includes the President's Office and Registrar's Office"
+            ],
+            "cc_building": [
+                "Communication Studies and Journalism Building",
+                "Home to the Department of Communication Studies and Journalism",
+                "Features classrooms, labs, and media production facilities"
+            ],
+            "cj_building": [
+                "Communication Studies and Journalism Annex",
+                "Additional space for the Communication Studies and Journalism department",
+                "Includes offices, studios, and editing suites"
+            ],
+            "hingston_hall": [
+                "Hingston Hall",
+                "Residence building for Loyola Campus students",
+                "Offers single and double rooms with shared facilities"
+            ],
+            "osborne_building": [
+                "Osborne Building",
+                "Hosts the Department of History and the Department of Theological Studies",
+                "Includes classrooms, offices, and research spaces"
+            ],
+            "performing_arts_building": [
+                "Performing Arts Building",
+                "Home to the Department of Theatre and the Department of Music",
+                "Features rehearsal spaces, performance venues, and music studios"
+            ],
+            "psych_building": [
+                "Psychology Building",
+                "Hosts the Department of Psychology",
+                "Includes labs, classrooms, and research facilities"
+            ],
+            "science_pavilion": [
+                "Science Pavilion",
+                "Home to the Department of Chemistry and Biochemistry",
+                "Features labs, classrooms, and research spaces"
+            ],
+            "sp_building": [
+                "Student Services Building",
+                "Provides support services for Loyola Campus students",
+                "Includes the Student Success Centre and Career Services"
+            ],
+            "vl_building": [
+                "Vanier Library",
+                "Main library on the Loyola Campus",
+                "Offers study spaces, collections, and research assistance"
+            ]
+        },
+        "faculties": [
+            "Faculty of Arts and Science",
+            "Faculty of Fine Arts",
+            "Faculty of Engineering and Computer Science",
+            "John Molson School of Business"
+        ],
+        "student_services": [
+            "Student Success Centre",
+            "Career Services",
+            "Counselling and Psychological Services",
+            "Health Services",
+            "Financial Aid and Awards Office",
+            "International Students Office",
+            "Indigenous Directions Office",
+            "Concordia Student Union (CSU)",
+            "Graduate Students' Association (GSA)"
+        ],
+        "general_dates": {
+            "fall_semester": "September to December",
+            "winter_semester": "January to April",
+            "summer_semester": "May to August",
+            "exam_period": "April and August",
+            "reading_week": "February"
+        }
+    },
+    "hall-floor-1": [
+        "The Hall Building was inaugurated in 1966 as part of Sir George Williams University, before it merged with Loyola College to form Concordia University.",
+        "The iconic brutalist architecture of the Hall Building represents a significant period in Montreal's architectural history.",
+        "LB Clarke Theatre, located on the first floor, hosts numerous student performances and university events throughout the year.",
+        "The Hall Building's first floor houses Le Gym, Concordia's main fitness center offering state-of-the-art equipment and facilities to students.",
+        "The Welcome Center on the first floor serves as the primary information hub for visitors, prospective students, and campus tours.",
+        "The Hall Building's first floor connects directly to the Guy-Concordia metro station through an underground tunnel, providing convenient access during Montreal winters.",
+        "The massive windows on the first floor allow abundant natural light and offer views of the bustling downtown Montreal streetscape.",
+        "The People's Potato, a vegan soup kitchen run by students, operates from the Hall Building and serves free lunches to the Concordia community.",
+        "The first floor houses various student service offices, making it a central hub for administrative support and student resources.",
+        "The Security Desk on the first floor operates 24/7, ensuring campus safety and providing assistance to students and visitors.",
+        "The Hall Building's first floor features multiple collaborative study spaces equipped with modern technology and comfortable seating.",
+        "Digital wayfinding kiosks on the first floor help visitors navigate the building's complex layout and find their destinations easily.",
+        "The first floor hosts one of the campus's largest Tim Hortons locations, serving as a popular meeting spot for students between classes.",
+        "The Hall Building's accessibility features include wide corridors and automatic doors, making the first floor easily navigable for all visitors.",
+        "Multiple ATMs from different banks are available on the first floor for student convenience.",
+        "The first floor maintains a constant comfortable temperature year-round through an advanced HVAC system, providing refuge from Montreal's extreme weather.",
+        "Student club bulletin boards on the first floor showcase the vibrant campus life and numerous opportunities for student engagement.",
+        "The Hall Building's first floor serves as a polling station during municipal, provincial, and federal elections.",
+        "Emergency phones are strategically placed throughout the first floor, connecting directly to campus security for immediate assistance.",
+        "The building's mail services and package pickup location operates from the first floor, handling student and faculty mail distribution.",
+        "Multiple recycling and composting stations on the first floor reflect Concordia's commitment to sustainability.",
+        "The first floor features a designated prayer and meditation room, supporting the diverse spiritual needs of the university community.",
+        "Electronic charging stations are available throughout the first floor, allowing students to power their devices between classes.",
+        "The Hall Building's first floor hosts regular art exhibitions in its corridor spaces, showcasing student and faculty work.",
+        "A dedicated lost and found office on the first floor helps reunite students with their misplaced items.",
+        "The first floor's information screens display real-time updates about campus events, weather, and emergency notifications.",
+        "Bike racks located near the first floor entrances promote sustainable transportation among the Concordia community.",
+        "The Hall Building's first floor windows are specially treated to reduce heat gain and maintain energy efficiency.",
+        "Water bottle refill stations on the first floor support Concordia's initiative to reduce single-use plastic consumption.",
+        "The first floor features a designated area for food delivery pickup, organized to manage the high volume of student orders efficiently."
+    ],
+    "webster-floor-1": [
+        "The first floor's distinctive circular information desk was designed to be easily visible from all angles of the entrance",
+      "The Webster Library's main entrance connects directly to the Hall building tunnel system for convenient winter access",
+      "The Library Café features a living wall with real plants to improve air quality and create a calming atmosphere",
+      "The self-checkout machines can process up to 5 books simultaneously using RFID technology",
+      "The entrance turnstiles count an average of 10,000 visitors per day during peak semester periods",
+      "The modern seating area near the entrance was renovated in 2015 as part of a major modernization project",
+      "The first floor's ceiling features exposed industrial design elements as a nod to Concordia's engineering heritage",
+      "The Library Services Desk handles all circulation, course reserves, and general inquiries",
+      "Free lockers are available near the entrance for daily use with your student ID",
+      "The Technology Sandbox offers 3D printing services and VR equipment for student projects",
+      "Course reserves can be borrowed for 3-hour periods using your student ID",
+      "The Library Café accepts meal plan cards and offers student discounts",
+      "Printing services are available with your student account or by purchasing a print card",
+      "The accessibility service desk provides specialized assistance and adaptive technologies",
+      "Lost and found items are kept at the security desk near the entrance",
+      "Group study room bookings can be made at the information desk or online",
+      "The Webster Library's hours extend to 24/7 during final exam periods",
+      "Express computer stations near the entrance have a 15-minute time limit",
+      "The first floor features both Mac and PC computers for quick access",
+      "Wireless printing is available through the library's online printing portal",
+      "Phone charging stations are available at various seating areas",
+      "The library offers free laptop loans for same-day use"
+    ],
+    "webster-floor-2": [
+        "The second floor's distinctive blue study pods were inspired by first-class airline seating",
+      "The floor-to-ceiling windows offer views of the Henry F. Hall Building's iconic brutalist architecture",
+      "The silent study zone features special acoustic panels that absorb 90% of ambient noise",
+      "The collaborative study zones were designed based on student feedback from a 2014 survey",
+      "The second floor houses one of the largest collections of Canadian literature in Quebec",
+      "The group study rooms feature writable wall surfaces for brainstorming sessions",
+      "The floor's layout was designed to maximize natural light penetration throughout the space",
+      "The second floor is divided into collaborative and silent study zones",
+      "Group study rooms on this floor can accommodate 4-8 people",
+      "The Reference Help Desk offers one-on-one research assistance",
+      "Subject librarians are available for consultation by appointment",
+      "The multimedia room features a large-screen display for group presentations",
+      "Standing desks are available in the northwest corner of the floor",
+      "Electrical outlets are embedded in all study tables",
+      "Research guides and course reserves are organized by faculty",
+      "The second floor houses the main humanities and social sciences collections",
+      "Noise-cancelling headphones can be borrowed from the service desk",
+      "Study pods can be reserved for up to 3 hours at a time",
+      "The floor features dedicated zones for graduate student study",
+      "Mobile whiteboards are available for use throughout the floor",
+      "Research workshops are regularly held in the instruction room",
+      "The second floor maintains strict quiet zone policies after 8 PM"
+    ]
+}
