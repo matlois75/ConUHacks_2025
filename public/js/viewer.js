@@ -942,6 +942,7 @@ async function main() {
     activeKeys = [];
   });
 
+  // MOUSE SCROLL WHEEL
 //   window.addEventListener(
 //     "wheel",
 //     (e) => {
@@ -998,6 +999,7 @@ async function main() {
     down = 2;
   });
 
+  //CLICK AND DRAG CONTROLS
 //   canvas.addEventListener("mousemove", (e) => {
 //     e.preventDefault();
 //     if (down == 1) {
@@ -1064,6 +1066,8 @@ async function main() {
     },
     { passive: false }
   );
+
+  //MOBILE TOUCH CONTROLS
   canvas.addEventListener(
     "touchmove",
     (e) => {
@@ -1160,16 +1164,20 @@ async function main() {
       activeKeys.includes("ShiftLeft") ||
       activeKeys.includes("ShiftRight");
 
+
     if (activeKeys.includes("ArrowUp")) {
+      //GO UP THROUGH SHIFT
       if (shiftKey) {
-        inv = translate4(inv, 0, -0.03, 0);
-      } else {
+       // inv = translate4(inv, 0, -0.03, 0);
+      }
+      else {
         inv = translate4(inv, 0, 0, 0.015);
       }
     }
     if (activeKeys.includes("ArrowDown")) {
+      //GO DOWN THROUGH SHIFT
       if (shiftKey) {
-        inv = translate4(inv, 0, 0.03, 0);
+        //inv = translate4(inv, 0, 0.03, 0);
       } else {
         inv = translate4(inv, 0, 0, -0.015);
       }
@@ -1178,12 +1186,16 @@ async function main() {
     //
     if (activeKeys.includes("ArrowRight")) inv = translate4(inv, 0.015, 0, 0);
     // inv = rotate4(inv, 0.01, 0, 1, 0);
+    //TURN CAMERA LEFT
     if (activeKeys.includes("KeyA")) inv = rotate4(inv, -0.01, 0, 1, 0);
+    //TURN CAMERA RIGHT
     if (activeKeys.includes("KeyD")) inv = rotate4(inv, 0.01, 0, 1, 0);
     // if (activeKeys.includes("KeyQ")) inv = rotate4(inv, 0.01, 0, 0, 1);
     // if (activeKeys.includes("KeyE")) inv = rotate4(inv, -0.01, 0, 0, 1);
-    // if (activeKeys.includes("KeyW")) inv = rotate4(inv, 0.005, 1, 0, 0);
-    // if (activeKeys.includes("KeyS")) inv = rotate4(inv, -0.005, 1, 0, 0);
+    //MOVE FORWARD
+     if (activeKeys.includes("KeyW")) inv = inv = inv = translate4(inv, 0, 0, 0.015);
+     //MOVE BACKWARDS
+     if (activeKeys.includes("KeyS")) inv = translate4(inv, 0, 0, -0.015);
 
     const gamepads = navigator.getGamepads ? navigator.getGamepads() : [];
     let isJumping = activeKeys.includes("Space");
