@@ -214,14 +214,9 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // Toggle fullscreen mode properly
+const viewer = document.getElementById("viewer-wrapper");
+
 function toggleFullscreen() {
-  let viewer = document.getElementById("viewer-wrapper");
-
-  if (!viewer) {
-    console.error("Viewer wrapper not found.");
-    return;
-  }
-
   if (!document.fullscreenElement) {
     if (viewer.requestFullscreen) {
       viewer.requestFullscreen();
@@ -234,15 +229,36 @@ function toggleFullscreen() {
     }
     viewer.classList.add("fullscreen-active");
   } else {
-    if (document.exitFullscreen) {
-      document.exitFullscreen();
-    } else if (document.mozCancelFullScreen) {
-      document.mozCancelFullScreen();
-    } else if (document.webkitExitFullscreen) {
-      document.webkitExitFullscreen();
-    } else if (document.msExitFullscreen) {
-      document.msExitFullscreen();
-    }
-    viewer.classList.remove("fullscreen-active");
+    exitFullscreen();
   }
 }
+
+function exitFullscreen() {
+  if (document.exitFullscreen) {
+    document.exitFullscreen();
+  } else if (document.mozCancelFullScreen) {
+    document.mozCancelFullScreen();
+  } else if (document.webkitExitFullscreen) {
+    document.webkitExitFullscreen();
+  } else if (document.msExitFullscreen) {
+    document.msExitFullscreen();
+  }
+  viewer.classList.remove("fullscreen-active");
+}
+
+// Listen for ESC key to exit fullscreen
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && document.fullscreenElement) {
+    exitFullscreen();
+  }
+});
+
+// Optional: Handle fullscreen change events
+document.addEventListener("fullscreenchange", () => {
+  if (!document.fullscreenElement) {
+    viewer.classList.remove("fullscreen-active");
+  }
+});
+
+// Attach function to a button click (if needed)
+document.getElementById("fullscreen-btn").addEventListener("click", toggleFullscreen);
