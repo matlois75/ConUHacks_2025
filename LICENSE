@@ -1,3 +1,32 @@
+# License Information
+
+This project is available for **research and non-commercial use only**.
+
+## Project Structure and Licenses
+
+This project:
+
+- Uses the Gaussian-Splatting implementation as a git submodule, which maintains its own license restricting usage to non-commercial research purposes
+- Contains MIT-licensed code components
+- Is therefore restricted to non-commercial research use only
+
+## License Terms
+
+By using this software, you agree to:
+
+1. Use it for research and non-commercial purposes only
+2. Comply with all license terms of included submodules and dependencies
+3. Maintain all copyright notices and attributions
+4. Cite the appropriate papers when using this code in academic work
+
+### Commercial Use
+
+Any commercial use requires explicit permission from:
+
+- Inria and MPII for the Gaussian-Splatting components (contact: stip-sophia.transfert@inria.fr)
+
+## MIT License Components
+
 MIT License
 
 Copyright (c) 2025 Mathys Loiselle
