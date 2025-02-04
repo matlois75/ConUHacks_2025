@@ -128,7 +128,7 @@ class RoomManager {
 
   updateRoomInfo(roomId) {
     const room = this.rooms[roomId];
-    const infoPanel = document.querySelector(".viewer-controls");
+    const infoPanel = document.querySelector(".room-info");
     if (!infoPanel) return;
 
     infoPanel.innerHTML = `
@@ -141,11 +141,6 @@ class RoomManager {
                       .map((feature) => `<li>${feature}</li>`)
                       .join("")}
                 </ul>
-            </div>
-            <div class="controls-text">
-                <h4>Navigation Controls:</h4>
-                Keyboard: Arrow keys to move, WASD to look around<br>
-                Touch: Pinch to zoom, drag to look around
             </div>
         `;
   }
