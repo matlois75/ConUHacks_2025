@@ -80,6 +80,7 @@
             </div>
           </div>
 
+
           <canvas id="canvas"></canvas>
           <button id="fullscreen-btn" onclick="toggleFullscreen()">
             ⛶ Fullscreen
@@ -100,13 +101,19 @@
               </div>
             </div>
           </div>
-          <div id="quality"><span id="fps"></span></div>
+          <div id="fps"><span id="fps"></span></div>
           <div id="caminfo"><span id="camid"></span></div>
+        </div>
+        <div class="room-info">
+
         </div>
         <div class="viewer-controls">
           <h3>Navigation Controls</h3>
           <p id="instructions" class="controls-text">
-            Keyboard: Arrow keys to move, WASD to look around<br />
+            Keyboard: Arrows, 'W' and 'S' keys to move<br />
+            Keyboard: 'A' and 'D' keys to look around<br />
+            Keyboard: 'P' key to keep rotating the camera 360 degrees, and 'O' to stop<br />
+            Keyboard: Number keys 1-9 to change cameras<br />
             Touch: Pinch to zoom, drag to look around
           </p>
         </div>
@@ -115,38 +122,6 @@
 
     <%- include('partials/footer') %>
 
-    <script>
-      function toggleFullscreen() {
-        let viewer = document.getElementById("viewer-wrapper");
-
-        if (!document.fullscreenElement) {
-          if (viewer.requestFullscreen) {
-            viewer.requestFullscreen();
-          } else if (viewer.mozRequestFullScreen) {
-            // Firefox
-            viewer.mozRequestFullScreen();
-          } else if (viewer.webkitRequestFullscreen) {
-            // Chrome, Safari, and Opera
-            viewer.webkitRequestFullscreen();
-          } else if (viewer.msRequestFullscreen) {
-            // IE/Edge
-            viewer.msRequestFullscreen();
-          }
-          viewer.classList.add("fullscreen-active");
-        } else {
-          if (document.exitFullscreen) {
-            document.exitFullscreen();
-          } else if (document.mozCancelFullScreen) {
-            document.mozCancelFullScreen();
-          } else if (document.webkitExitFullscreen) {
-            document.webkitExitFullscreen();
-          } else if (document.msExitFullscreen) {
-            document.msExitFullscreen();
-          }
-          viewer.classList.remove("fullscreen-active");
-        }
-      }
-    </script>
     <script src="js/chat-manager.js"></script>
     <script src="js/facts.js"></script>
     <script src="js/viewer.js"></script>

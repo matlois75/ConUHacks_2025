@@ -907,41 +907,90 @@ async function main() {
   let activeKeys = [];
   let currentCameraIndex = 0;
 
-  window.addEventListener("keydown", (e) => {
-    // if (document.activeElement != document.body) return;
-    carousel = false;
-    if (!activeKeys.includes(e.code)) activeKeys.push(e.code);
-    if (/\d/.test(e.key)) {
-      currentCameraIndex = parseInt(e.key);
-      camera = cameras[currentCameraIndex];
-      viewMatrix = getViewMatrix(camera);
+  let canvasActive= false;
+  let pPressedWhileActive = false;
+
+  document.getElementById("canvas").addEventListener("click", () => {
+    if(!canvasActive) {
+      canvasActive = true;
+      console.log("canvas active")
     }
-    if (["-", "_"].includes(e.key)) {
-      currentCameraIndex =
-        (currentCameraIndex + cameras.length - 1) % cameras.length;
-      viewMatrix = getViewMatrix(cameras[currentCameraIndex]);
-    }
-    if (["+", "="].includes(e.key)) {
-      currentCameraIndex = (currentCameraIndex + 1) % cameras.length;
-      viewMatrix = getViewMatrix(cameras[currentCameraIndex]);
-    }
-    camid.innerText = "cam  " + currentCameraIndex;
-    if (e.code == "KeyV") {
-      location.hash =
-        "#" + JSON.stringify(viewMatrix.map((k) => Math.round(k * 100) / 100));
-      camid.innerText = "";
-    } else if (e.code === "KeyP") {
-      carousel = true;
-      camid.innerText = "";
-    }
-  });
-  window.addEventListener("keyup", (e) => {
-    activeKeys = activeKeys.filter((k) => k !== e.code);
-  });
-  window.addEventListener("blur", () => {
-    activeKeys = [];
   });
 
+  document.addEventListener("click", (event) => {
+    if (!document.getElementById("canvas").contains(event.target)) {
+      if(canvasActive) {
+        canvasActive = false;
+        console.log("canvas inactive")
+      }
+    }
+  });
+
+
+    window.addEventListener("keydown", (e) => {
+      // if (document.activeElement != document.body) return;
+      document.addEventListener("keydown", (e) => {
+
+        //IF THE CANVAS IS NOT FOCUSED, DO NOT ALLOW KEYBOARD INPUT
+        if (!canvasActive) return;
+
+        // Always track "P" key
+        if (e.code === "KeyP") {
+          carousel = !carousel; // Toggle carousel on P press
+          pPressedWhileActive = true; // Mark that P was pressed
+          return;
+        }
+
+        carousel = false;
+
+          if (!activeKeys.includes(e.code)) activeKeys.push(e.code);
+          if (/\d/.test(e.key)) {
+            currentCameraIndex = parseInt(e.key);
+            camera = cameras[currentCameraIndex];
+            viewMatrix = getViewMatrix(camera);
+          }
+          if (["-", "_"].includes(e.key)) {
+            currentCameraIndex =
+                (currentCameraIndex + cameras.length - 1) % cameras.length;
+            viewMatrix = getViewMatrix(cameras[currentCameraIndex]);
+          }
+          if (["+", "="].includes(e.key)) {
+            currentCameraIndex = (currentCameraIndex + 1) % cameras.length;
+            viewMatrix = getViewMatrix(cameras[currentCameraIndex]);
+          }
+          camid.innerText = "cam  " + currentCameraIndex;
+          if (e.code == "KeyV") {
+            location.hash =
+                "#" + JSON.stringify(viewMatrix.map((k) => Math.round(k * 100) / 100));
+            camid.innerText = "";
+          } else if (e.code === "KeyP") {
+            carousel = true;
+            camid.innerText = "";
+            pPressedWhileActive = true;
+          }
+
+      });
+    });
+
+
+  window.addEventListener("keyup", (e) => {
+    if (e.code === "KeyP") {
+      return; // Do not remove "P" from activeKeys to keep carousel running
+    }
+    activeKeys = activeKeys.filter((k) => k !== e.code);
+
+  });
+  window.addEventListener("blur", () => {
+    if (!pPressedWhileActive) {
+      activeKeys = activeKeys.filter((k) => k !== e.code);
+    } else {
+      activeKeys.forEach((key) => {
+        if (key !== "KeyP") activeKeys.delete(key);
+      });
+    }
+  });
+
+  // MOUSE SCROLL WHEEL
 //   window.addEventListener(
 //     "wheel",
 //     (e) => {
@@ -998,6 +1047,7 @@ async function main() {
     down = 2;
   });
 
+  //CLICK AND DRAG CONTROLS
 //   canvas.addEventListener("mousemove", (e) => {
 //     e.preventDefault();
 //     if (down == 1) {
@@ -1064,6 +1114,8 @@ async function main() {
     },
     { passive: false }
   );
+
+  //MOBILE TOUCH CONTROLS
   canvas.addEventListener(
     "touchmove",
     (e) => {
@@ -1153,197 +1205,225 @@ async function main() {
 
   let leftGamepadTrigger, rightGamepadTrigger;
 
+
+
   const frame = (now) => {
-    let inv = invert4(viewMatrix);
-    let shiftKey =
-      activeKeys.includes("Shift") ||
-      activeKeys.includes("ShiftLeft") ||
-      activeKeys.includes("ShiftRight");
 
-    if (activeKeys.includes("ArrowUp")) {
-      if (shiftKey) {
-        inv = translate4(inv, 0, -0.03, 0);
-      } else {
-        inv = translate4(inv, 0, 0, 0.015);
-      }
-    }
-    if (activeKeys.includes("ArrowDown")) {
-      if (shiftKey) {
-        inv = translate4(inv, 0, 0.03, 0);
-      } else {
-        inv = translate4(inv, 0, 0, -0.015);
-      }
-    }
-    if (activeKeys.includes("ArrowLeft")) inv = translate4(inv, -0.015, 0, 0);
-    //
-    if (activeKeys.includes("ArrowRight")) inv = translate4(inv, 0.015, 0, 0);
-    // inv = rotate4(inv, 0.01, 0, 1, 0);
-    if (activeKeys.includes("KeyA")) inv = rotate4(inv, -0.01, 0, 1, 0);
-    if (activeKeys.includes("KeyD")) inv = rotate4(inv, 0.01, 0, 1, 0);
-    // if (activeKeys.includes("KeyQ")) inv = rotate4(inv, 0.01, 0, 0, 1);
-    // if (activeKeys.includes("KeyE")) inv = rotate4(inv, -0.01, 0, 0, 1);
-    // if (activeKeys.includes("KeyW")) inv = rotate4(inv, 0.005, 1, 0, 0);
-    // if (activeKeys.includes("KeyS")) inv = rotate4(inv, -0.005, 1, 0, 0);
+      let inv = invert4(viewMatrix);
+      let shiftKey =
+          activeKeys.includes("Shift") ||
+          activeKeys.includes("ShiftLeft") ||
+          activeKeys.includes("ShiftRight");
 
-    const gamepads = navigator.getGamepads ? navigator.getGamepads() : [];
-    let isJumping = activeKeys.includes("Space");
-    for (let gamepad of gamepads) {
-      if (!gamepad) continue;
 
-      const axisThreshold = 0.1; // Threshold to detect when the axis is intentionally moved
-      const moveSpeed = 0.02;
-      const rotateSpeed = 0.02;
+      if (activeKeys.includes("ArrowUp")) {
+        //GO UP THROUGH SHIFT
+        if (shiftKey) {
+          // inv = translate4(inv, 0, -0.03, 0);
+        } else {
+          inv = translate4(inv, 0, 0, 0.015);
+        }
+      }
+      if (activeKeys.includes("ArrowDown")) {
+        //GO DOWN THROUGH SHIFT
+        if (shiftKey) {
+          //inv = translate4(inv, 0, 0.03, 0);
+        } else {
+          inv = translate4(inv, 0, 0, -0.015);
+        }
+      }
+      if (activeKeys.includes("ArrowLeft")) inv = translate4(inv, -0.015, 0, 0);
+      //
+      if (activeKeys.includes("ArrowRight")) inv = translate4(inv, 0.015, 0, 0);
+      // inv = rotate4(inv, 0.01, 0, 1, 0);
+      //TURN CAMERA LEFT
+      if (activeKeys.includes("KeyA")) inv = rotate4(inv, -0.01, 0, 1, 0);
+      //TURN CAMERA RIGHT
+      if (activeKeys.includes("KeyD")) inv = rotate4(inv, 0.01, 0, 1, 0);
+      // if (activeKeys.includes("KeyQ")) inv = rotate4(inv, 0.01, 0, 0, 1);
+      // if (activeKeys.includes("KeyE")) inv = rotate4(inv, -0.01, 0, 0, 1);
+      //MOVE FORWARD
+      if (activeKeys.includes("KeyW")) inv = inv = inv = translate4(inv, 0, 0, 0.015);
+      //MOVE BACKWARDS
+      if (activeKeys.includes("KeyS")) inv = translate4(inv, 0, 0, -0.015);
 
-      // Assuming the left stick controls translation (axes 0 and 1)
-      if (Math.abs(gamepad.axes[0]) > axisThreshold) {
-        inv = translate4(inv, moveSpeed * gamepad.axes[0], 0, 0);
-        carousel = false;
-      }
-      if (Math.abs(gamepad.axes[1]) > axisThreshold) {
-        inv = translate4(inv, 0, 0, -moveSpeed * gamepad.axes[1]);
-        carousel = false;
-      }
-      if (gamepad.buttons[12].pressed || gamepad.buttons[13].pressed) {
-        inv = translate4(
-          inv,
-          0,
-          -moveSpeed *
-            (gamepad.buttons[12].pressed - gamepad.buttons[13].pressed),
-          0
-        );
-        carousel = false;
+      const gamepads = navigator.getGamepads ? navigator.getGamepads() : [];
+      let isJumping = activeKeys.includes("Space");
+      for (let gamepad of gamepads) {
+        if (!gamepad) continue;
+
+        const axisThreshold = 0.1; // Threshold to detect when the axis is intentionally moved
+        const moveSpeed = 0.02;
+        const rotateSpeed = 0.02;
+
+        // Assuming the left stick controls translation (axes 0 and 1)
+        if (Math.abs(gamepad.axes[0]) > axisThreshold) {
+          inv = translate4(inv, moveSpeed * gamepad.axes[0], 0, 0);
+          carousel = false;
+        }
+        if (Math.abs(gamepad.axes[1]) > axisThreshold) {
+          inv = translate4(inv, 0, 0, -moveSpeed * gamepad.axes[1]);
+          carousel = false;
+        }
+        if (gamepad.buttons[12].pressed || gamepad.buttons[13].pressed) {
+          inv = translate4(
+              inv,
+              0,
+              -moveSpeed *
+              (gamepad.buttons[12].pressed - gamepad.buttons[13].pressed),
+              0
+          );
+          carousel = false;
+        }
+
+        if (gamepad.buttons[14].pressed || gamepad.buttons[15].pressed) {
+          inv = translate4(
+              inv,
+              -moveSpeed *
+              (gamepad.buttons[14].pressed - gamepad.buttons[15].pressed),
+              0,
+              0
+          );
+          carousel = false;
+        }
+
+        // Assuming the right stick controls rotation (axes 2 and 3)
+        if (Math.abs(gamepad.axes[2]) > axisThreshold) {
+          inv = rotate4(inv, rotateSpeed * gamepad.axes[2], 0, 1, 0);
+          carousel = false;
+        }
+        if (Math.abs(gamepad.axes[3]) > axisThreshold) {
+          inv = rotate4(inv, -rotateSpeed * gamepad.axes[3], 1, 0, 0);
+          carousel = false;
+        }
+
+        let tiltAxis = gamepad.buttons[6].value - gamepad.buttons[7].value;
+        if (Math.abs(tiltAxis) > axisThreshold) {
+          inv = rotate4(inv, rotateSpeed * tiltAxis, 0, 0, 1);
+          carousel = false;
+        }
+        if (gamepad.buttons[4].pressed && !leftGamepadTrigger) {
+          camera = cameras[(cameras.indexOf(camera) + 1) % cameras.length];
+          inv = invert4(getViewMatrix(camera));
+          carousel = false;
+        }
+        if (gamepad.buttons[5].pressed && !rightGamepadTrigger) {
+          camera =
+              cameras[
+              (cameras.indexOf(camera) + cameras.length - 1) % cameras.length
+                  ];
+          inv = invert4(getViewMatrix(camera));
+          carousel = false;
+        }
+        leftGamepadTrigger = gamepad.buttons[4].pressed;
+        rightGamepadTrigger = gamepad.buttons[5].pressed;
+        if (gamepad.buttons[0].pressed) {
+          isJumping = true;
+          carousel = false;
+        }
+        if (gamepad.buttons[3].pressed) {
+          carousel = true;
+        }
       }
 
-      if (gamepad.buttons[14].pressed || gamepad.buttons[15].pressed) {
-        inv = translate4(
-          inv,
-          -moveSpeed *
-            (gamepad.buttons[14].pressed - gamepad.buttons[15].pressed),
-          0,
-          0
-        );
-        carousel = false;
-      }
-
-      // Assuming the right stick controls rotation (axes 2 and 3)
-      if (Math.abs(gamepad.axes[2]) > axisThreshold) {
-        inv = rotate4(inv, rotateSpeed * gamepad.axes[2], 0, 1, 0);
-        carousel = false;
-      }
-      if (Math.abs(gamepad.axes[3]) > axisThreshold) {
-        inv = rotate4(inv, -rotateSpeed * gamepad.axes[3], 1, 0, 0);
-        carousel = false;
-      }
-
-      let tiltAxis = gamepad.buttons[6].value - gamepad.buttons[7].value;
-      if (Math.abs(tiltAxis) > axisThreshold) {
-        inv = rotate4(inv, rotateSpeed * tiltAxis, 0, 0, 1);
-        carousel = false;
-      }
-      if (gamepad.buttons[4].pressed && !leftGamepadTrigger) {
-        camera = cameras[(cameras.indexOf(camera) + 1) % cameras.length];
-        inv = invert4(getViewMatrix(camera));
-        carousel = false;
-      }
-      if (gamepad.buttons[5].pressed && !rightGamepadTrigger) {
-        camera =
-          cameras[
-            (cameras.indexOf(camera) + cameras.length - 1) % cameras.length
-          ];
-        inv = invert4(getViewMatrix(camera));
-        carousel = false;
-      }
-      leftGamepadTrigger = gamepad.buttons[4].pressed;
-      rightGamepadTrigger = gamepad.buttons[5].pressed;
-      if (gamepad.buttons[0].pressed) {
-        isJumping = true;
-        carousel = false;
-      }
-      if (gamepad.buttons[3].pressed) {
-        carousel = true;
-      }
-    }
-
-    // if (["KeyJ", "KeyK", "KeyL", "KeyI"].some((k) => activeKeys.includes(k))) {
-    //   let d = 4;
-    //   inv = translate4(inv, 0, 0, d);
-    //   inv = rotate4(
-    //     inv,
-    //     activeKeys.includes("KeyJ")
-    //       ? -0.05
-    //       : activeKeys.includes("KeyL")
-    //       ? 0.05
-    //       : 0,
-    //     0,
-    //     1,
-    //     0
-    //   );
-    //   inv = rotate4(
-    //     inv,
-    //     activeKeys.includes("KeyI")
-    //       ? 0.05
-    //       : activeKeys.includes("KeyK")
-    //       ? -0.05
-    //       : 0,
-    //     1,
-    //     0,
-    //     0
-    //   );
-    //   inv = translate4(inv, 0, 0, -d);
-    // }
-
-    viewMatrix = invert4(inv);
-
-    if (carousel) {
-      let inv = invert4(defaultViewMatrix);
-
-      const t = Math.sin((Date.now() - start) / 5000);
-      inv = translate4(inv, 2.5 * t, 0, 6 * (1 - Math.cos(t)));
-      inv = rotate4(inv, -0.6 * t, 0, 1, 0);
+      // if (["KeyJ", "KeyK", "KeyL", "KeyI"].some((k) => activeKeys.includes(k))) {
+      //   let d = 4;
+      //   inv = translate4(inv, 0, 0, d);
+      //   inv = rotate4(
+      //     inv,
+      //     activeKeys.includes("KeyJ")
+      //       ? -0.05
+      //       : activeKeys.includes("KeyL")
+      //       ? 0.05
+      //       : 0,
+      //     0,
+      //     1,
+      //     0
+      //   );
+      //   inv = rotate4(
+      //     inv,
+      //     activeKeys.includes("KeyI")
+      //       ? 0.05
+      //       : activeKeys.includes("KeyK")
+      //       ? -0.05
+      //       : 0,
+      //     1,
+      //     0,
+      //     0
+      //   );
+      //   inv = translate4(inv, 0, 0, -d);
+      // }
 
       viewMatrix = invert4(inv);
-    }
 
-    if (isJumping) {
-      jumpDelta = Math.min(1, jumpDelta + 0.05);
-    } else {
-      jumpDelta = Math.max(0, jumpDelta - 0.05);
-    }
+      if (carousel) {
+        let inv = invert4(defaultViewMatrix);
 
-    let inv2 = invert4(viewMatrix);
-    inv2 = translate4(inv2, 0, -jumpDelta, 0);
-    inv2 = rotate4(inv2, -0.1 * jumpDelta, 1, 0, 0);
-    let actualViewMatrix = invert4(inv2);
+        const t = Math.sin((Date.now() - start) / 5000);
+        inv = translate4(inv, 2.5 * t, 0, 6 * (1 - Math.cos(t)));
+        inv = rotate4(inv, -0.6 * t, 0, 1, 0);
 
-    const viewProj = multiply4(projectionMatrix, actualViewMatrix);
-    worker.postMessage({ view: viewProj });
+        viewMatrix = invert4(inv);
+      }
 
-    const currentFps = 1000 / (now - lastFrame) || 0;
-    avgFps = avgFps * 0.9 + currentFps * 0.1;
+      if (isJumping) {
+        jumpDelta = Math.min(1, jumpDelta + 0.05);
+      } else {
+        jumpDelta = Math.max(0, jumpDelta - 0.05);
+      }
 
-    if (vertexCount > 0) {
-      document.getElementById("spinner").style.display = "none";
-      gl.uniformMatrix4fv(u_view, false, actualViewMatrix);
-      gl.clear(gl.COLOR_BUFFER_BIT);
-      gl.drawArraysInstanced(gl.TRIANGLE_FAN, 0, 4, vertexCount);
-    } else {
-      gl.clear(gl.COLOR_BUFFER_BIT);
-      document.getElementById("spinner").style.display = "";
-      start = Date.now() + 2000;
-    }
-    const progress = (100 * vertexCount) / (splatData.length / rowLength);
-    if (progress < 100) {
-      document.getElementById("progress").style.width = progress + "%";
-    } else {
-      document.getElementById("progress").style.display = "none";
-    }
-    fps.innerText = Math.round(avgFps) + " fps";
-    if (isNaN(currentCameraIndex)) {
-      camid.innerText = "";
-    }
+
+        let inv2 = invert4(viewMatrix);
+        inv2 = translate4(inv2, 0, -jumpDelta, 0);
+        inv2 = rotate4(inv2, -0.1 * jumpDelta, 1, 0, 0);
+        let actualViewMatrix = invert4(inv2);
+
+
+
+      const viewProj = multiply4(projectionMatrix, actualViewMatrix);
+      worker.postMessage({view: viewProj});
+
+      const currentFps = 1000 / (now - lastFrame) || 0;
+      avgFps = avgFps * 0.9 + currentFps * 0.1;
+
+      if (vertexCount > 0) {
+        document.getElementById("spinner").style.display = "none";
+        gl.uniformMatrix4fv(u_view, false, actualViewMatrix);
+        gl.clear(gl.COLOR_BUFFER_BIT);
+        gl.drawArraysInstanced(gl.TRIANGLE_FAN, 0, 4, vertexCount);
+      } else {
+        gl.clear(gl.COLOR_BUFFER_BIT);
+        document.getElementById("spinner").style.display = "";
+        start = Date.now() + 2000;
+      }
+      const progress = (100 * vertexCount) / (splatData.length / rowLength);
+      if (progress < 100) {
+        document.getElementById("progress").style.width = progress + "%";
+      } else {
+        document.getElementById("progress").style.display = "none";
+      }
+      fps.innerText = Math.round(avgFps) + " fps";
+      
+      if (progress < 100) {
+        document.getElementById("progress").style.width = progress + "%";
+      } else {
+        document.getElementById("progress").style.display = "none";
+      }
+
+  // Display FPS next to Camera ID
+      fps.innerText = Math.round(avgFps) + " fps";
+      if (!isNaN(currentCameraIndex)) {
+        camid.innerText = "Cam " + currentCameraIndex + " | " + fps.innerText;
+      } else {
+        camid.innerText = fps.innerText;
+      }
+
     lastFrame = now;
     requestAnimationFrame(frame);
+
+
   };
+
 
   frame();
 
