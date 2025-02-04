@@ -1403,11 +1403,24 @@ async function main() {
         document.getElementById("progress").style.display = "none";
       }
       fps.innerText = Math.round(avgFps) + " fps";
-      if (isNaN(currentCameraIndex)) {
-        camid.innerText = "";
+      
+      if (progress < 100) {
+        document.getElementById("progress").style.width = progress + "%";
+      } else {
+        document.getElementById("progress").style.display = "none";
       }
-      lastFrame = now;
-      requestAnimationFrame(frame);
+
+  // Display FPS next to Camera ID
+      fps.innerText = Math.round(avgFps) + " fps";
+      if (!isNaN(currentCameraIndex)) {
+        camid.innerText = "Cam " + currentCameraIndex + " | " + fps.innerText;
+      } else {
+        camid.innerText = fps.innerText;
+      }
+
+    lastFrame = now;
+    requestAnimationFrame(frame);
+
 
   };
 
