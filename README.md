@@ -58,7 +58,17 @@ npm install
 
 ## Workflow
 
-Image capture -> COLMAP -> train -> get 3D model -> plug into WebGL Viewer -> implement controls -> implement collision detection
+### 3D Gaussian Splatting:
+Image capture -> COLMAP -> Train -> Get 3D model -> Plug into WebGL Viewer -> Implement controls -> Implement collision detection
+
+### AI Chatbot:
+1) If another model is desired: Replace the HuggingFace model link with your new link (simply provide the link if using a model under 10MB in size)
+2) Generate your HuggingFace API key
+3) For local development: Create a .env file which should include:<br/>
+  &emsp;HUGGINGFACE_API_KEY=[your_key]<br/>
+  &emsp;PORT=3000<br/>
+For public deployment:<br/>
+  &emsp;Create HUGGINGFACE_API_KEY and PORT environment variables (PORT number may depend on deployment method)
 
 ## Acknowledgements
 
