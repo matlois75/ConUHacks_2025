@@ -40,7 +40,7 @@ Concordia's current virtual tour is static, while **Virtual Tour++** allows for 
 ### After
 ![After](public/assets/our_virtual_tour.gif)
 
-**Try it out!**: [Concordia Virtual Tour++](https://concordia.design/)
+**Live Demo:** [YouTube Video](https://youtu.be/A_DX9EN-Qm8?si=9cySosMlBfppZ0zA)
 
 ## Installation
 
