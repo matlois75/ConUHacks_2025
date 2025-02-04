@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
+    <title>Concordia Virtual Tour++</title>
     <link rel="icon" type="image/png" href="/assets/Concordia_Logo.png" />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/viewer.css" />
@@ -81,7 +82,6 @@
             </div>
           </div>
 
-
           <canvas id="canvas"></canvas>
           <button id="fullscreen-btn" onclick="toggleFullscreen()">
             ⛶ Fullscreen
@@ -105,15 +105,14 @@
           <div id="fps"><span id="fps"></span></div>
           <div id="caminfo"><span id="camid"></span></div>
         </div>
-        <div class="room-info">
-
-        </div>
+        <div class="room-info"></div>
         <div class="viewer-controls">
           <h3>Navigation Controls</h3>
           <p id="instructions" class="controls-text">
             Keyboard: Arrows, 'W' and 'S' keys to move<br />
             Keyboard: 'A' and 'D' keys to look around<br />
-            Keyboard: 'P' key to keep rotating the camera 360 degrees, and 'O' to stop<br />
+            Keyboard: 'P' key to keep rotating the camera 360 degrees, and 'O'
+            to stop<br />
             Keyboard: Number keys 1-9 to change cameras<br />
             Touch: Pinch to zoom, drag to look around
           </p>
