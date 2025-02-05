@@ -82,6 +82,22 @@
             </div>
           </div>
 
+          <div id="controls-popup" class="controls-popup">
+            <button id="close-popup" class="close-popup">×</button>
+            <h3>Navigation Controls</h3>
+            <p id="instructions" class="controls-text">
+              Keyboard: Arrows, 'W' and 'S' keys to move<br />
+              Keyboard: 'A' and 'D' keys to look around<br />
+              Keyboard: 'P' key to keep rotating the camera 360 degrees, and 'O' to stop<br />
+              Keyboard: Number keys 1-9 to change cameras<br />
+              Touch: Pinch to zoom, drag to look around
+            </p>
+          </div>
+          
+          <button id="show-controls" class="show-controls-btn hidden">
+            Show Controls
+          </button>        
+
           <canvas id="canvas"></canvas>
           <button id="fullscreen-btn" onclick="toggleFullscreen()">
             ⛶ Fullscreen
@@ -106,7 +122,7 @@
           <div id="caminfo"><span id="camid"></span></div>
         </div>
         <div class="room-info"></div>
-        <div class="viewer-controls">
+        <!-- <div class="viewer-controls">
           <h3>Navigation Controls</h3>
           <p id="instructions" class="controls-text">
             Keyboard: Arrows, 'W' and 'S' keys to move<br />
@@ -116,7 +132,7 @@
             Keyboard: Number keys 1-9 to change cameras<br />
             Touch: Pinch to zoom, drag to look around
           </p>
-        </div>
+        </div> -->
       </div>
     </section>
 

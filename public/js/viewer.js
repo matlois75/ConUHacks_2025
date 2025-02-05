@@ -1,6 +1,35 @@
 let gl = null;
 let worker;
 
+// Popup control logic
+function initializePopupControls() {
+  const popup = document.getElementById('controls-popup');
+  const closeButton = document.getElementById('close-popup');
+  const showControlsBtn = document.getElementById('show-controls');
+  
+  closeButton.addEventListener('click', () => {
+    console.log("Closing popup");
+    popup.classList.add('hidden');
+    showControlsBtn.classList.remove('hidden');
+  });
+
+  showControlsBtn.addEventListener('click', () => {
+    console.log("Showing popup");
+    popup.classList.remove('hidden');
+    showControlsBtn.classList.add('hidden');
+  });
+}
+
+// Show popup
+function showControlsPopup() {
+  const popup = document.getElementById('controls-popup');
+  const showControlsBtn = document.getElementById('show-controls');
+  if (popup && showControlsBtn) {
+    popup.classList.remove('hidden');
+    showControlsBtn.classList.add('hidden');
+  }
+}
+
 let cameras = [
   {
     id: 0,
@@ -738,6 +767,12 @@ let defaultViewMatrix = [
 let viewMatrix = defaultViewMatrix;
 async function main() {
   let carousel = false;
+
+  // Initialize popup controls
+  document.addEventListener('DOMContentLoaded', () => {
+    initializePopupControls();
+  });
+
   const params = new URLSearchParams(location.search);
   try {
     viewMatrix = JSON.parse(decodeURIComponent(location.hash.slice(1)));
