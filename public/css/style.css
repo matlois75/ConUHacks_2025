@@ -367,21 +367,40 @@ body {
 /* Add new mobile responsive layout */
 @media screen and (max-width: 768px) {
   /* Hide elements */
-  #about, #sgw_banner, .c-header, .c-breadcrumb,
-  .rooms-section .left-panel,
+  #about, #sgw_banner, .c-header, .c-breadcrumb, .room-info,
+  .header-container, #fullscreen-btn,
   .c-footer {
     display: none !important;
   }
 
+  /* Also ensure the parent isn't adding extra spacing */
   #rooms {
+    margin: 0;
     padding: 0;
+    display: flex;
+    align-items: flex-start; /* Make left-panel & viewer-container stick to the top */
+    gap: 0;
+  }
+
+  .tab-button {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .tab-navigation {
+    height: 7vh;
+  }
+
+  .left-panel {
+    width: 100%;
   }
 
   /* Adjust viewer container */
   .viewer-container {
     flex: 1;
     width: 100vw;
-    height: 100vh;
+    height: 93vh;
     min-width: unset;
     padding: 0;
     margin: 0;
@@ -391,7 +410,7 @@ body {
 
   #viewer-wrapper {
     width: 100vw;
-    height: 100vh;
+    height: 93vh;
     min-height: unset;
   }
 

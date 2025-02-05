@@ -32,23 +32,29 @@ class FactDisplay {
   setupTabFunctionality() {
     const tabButtons = document.querySelectorAll(".tab-button");
     const tabContents = document.querySelectorAll(".tab-content");
-
+  
+    // Remove any default active classes on page load
+    tabButtons.forEach((button) => button.classList.remove("active"));
+    tabContents.forEach((content) => content.classList.remove("active"));
+  
     tabButtons.forEach((button) => {
       button.addEventListener("click", () => {
         const tabName = button.dataset.tab;
-
-        // Update button active states
-        tabButtons.forEach((btn) => btn.classList.remove("active"));
-        button.classList.add("active");
-
-        // Update content visibility
-        tabContents.forEach((content) => {
-          if (content.id === `${tabName}-tab`) {
-            content.classList.add("active");
-          } else {
-            content.classList.remove("active");
-          }
-        });
+        const targetContent = document.getElementById(`${tabName}-tab`);
+        const isActive = button.classList.contains("active");
+  
+        if (isActive) {
+          // Toggle content visibility without removing the active class on the button
+          targetContent.classList.toggle("active");
+        } else {
+          // Ensure one tab is always styled: remove active state from all buttons and content
+          tabButtons.forEach((btn) => btn.classList.remove("active"));
+          tabContents.forEach((content) => content.classList.remove("active"));
+  
+          // Activate clicked button and show its associated content
+          button.classList.add("active");
+          targetContent.classList.add("active");
+        }
       });
     });
   }
