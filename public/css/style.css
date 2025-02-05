@@ -73,8 +73,8 @@ body {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Ensures the viewer-wrapper has flexible size */
-#viewer-wrapper {
+/* Ensures the viewer-display has flexible size */
+#viewer-display {
   position: relative; /* This makes the button position relative to this div */
   background: black;
   width: 100%;
@@ -89,7 +89,7 @@ body {
   align-items: center;
 }
 
-#viewer-wrapper:active {
+#viwewer-display:active {
   cursor: grabbing;
 }
 
@@ -111,20 +111,6 @@ body {
   background: #f8f9fa;
   border-radius: 6px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* Mobile responsive tweaks */
-@media (max-width: 900px) {
-  .rooms-section {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .room-list,
-  .viewer-container {
-    width: 100%;
-    min-width: unset;
-  }
 }
 
 /* Fullscreen Button inside viewer-wrapper */
@@ -362,4 +348,87 @@ body {
   font-style: italic;
   margin: 8px 0;
   padding-left: 12px;
+}
+
+/* Mobile responsive tweaks */
+@media (max-width: 900px) {
+  .rooms-section {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .room-list,
+  .viewer-container {
+    width: 100%;
+    min-width: unset;
+  }
+}
+
+/* Add new mobile responsive layout */
+@media screen and (max-width: 768px) {
+  /* Hide elements */
+  #about, #sgw_banner, .c-header, .c-breadcrumb, .room-info,
+  .header-container, #fullscreen-btn,
+  .c-footer {
+    display: none !important;
+  }
+
+  /* Also ensure the parent isn't adding extra spacing */
+  #rooms {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: flex-start; /* Make left-panel & viewer-container stick to the top */
+    gap: 0;
+  }
+
+  .tab-button {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .tab-navigation {
+    height: 7vh;
+  }
+
+  .left-panel {
+    width: 100%;
+  }
+
+  /* Adjust viewer container */
+  .viewer-container {
+    flex: 1;
+    width: 100vw;
+    height: 93vh;
+    min-width: unset;
+    padding: 0;
+    margin: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  #viewer-display {
+    width: 100vw;
+    height: 93vh;
+    min-height: unset;
+  }
+
+  /* Make canvas fill screen */
+  #canvas {
+    width: 100vw;
+    height: 100vh;
+  }
+
+  #chat-tab {
+    height: 94vh;
+  }
+
+  /* Adjust body/html for full viewport */
+  html, body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    height: 100%;
+  }
 }

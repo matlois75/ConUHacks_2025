@@ -194,3 +194,10 @@
 .show-controls-btn.hidden {
     display: none;
 }
+
+/* Add new mobile responsive layout */
+@media screen and (max-width: 768px) {
+    .show-controls-btn {
+        bottom: 2vh;
+      }
+}

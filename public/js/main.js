@@ -209,7 +209,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // Toggle fullscreen mode properly
-const viewer = document.getElementById("viewer-wrapper");
+const viewer = document.getElementById("viewer-display");
 
 function toggleFullscreen() {
   if (!document.fullscreenElement) {
