@@ -1158,14 +1158,14 @@ async function main() {
       if (e.touches.length === 1 && down) {
         let inv = invert4(viewMatrix);
         let dx = (4 * (e.touches[0].clientX - startX)) / innerWidth;
-        let dy = (4 * (e.touches[0].clientY - startY)) / innerHeight;
+        //let dy = (4 * (e.touches[0].clientY - startY)) / innerHeight;
 
         let d = 4;
         inv = translate4(inv, 0, 0, d);
         // inv = translate4(inv,  -x, -y, -z);
         // inv = translate4(inv,  x, y, z);
         inv = rotate4(inv, dx, 0, 1, 0);
-        inv = rotate4(inv, -dy, 1, 0, 0);
+        //inv = rotate4(inv, -dy, 1, 0, 0);
         inv = translate4(inv, 0, 0, -d);
 
         viewMatrix = invert4(inv);
@@ -1188,13 +1188,13 @@ async function main() {
           );
         const dx =
           (e.touches[0].clientX + e.touches[1].clientX - (startX + altX)) / 2;
-        const dy =
-          (e.touches[0].clientY + e.touches[1].clientY - (startY + altY)) / 2;
+        // const dy =
+        //   (e.touches[0].clientY + e.touches[1].clientY - (startY + altY)) / 2;
         let inv = invert4(viewMatrix);
         // inv = translate4(inv,  0, 0, d);
-        inv = rotate4(inv, dtheta, 0, 0, 1);
+        //inv = rotate4(inv, dtheta, 0, 0, 1);
 
-        inv = translate4(inv, -dx / innerWidth, -dy / innerHeight, 0);
+        inv = translate4(inv, -dx / innerWidth, 0, 0);
 
         // let preY = inv[13];
         inv = translate4(inv, 0, 0, 3 * (1 - dscale));
