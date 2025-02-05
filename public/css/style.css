@@ -420,6 +420,10 @@ body {
     height: 100vh;
   }
 
+  #chat-tab {
+    height: 94vh;
+  }
+
   /* Adjust body/html for full viewport */
   html, body {
     margin: 0;

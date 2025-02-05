@@ -37,6 +37,16 @@ class FactDisplay {
     tabButtons.forEach((button) => button.classList.remove("active"));
     tabContents.forEach((content) => content.classList.remove("active"));
   
+    // If desktop (above 768px), set the first tab as active by default
+    if (window.innerWidth > 768) {
+      if (tabButtons.length > 0) {
+        tabButtons[0].classList.add("active");
+        const tabName = tabButtons[0].dataset.tab;
+        const targetContent = document.getElementById(`${tabName}-tab`);
+        if (targetContent) targetContent.classList.add("active");
+      }
+    }
+  
     tabButtons.forEach((button) => {
       button.addEventListener("click", () => {
         const tabName = button.dataset.tab;
@@ -44,10 +54,12 @@ class FactDisplay {
         const isActive = button.classList.contains("active");
   
         if (isActive) {
-          // Toggle content visibility without removing the active class on the button
-          targetContent.classList.toggle("active");
+          // For mobile, allow toggling off the content if active
+          if (window.innerWidth <= 768) {
+            targetContent.classList.toggle("active");
+          }
         } else {
-          // Ensure one tab is always styled: remove active state from all buttons and content
+          // Remove active state from all buttons and content
           tabButtons.forEach((btn) => btn.classList.remove("active"));
           tabContents.forEach((content) => content.classList.remove("active"));
   
