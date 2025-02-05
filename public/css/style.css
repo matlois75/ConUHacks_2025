@@ -73,8 +73,8 @@ body {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Ensures the viewer-wrapper has flexible size */
-#viewer-wrapper {
+/* Ensures the viewer-display has flexible size */
+#viewer-display {
   position: relative; /* This makes the button position relative to this div */
   background: black;
   width: 100%;
@@ -89,7 +89,7 @@ body {
   align-items: center;
 }
 
-#viewer-wrapper:active {
+#viwewer-display:active {
   cursor: grabbing;
 }
 
