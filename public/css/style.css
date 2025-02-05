@@ -408,7 +408,7 @@ body {
     box-shadow: none;
   }
 
-  #viewer-wrapper {
+  #viewer-display {
     width: 100vw;
     height: 93vh;
     min-height: unset;
