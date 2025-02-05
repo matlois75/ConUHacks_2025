@@ -74,7 +74,7 @@ body {
 }
 
 /* Ensures the viewer-wrapper has flexible size */
-#viewer-wrapper {
+#viewer-display {
   position: relative; /* This makes the button position relative to this div */
   background: black;
   width: 100%;
@@ -89,7 +89,7 @@ body {
   align-items: center;
 }
 
-#viewer-wrapper:active {
+#viwewer-display:active {
   cursor: grabbing;
 }
 
@@ -127,7 +127,7 @@ body {
   }
 }
 
-/* Fullscreen Button inside viewer-wrapper */
+/* Fullscreen Button inside viwewer-display */
 #fullscreen-btn {
   position: absolute;
   bottom: 10px; /* Positioned relative to the canvas */

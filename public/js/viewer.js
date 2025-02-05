@@ -942,19 +942,19 @@ async function main() {
   let activeKeys = [];
   let currentCameraIndex = 0;
 
-  let canvasActive= false;
+  let canvasActive = false;
   let pPressedWhileActive = false;
 
-  document.getElementById("canvas").addEventListener("click", () => {
-    if(!canvasActive) {
+  document.getElementById("viewer-display").addEventListener("click", () => {
+    if (!canvasActive) {
       canvasActive = true;
       console.log("canvas active")
     }
   });
 
   document.addEventListener("click", (event) => {
-    if (!document.getElementById("canvas").contains(event.target)) {
-      if(canvasActive) {
+    if (!document.getElementById("viewer-display").contains(event.target)) {
+      if (canvasActive) {
         canvasActive = false;
         console.log("canvas inactive")
       }
