@@ -216,6 +216,7 @@ body {
 .left-panel {
   flex: 1;
   min-width: 300px;
+  width:100%;
   background: white;
   border-radius: 8px;
   overflow: hidden;
@@ -260,6 +261,7 @@ body {
 
 .tab-content.active {
   display: block;
+  overflow-y: auto;
 }
 
 .chat-interface {
@@ -382,6 +384,29 @@ body {
     gap: 0;
   }
 
+  .left-panel {
+    flex: 1;
+    width: 100%;
+  }
+
+  .tab-content{
+    display: none;
+    padding: 20px;
+    height: 100%;
+    overflow-y: auto;
+  }
+
+  .tab-content.active{
+    display: block;
+    overflow-y: auto;
+  }
+
+  .room-selector{
+    position: relative;
+    height: 100vh;
+    overflow-y: auto;
+  }
+
   .tab-button {
     white-space: nowrap;
     overflow: hidden;
@@ -392,15 +417,11 @@ body {
     height: 7vh;
   }
 
-  .left-panel {
-    width: 100%;
-  }
-
   /* Adjust viewer container */
   .viewer-container {
     flex: 1;
     width: 100vw;
-    height: 93vh;
+    height: 90%;
     min-width: unset;
     padding: 0;
     margin: 0;
