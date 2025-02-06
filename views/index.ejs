@@ -1,7 +1,21 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-DV37WG4PWT"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-DV37WG4PWT");
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Concordia Virtual Tour++</title>
     <link rel="icon" type="image/png" href="/assets/Concordia_Logo.png" />
     <link rel="stylesheet" href="css/style.css" />
@@ -89,15 +103,16 @@
             <p id="instructions" class="controls-text">
               Keyboard: Arrows, 'W' and 'S' keys to move<br />
               Keyboard: 'A' and 'D' keys to look around<br />
-              Keyboard: 'P' key to keep rotating the camera 360 degrees, and 'O' to stop<br />
+              Keyboard: 'P' key to keep rotating the camera 360 degrees, and 'O'
+              to stop<br />
               Keyboard: Number keys 1-9 to change cameras<br />
               Touch: Pinch to zoom, drag to look around
             </p>
           </div>
-          
+
           <button id="show-controls" class="show-controls-btn hidden">
             Show Controls
-          </button>        
+          </button>
 
           <canvas id="canvas"></canvas>
           <button id="fullscreen-btn" onclick="toggleFullscreen()">
