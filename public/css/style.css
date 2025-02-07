@@ -12,13 +12,6 @@ body {
   padding: 0;
 }
 
-/* Sections spacing */
-.section {
-  padding: 2rem 0;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
 /* Header and banner section */
 #sgw_banner {
   width: 100%;
@@ -36,7 +29,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  gap: 20px;
+  max-width:100vw;
 }
 
 /* Room list styling */
@@ -56,6 +49,8 @@ body {
   border: 1px solid #ddd;
   cursor: pointer;
   transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column; /* stack everything top-to-bottom */
 }
 
 .room-card:hover {
@@ -63,14 +58,42 @@ body {
   transform: translateY(-2px);
 }
 
-/* Viewer container styling */
+.room-card img {
+  order: 2;
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.left-panel {
+  min-width: 300px;
+  max-width:30%;
+
+  /*IF WE CHANGE MAX-HEIGHT TO 100% IT WILL BECOME UNSCROLLABLE ON MOBILE */
+  max-height: 100%;
+  width:100%;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.room-selector{
+  position: relative;
+  height: 100vh;
+  overflow-y: auto;
+}
+
 .viewer-container {
-  flex: 2;
-  min-width: 600px;
+  width: 100%;
+  max-width: 70%;
   background: white;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: block;
+  flex:1;
 }
 
 /* Ensures the viewer-display has flexible size */
@@ -104,15 +127,6 @@ body {
   touch-action: none;
 }
 
-/* Viewer controls */
-.viewer-controls {
-  margin-top: 15px;
-  padding: 15px;
-  background: #f8f9fa;
-  border-radius: 6px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
 /* Fullscreen Button inside viewer-wrapper */
 #fullscreen-btn {
   position: absolute;
@@ -142,22 +156,13 @@ body {
   left: 0 !important;
   z-index: 1000 !important;
 }
-.room-card {
-    display: flex;
-    flex-direction: column; /* stack everything top-to-bottom */
-}
 
 /* Put .room-info (title, description) on top with order: 1,
    and .room-card img at the bottom with order: 2 */
 .room-info {
     order: 1;
 }
-.room-card img {
-    order: 2;
-    max-width: 100%;
-    height: auto;
-    object-fit: cover;
-}
+
 
 
 .fact-overlay {
@@ -213,16 +218,7 @@ body {
   opacity: 1;
 }
 
-.left-panel {
-  flex: 1;
-  min-width: 300px;
-  background: white;
-  border-radius: 8px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
+
 
 .tab-navigation {
   display: flex;
@@ -249,6 +245,7 @@ body {
   color: var(--primary-color);
   border-bottom: 2px solid var(--primary-color);
   margin-bottom: -2px;
+  display: block;
 }
 
 .tab-content {
@@ -260,6 +257,7 @@ body {
 
 .tab-content.active {
   display: block;
+  overflow-y: auto;
 }
 
 .chat-interface {
@@ -350,20 +348,6 @@ body {
   padding-left: 12px;
 }
 
-/* Mobile responsive tweaks */
-@media (max-width: 900px) {
-  .rooms-section {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .room-list,
-  .viewer-container {
-    width: 100%;
-    min-width: unset;
-  }
-}
-
 /* Add new mobile responsive layout */
 @media screen and (max-width: 768px) {
   /* Hide elements */
@@ -373,13 +357,28 @@ body {
     display: none !important;
   }
 
-  /* Also ensure the parent isn't adding extra spacing */
-  #rooms {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    align-items: flex-start; /* Make left-panel & viewer-container stick to the top */
-    gap: 0;
+  .left-panel {
+    max-height: 100vh;
+    flex: 1;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .room-selector{
+    position: relative;
+    height: 100vh;
+    overflow: auto;
+  }
+
+  .rooms-section{
+    display: block;
+    max-width: 100vw;
+  }
+
+  .tab-content.active{
+    display: block;
+    overflow-y: auto;
+    height:50%;
   }
 
   .tab-button {
@@ -392,15 +391,11 @@ body {
     height: 7vh;
   }
 
-  .left-panel {
-    width: 100%;
-  }
-
   /* Adjust viewer container */
   .viewer-container {
     flex: 1;
-    width: 100vw;
-    height: 93vh;
+    max-width: 100vw;
+    height: 90%;
     min-width: unset;
     padding: 0;
     margin: 0;
@@ -432,3 +427,4 @@ body {
     height: 100%;
   }
 }
+

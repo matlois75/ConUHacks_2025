@@ -1,36 +1,37 @@
-.header-container{
-    max-width: 80%;
-    margin-left: 10%;
-    margin-right: 10%;
+/* Container width constraint */
+.header-container {
+    max-width: 1200px; /* Match the .section max-width */
+    margin: 0 auto;
+    width: 90%; /* More responsive than fixed percentage */
 }
+
 /* HEADER CONTAINER */
 .c-header {
     width: 100%;
     background: white;
-    padding: 10px 20px;
+    padding: 10px 0; /* Remove horizontal padding */
 }
 
-/* FLEX CONTAINER: Aligns logo and buttons on the same row */
+/* FLEX CONTAINER */
 .c-header__container {
     display: flex;
-    justify-content: space-between; /* Pushes logo left, buttons right */
-    align-items: center; /* Ensures everything is vertically aligned */
+    justify-content: space-between;
+    align-items: center;
     width: 100%;
 }
 
 /* LOGO */
 .c-header__logo {
-    height: 10%;
-    width: auto;
-    padding-top:0;
-
+    height: 50%; /* Fixed height instead of percentage */
+    width: 75%;
+    padding-top: 0;
 }
 
 /* RIGHT SECTION (BUTTONS) */
 .c-header__right {
     display: flex;
     align-items: center;
-    gap: 15px; /* Space between buttons */
+    gap: 15px;
 }
 
 /* BUTTON STYLES */
@@ -39,18 +40,20 @@
     border: 1px solid #ccc;
     cursor: pointer;
     font-size: 14px;
-    padding: 10px 10px;
+    padding: 10px;
     border-radius: 5px;
 }
 
 /* User initials bubble */
 .btn-user {
-    background: #800000; /* Concordia burgundy */
+    background: #800000;
     color: white;
     border-radius: 50%;
     width: 40px;
     height: 40px;
-
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* DIVIDER LINE */
@@ -59,20 +62,19 @@
     height: 1px;
     background-color: #ccc;
     margin: 0;
-
+    width: 100%;
 }
 
 /* BREADCRUMB NAVIGATION */
 .c-breadcrumb {
     width: 100%;
-    text-align: left; /* Aligns navbar to the left */
-    padding: 10px 20px;
-    font-weight: bold;
+    text-align: left;
+    padding: 10px 0; /* Remove horizontal padding */
 }
 
 .breadcrumb {
     display: flex;
-    justify-content: flex-start; /* Makes the breadcrumb glued to the left */
+    justify-content: flex-start;
     list-style: none;
     padding: 0;
     margin: 0;
@@ -82,14 +84,12 @@
     font-size: 14px;
 }
 
-.breadcrumb-item:hover{
+.breadcrumb-item:hover {
     text-decoration: underline;
-
 }
 
-/* Apply correct `/` separator between breadcrumb items */
 .breadcrumb-item + .breadcrumb-item::before {
-    content: " / "; /* Now correctly displays '/' */
+    content: " / ";
     padding: 0 5px;
     color: #555;
 }

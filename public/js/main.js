@@ -7,7 +7,7 @@ if (!gl) {
 }
 
 class RoomManager {
-                
+
   constructor() {
     this.rooms = {
       "library-second-floor": {
@@ -30,7 +30,7 @@ class RoomManager {
           "Digital resources",
         ],
         picture: '/assets/library-picture.jpg'
-        
+
       },
       "lecture-hall": {
         name: "Hall Building Entrance",
@@ -44,8 +44,8 @@ class RoomManager {
     this.currentRoom = null;
     this.updateRoomList(); // Ensure the room list is populated before adding event listeners
   }
-                
-                
+
+
 
   initializeEventListeners() {
     document.querySelectorAll(".room-card").forEach((card) => {
@@ -97,32 +97,42 @@ class RoomManager {
       return;
     }
 
-    // Remove previous selection
+    // Remove the active class from room cards (if applicable)
     document.querySelectorAll(".room-card").forEach((card) => {
       card.classList.toggle("active", card.dataset.room === roomId);
     });
 
     try {
-      // Update UI
+      // Update the room info and load the model
       this.updateRoomInfo(roomId);
-
-      // Load the 3D model using the function from viewer.js
       await this.loadRoomModel(roomId);
-
-      // Update URL
       window.history.pushState({ roomId }, "", `#${roomId}`);
-
       this.currentRoom = roomId;
-      // Dispatch room change event
-      document.dispatchEvent(
-        new CustomEvent("roomChanged", {
-          detail: { roomId },
-        })
-      );
+      document.dispatchEvent(new CustomEvent("roomChanged", { detail: { roomId } }));
+
+      // On mobile, we might want to hide the room selection; on desktop, keep it visible.
+      if (window.innerWidth <= 768) {
+        // For mobile, remove the "active" class from tab-content (room selection)
+        const roomTab = document.querySelector('.tab-content.active');
+        if (roomTab) {
+          roomTab.classList.remove('active');
+        }
+        // And show the viewer container instead.
+        const viewerContainer = document.querySelector('.viewer-container');
+        if (viewerContainer) {
+          viewerContainer.classList.add('visible');
+        }
+      } else {
+        // On desktop, ensure the rooms tab remains active.
+        const roomTab = document.getElementById("rooms-tab");
+        if (roomTab && !roomTab.classList.contains("active")) {
+          roomTab.classList.add("active");
+        }
+      }
+
     } catch (error) {
       console.error("Error loading room:", error);
-      document.getElementById("message").textContent =
-        "Error loading room model";
+      document.getElementById("message").textContent = "Error loading room model";
     }
   }
 
@@ -257,3 +267,7 @@ document.addEventListener("fullscreenchange", () => {
 
 // Attach function to a button click (if needed)
 document.getElementById("fullscreen-btn").addEventListener("click", toggleFullscreen);
+
+
+
+
