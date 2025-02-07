@@ -348,6 +348,10 @@ body {
   padding-left: 12px;
 }
 
+.section {
+  padding: 0 5vw;
+}
+
 /* Add new mobile responsive layout */
 @media screen and (max-width: 768px) {
   /* Hide elements */
@@ -355,6 +359,11 @@ body {
   .header-container, #fullscreen-btn,
   .c-footer {
     display: none !important;
+  }
+
+  .section {
+    padding-left: 0;
+    padding-right: 0;
   }
 
   .left-panel {
