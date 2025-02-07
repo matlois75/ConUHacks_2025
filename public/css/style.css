@@ -29,7 +29,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  max-width:100vw;
+  max-width: 100vw;
 }
 
 /* Room list styling */
@@ -67,11 +67,11 @@ body {
 
 .left-panel {
   min-width: 300px;
-  max-width:30%;
+  max-width: 30%;
 
   /*IF WE CHANGE MAX-HEIGHT TO 100% IT WILL BECOME UNSCROLLABLE ON MOBILE */
   max-height: 100%;
-  width:100%;
+  width: 100%;
   background: white;
   border-radius: 8px;
   overflow: hidden;
@@ -79,7 +79,7 @@ body {
   flex-direction: column;
 }
 
-.room-selector{
+.room-selector {
   position: relative;
   height: 100vh;
   overflow-y: auto;
@@ -93,7 +93,7 @@ body {
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: block;
-  flex:1;
+  flex: 1;
 }
 
 /* Ensures the viewer-display has flexible size */
@@ -160,10 +160,8 @@ body {
 /* Put .room-info (title, description) on top with order: 1,
    and .room-card img at the bottom with order: 2 */
 .room-info {
-    order: 1;
+  order: 1;
 }
-
-
 
 .fact-overlay {
   position: absolute;
@@ -217,8 +215,6 @@ body {
 .fact-overlay.visible {
   opacity: 1;
 }
-
-
 
 .tab-navigation {
   display: flex;
@@ -355,8 +351,13 @@ body {
 /* Add new mobile responsive layout */
 @media screen and (max-width: 768px) {
   /* Hide elements */
-  #about, #sgw_banner, .c-header, .c-breadcrumb, .room-info,
-  .header-container, #fullscreen-btn,
+  #about,
+  #sgw_banner,
+  .c-header,
+  .c-breadcrumb,
+  .room-info,
+  .header-container,
+  #fullscreen-btn,
   .c-footer {
     display: none !important;
   }
@@ -373,21 +374,21 @@ body {
     max-width: 100%;
   }
 
-  .room-selector{
+  .room-selector {
     position: relative;
     height: 100vh;
     overflow: auto;
   }
 
-  .rooms-section{
+  .rooms-section {
     display: block;
     max-width: 100vw;
   }
 
-  .tab-content.active{
+  .tab-content.active {
     display: block;
     overflow-y: auto;
-    height:50%;
+    height: 50%;
   }
 
   .tab-button {
@@ -414,14 +415,14 @@ body {
 
   #viewer-display {
     width: 100vw;
-    height: 93vh;
+    height: calc(var(--vh, 1vh) * 93);
     min-height: unset;
   }
 
   /* Make canvas fill screen */
   #canvas {
     width: 100vw;
-    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
   }
 
   #chat-tab {
@@ -429,11 +430,12 @@ body {
   }
 
   /* Adjust body/html for full viewport */
-  html, body {
+  html,
+  body {
+    height: -webkit-fill-available;
     margin: 0;
     padding: 0;
     overflow: hidden;
     height: 100%;
   }
 }
-

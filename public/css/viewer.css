@@ -1,203 +1,252 @@
-
 #progress {
-    position: absolute;
-    top: 0;
-    height: 5px;
-    background: blue;
-    z-index: 99;
-    transition: width 0.1s ease-in-out;
+  position: absolute;
+  top: 0;
+  height: 8px;
+  background: blue;
+  z-index: 99;
+  transition: width 0.1s ease-in-out;
 }
 
 #message {
-    position: absolute;
-    display: flex;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    z-index: 2;
-    height: 100%;
-    width: 100%;
-    align-items: center;
-    justify-content: center;
-    pointer-events: none;
-    font-weight: bold;
-    font-size: large;
-    color: red;
+  position: absolute;
+  display: flex;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 2;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  font-weight: bold;
+  font-size: large;
+  color: red;
 }
 
 .scene {
-    position: absolute;
-    display: flex;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    z-index: 2;
-    height: 100%;
-    width: 100%;
-    align-items: center;
-    justify-content: center;
+  position: absolute;
+  display: flex;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 2;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Loading cube animation styles */
 .cube-wrapper {
-    transform-style: preserve-3d;
+  transform-style: preserve-3d;
 }
 
 .cube {
-    transform-style: preserve-3d;
-    transform: rotateX(45deg) rotateZ(45deg);
-    animation: rotation 2s infinite;
+  transform-style: preserve-3d;
+  transform: rotateX(45deg) rotateZ(45deg);
+  animation: rotation 2s infinite;
 }
 
 .cube-faces {
-    transform-style: preserve-3d;
-    height: 80px;
-    width: 80px;
-    position: relative;
-    transform-origin: 0 0;
-    transform: translateX(0) translateY(0) translateZ(-40px);
+  transform-style: preserve-3d;
+  height: 80px;
+  width: 80px;
+  position: relative;
+  transform-origin: 0 0;
+  transform: translateX(0) translateY(0) translateZ(-40px);
 }
 
 .cube-face {
-    position: absolute;
-    inset: 0;
-    background: #0017ff;
-    border: solid 1px #ffffff;
+  position: absolute;
+  inset: 0;
+  background: #0017ff;
+  border: solid 1px #ffffff;
 }
 
 .cube-face.top {
-    transform: translateZ(80px);
+  transform: translateZ(80px);
 }
 
 .cube-face.front {
-    transform-origin: 0 50%;
-    transform: rotateY(-90deg);
+  transform-origin: 0 50%;
+  transform: rotateY(-90deg);
 }
 
 .cube-face.back {
-    transform-origin: 0 50%;
-    transform: rotateY(-90deg) translateZ(-80px);
+  transform-origin: 0 50%;
+  transform: rotateY(-90deg) translateZ(-80px);
 }
 
 .cube-face.right {
-    transform-origin: 50% 0;
-    transform: rotateX(-90deg) translateY(-80px);
+  transform-origin: 50% 0;
+  transform: rotateX(-90deg) translateY(-80px);
 }
 
 .cube-face.left {
-    transform-origin: 50% 0;
-    transform: rotateX(-90deg) translateY(-80px) translateZ(80px);
+  transform-origin: 50% 0;
+  transform: rotateX(-90deg) translateY(-80px) translateZ(80px);
 }
 
 @keyframes rotation {
-    0% {
-        transform: rotateX(45deg) rotateY(0) rotateZ(45deg);
-        animation-timing-function: cubic-bezier(0.17, 0.84, 0.44, 1);
-    }
-    50% {
-        transform: rotateX(45deg) rotateY(0) rotateZ(225deg);
-        animation-timing-function: cubic-bezier(0.76, 0.05, 0.86, 0.06);
-    }
-    100% {
-        transform: rotateX(45deg) rotateY(0) rotateZ(405deg);
-        animation-timing-function: cubic-bezier(0.17, 0.84, 0.44, 1);
-    }
+  0% {
+    transform: rotateX(45deg) rotateY(0) rotateZ(45deg);
+    animation-timing-function: cubic-bezier(0.17, 0.84, 0.44, 1);
+  }
+  50% {
+    transform: rotateX(45deg) rotateY(0) rotateZ(225deg);
+    animation-timing-function: cubic-bezier(0.76, 0.05, 0.86, 0.06);
+  }
+  100% {
+    transform: rotateX(45deg) rotateY(0) rotateZ(405deg);
+    animation-timing-function: cubic-bezier(0.17, 0.84, 0.44, 1);
+  }
 }
 
 #quality {
-    position: absolute;
-    bottom: 10px;
-    z-index: 999;
-    right: 10px;
-    color: white;
+  position: absolute;
+  bottom: 10px;
+  z-index: 999;
+  right: 10px;
+  color: white;
 }
 
 #caminfo {
-    position: absolute;
-    top: 10px;
-    z-index: 999;
-    right: 10px;
-    color: white;
+  position: absolute;
+  top: 10px;
+  z-index: 999;
+  right: 10px;
+  color: white;
 }
 
 .controls-popup {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: rgba(0, 0, 0, 0.8);
-    color: white;
-    padding: 20px;
-    border-radius: 8px;
-    z-index: 1000;
-    max-width: 400px;
-    width: 90%;
-    backdrop-filter: blur(8px);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 20px;
+  border-radius: 8px;
+  z-index: 1000;
+  max-width: 400px;
+  width: 90%;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
-  
+
 .controls-popup h3 {
-    margin: 0 0 15px 0;
-    padding-right: 30px;
-    color: white;
+  margin: 0 0 15px 0;
+  padding-right: 30px;
+  color: white;
 }
-  
+
 .controls-popup .controls-text {
-    margin: 0;
-    line-height: 1.6;
-    font-size: 14px;
+  margin: 0;
+  line-height: 1.6;
+  font-size: 14px;
 }
-  
+
 .close-popup {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: none;
-    border: none;
-    color: white;
-    font-size: 20px;
-    cursor: pointer;
-    padding: 5px;
-    line-height: 1;
-    transition: opacity 0.3s ease;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 5px;
+  line-height: 1;
+  transition: opacity 0.3s ease;
 }
-  
+
 .close-popup:hover {
-    opacity: 0.7;
+  opacity: 0.7;
 }
-  
+
 .controls-popup.hidden {
-    display: none;
+  display: none;
 }
 
 .show-controls-btn {
-    position: absolute;
-    bottom: 55px;
-    right: 10px;
-    background: rgba(0, 0, 0, 0.7);
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background-color 0.3s ease;
-    z-index: 1000;
-  }
-  
+  position: absolute;
+  bottom: 55px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+  z-index: 1000;
+}
+
 .show-controls-btn:hover {
-    background: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.3);
 }
-  
+
 .show-controls-btn.hidden {
-    display: none;
+  display: none;
 }
+
+#mobile-controls {
+  position: absolute;
+  bottom: 20px;
+  grid-template-rows: repeat(2, auto);
+  grid-template-columns: repeat(3, auto);
+  gap: 8px;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+}
+
+#mobile-controls .arrow {
+  opacity: 0.7;
+  background: rgba(0, 0, 0, 0.3);
+  border: none;
+  color: white;
+  font-size: 24px;
+  width: 50px;
+  height: 50px;
+  border-radius: 5px;
+  padding: 0;
+}
+
+#mobile-controls .arrow-row {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+}
+
+#mobile-controls .mobile-controls-left .arrow.up {
+  margin-bottom: 8px;
+}
+
+#mobile-controls .arrow-row-empty {
+  min-height: 50px;
+  margin-bottom: 8px;
+}
+
+/* #mobile-controls .mobile-controls-right .arrow {
+  width: 60px;
+} */
 
 /* Add new mobile responsive layout */
 @media screen and (max-width: 768px) {
-    .show-controls-btn {
-        bottom: 2vh;
-      }
+  .show-controls-btn {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 769px) {
+  #mobile-controls {
+    display: none;
+  }
 }

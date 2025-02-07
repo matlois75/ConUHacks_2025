@@ -6,8 +6,23 @@ if (!gl) {
   console.error("WebGL2 is not supported on this browser.");
 }
 
-class RoomManager {
+function setViewportHeight() {
+  const height =
+    (window.visualViewport && window.visualViewport.height) ||
+    window.innerHeight;
+  let vh = height * 0.01;
+  document.documentElement.style.setProperty("--vh", `${vh}px`);
+}
 
+// Listen to both window resize and visualViewport resize events
+window.addEventListener("resize", setViewportHeight);
+if (window.visualViewport) {
+  window.visualViewport.addEventListener("resize", setViewportHeight);
+}
+document.addEventListener("DOMContentLoaded", setViewportHeight);
+setViewportHeight();
+
+class RoomManager {
   constructor() {
     this.rooms = {
       "library-second-floor": {
@@ -18,7 +33,8 @@ class RoomManager {
           "Silent Rooms",
           "Computer workstations",
           "Printing Stations",
-        ],picture: '/assets/library-2ndF-picture.jpg'
+        ],
+        picture: "/assets/library-2ndF-picture.jpg",
       },
       "library-lobby": {
         name: "Webster Library Lobby",
@@ -29,23 +45,20 @@ class RoomManager {
           "Group study rooms",
           "Digital resources",
         ],
-        picture: '/assets/library-picture.jpg'
-
+        picture: "/assets/library-picture.jpg",
       },
       "lecture-hall": {
         name: "Hall Building Entrance",
         modelUrl: "/assets/models/hall2.splat",
         description: "Modern building with multimedia capabilities",
         features: ["12 floors", "Advanced AV system", "Wheelchair accessible"],
-        picture: '/assets/hall-building-picture.jpg'
+        picture: "/assets/hall-building-picture.jpg",
       },
     };
     this.initializeEventListeners();
     this.currentRoom = null;
     this.updateRoomList(); // Ensure the room list is populated before adding event listeners
   }
-
-
 
   initializeEventListeners() {
     document.querySelectorAll(".room-card").forEach((card) => {
@@ -88,36 +101,39 @@ class RoomManager {
       console.error(`Room ${roomId} not found`);
       return;
     }
-  
+
     // Update the active state on room cards immediately.
     document.querySelectorAll(".room-card").forEach((card) => {
       card.classList.toggle("active", card.dataset.room === roomId);
     });
-  
+
     // Immediately update room info.
     this.updateRoomInfo(roomId);
-  
+
     // On mobile, close the room selector tab right away.
     if (window.innerWidth <= 768) {
-      const roomTab = document.querySelector('.tab-content.active');
+      const roomTab = document.querySelector(".tab-content.active");
       if (roomTab) {
-        roomTab.classList.remove('active');
+        roomTab.classList.remove("active");
       }
-      const viewerContainer = document.querySelector('.viewer-container');
+      const viewerContainer = document.querySelector(".viewer-container");
       if (viewerContainer) {
-        viewerContainer.classList.add('visible');
+        viewerContainer.classList.add("visible");
       }
     }
-  
+
     try {
       // Now load the model asynchronously.
       await this.loadRoomModel(roomId);
       window.history.pushState({ roomId }, "", `#${roomId}`);
       this.currentRoom = roomId;
-      document.dispatchEvent(new CustomEvent("roomChanged", { detail: { roomId } }));
+      document.dispatchEvent(
+        new CustomEvent("roomChanged", { detail: { roomId } })
+      );
     } catch (error) {
       console.error("Error loading room:", error);
-      document.getElementById("message").textContent = "Error loading room model";
+      document.getElementById("message").textContent =
+        "Error loading room model";
     }
   }
 
@@ -251,8 +267,6 @@ document.addEventListener("fullscreenchange", () => {
 });
 
 // Attach function to a button click (if needed)
-document.getElementById("fullscreen-btn").addEventListener("click", toggleFullscreen);
-
-
-
-
+document
+  .getElementById("fullscreen-btn")
+  .addEventListener("click", toggleFullscreen);

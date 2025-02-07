@@ -30,6 +30,31 @@ function showControlsPopup() {
   }
 }
 
+function simulateKeyEvent(key, type) {
+  const event = new KeyboardEvent(type, {
+      code: key,
+      key: key, 
+      bubbles: true,
+      cancelable: true
+  });
+  document.dispatchEvent(event);
+}
+
+// Attach both touchstart and touchend events to dispatch key events
+document.querySelectorAll("#mobile-controls .arrow").forEach(button => {
+  const key = button.dataset.key;
+  
+  button.addEventListener("touchstart", (e) => {
+      simulateKeyEvent(key, "keydown");
+      e.preventDefault();
+  }, {passive: false});
+  
+  button.addEventListener("touchend", (e) => {
+      simulateKeyEvent(key, "keyup");
+      e.preventDefault();
+  }, {passive: false});
+});
+
 let cameras = [
   {
     id: 0,

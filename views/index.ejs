@@ -101,17 +101,37 @@
             <button id="close-popup" class="close-popup">×</button>
             <h3>Navigation Controls</h3>
             <p id="instructions" class="controls-text">
-              Mobile: Pinch to zoom, drag to look around<br />
+              Touch: Pinch to zoom, drag to look around<br />
               Keyboard: 'W', 'S', and arrow keys to move<br />
               Keyboard: 'A' and 'D' keys to look around<br />
               Keyboard: 'P' key to keep rotating the camera 360 degrees, and 'O'
               to stop<br />
             </p>
-          </div>  
+          </div>
 
           <button id="show-controls" class="show-controls-btn hidden">
             Show Controls
           </button>
+
+          <div id="mobile-controls">
+            <div class="mobile-controls-left">
+              <div class="arrow-row">
+                <button data-key="KeyW" class="arrow up">↑</button>
+              </div>
+              <div class="arrow-row">
+                <button data-key="ArrowLeft" class="arrow left">←</button>
+                <button data-key="KeyS" class="arrow down">↓</button>
+                <button data-key="ArrowRight" class="arrow right">→</button>
+              </div>
+            </div>
+            <div class="mobile-controls-right">
+              <div class="arrow-row-empty"></div>
+              <div class="arrow-row">
+                <button data-key="KeyA" class="arrow left">←</button>
+                <button data-key="KeyD" class="arrow right">→</button>
+              </div>
+            </div>
+          </div>
 
           <canvas id="canvas"></canvas>
           <button id="fullscreen-btn" onclick="toggleFullscreen()">
