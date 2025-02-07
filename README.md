@@ -56,6 +56,9 @@ cd ConUHacks_2025
 npm install
 ```
 
+### **Running the Web App**
+Run `node index.js`
+
 ## Workflow
 
 ### 3D Gaussian Splatting:
