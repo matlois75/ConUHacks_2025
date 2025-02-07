@@ -55,14 +55,6 @@ class RoomManager {
       });
     });
   }
-  initializeEventListeners() {
-    document.querySelectorAll(".room-card").forEach((card) => {
-      card.addEventListener("click", (e) => {
-        const roomId = e.currentTarget.dataset.room;
-        this.selectRoom(roomId);
-      });
-    });
-  }
 
   updateRoomList() {
     const roomList = document.querySelector(".room-selector");
@@ -96,40 +88,33 @@ class RoomManager {
       console.error(`Room ${roomId} not found`);
       return;
     }
-
-    // Remove the active class from room cards (if applicable)
+  
+    // Update the active state on room cards immediately.
     document.querySelectorAll(".room-card").forEach((card) => {
       card.classList.toggle("active", card.dataset.room === roomId);
     });
-
+  
+    // Immediately update room info.
+    this.updateRoomInfo(roomId);
+  
+    // On mobile, close the room selector tab right away.
+    if (window.innerWidth <= 768) {
+      const roomTab = document.querySelector('.tab-content.active');
+      if (roomTab) {
+        roomTab.classList.remove('active');
+      }
+      const viewerContainer = document.querySelector('.viewer-container');
+      if (viewerContainer) {
+        viewerContainer.classList.add('visible');
+      }
+    }
+  
     try {
-      // Update the room info and load the model
-      this.updateRoomInfo(roomId);
+      // Now load the model asynchronously.
       await this.loadRoomModel(roomId);
       window.history.pushState({ roomId }, "", `#${roomId}`);
       this.currentRoom = roomId;
       document.dispatchEvent(new CustomEvent("roomChanged", { detail: { roomId } }));
-
-      // On mobile, we might want to hide the room selection; on desktop, keep it visible.
-      if (window.innerWidth <= 768) {
-        // For mobile, remove the "active" class from tab-content (room selection)
-        const roomTab = document.querySelector('.tab-content.active');
-        if (roomTab) {
-          roomTab.classList.remove('active');
-        }
-        // And show the viewer container instead.
-        const viewerContainer = document.querySelector('.viewer-container');
-        if (viewerContainer) {
-          viewerContainer.classList.add('visible');
-        }
-      } else {
-        // On desktop, ensure the rooms tab remains active.
-        const roomTab = document.getElementById("rooms-tab");
-        if (roomTab && !roomTab.classList.contains("active")) {
-          roomTab.classList.add("active");
-        }
-      }
-
     } catch (error) {
       console.error("Error loading room:", error);
       document.getElementById("message").textContent = "Error loading room model";
