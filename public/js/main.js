@@ -268,27 +268,6 @@ document.addEventListener("fullscreenchange", () => {
 // Attach function to a button click (if needed)
 document.getElementById("fullscreen-btn").addEventListener("click", toggleFullscreen);
 
-function selectRoomMobile() {
-  // Hide the room selection (assumed to be the currently active tab-content)
-  const roomTab = document.querySelector('.tab-content.active');
-  if (roomTab) {
-    roomTab.classList.remove('active');
-  }
-
-  // Show the viewer container by adding the "visible" class
-  const viewerContainer = document.querySelector('.viewer-container');
-  if (viewerContainer) {
-    viewerContainer.classList.add('visible');
-  }
-}
 
 
 
-document.querySelectorAll('.room-card').forEach(card => {
-  card.addEventListener('click', () => {
-    // Your room selection logic here...
-
-    // Hide the room selection and show the viewer container
-    selectRoomMobile();
-  });
-});
