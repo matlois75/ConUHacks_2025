@@ -963,9 +963,6 @@ async function main() {
 
 
     window.addEventListener("keydown", (e) => {
-      // if (document.activeElement != document.body) return;
-      document.addEventListener("keydown", (e) => {
-
         //IF THE CANVAS IS NOT FOCUSED, DO NOT ALLOW KEYBOARD INPUT
         if (!canvasActive) return;
 
@@ -1003,8 +1000,6 @@ async function main() {
             camid.innerText = "";
             pPressedWhileActive = true;
           }
-
-      });
     });
 
 
