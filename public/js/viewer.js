@@ -1298,6 +1298,12 @@ async function main() {
     //MOVE BACKWARDS
     if (activeKeys.includes("KeyS")) inv = translate4(inv, 0, 0, -0.015);
 
+    //MOVE FORWARD MOBILE FAST
+    if (activeKeys.includes("BracketLeft"))
+      inv = inv = inv = translate4(inv, 0, 0, 0.03);
+    //MOVE BACKWARDS MOBILE FAST
+    if (activeKeys.includes("BracketRight")) inv = translate4(inv, 0, 0, -0.03);
+
     const gamepads = navigator.getGamepads ? navigator.getGamepads() : [];
     let isJumping = activeKeys.includes("Space");
     for (let gamepad of gamepads) {
