@@ -10,7 +10,6 @@
   "author": "Your Name",
   "license": "ISC",
   "dependencies": {
-    "compression": "^1.7.5",
     "dotenv": "^16.4.7",
     "ejs": "^3.1.9",
     "express": "^4.21.2"
