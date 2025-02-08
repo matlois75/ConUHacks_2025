@@ -805,8 +805,12 @@ async function main() {
   } catch (err) {}
   const url = new URL("../assets/models/library-2nd.splat", location.href);
   const req = await fetch(url, {
-    mode: "cors", // no-cors, *cors, same-origin
-    credentials: "omit", // include, *same-origin, omit
+    mode: "cors",
+    credentials: "omit",
+    headers: {
+      "Cache-Control": "public, max-age=31536000", // 1 year
+      "CDN-Cache-Control": "public, max-age=31536000"
+    }
   });
   console.log(req);
   if (req.status != 200)
@@ -1585,7 +1589,14 @@ window.loadNewModel = async function (modelUrl, gl) {
     if (!modelUrl) throw new Error("Model URL is missing.");
 
     // Fetch new model
-    let response = await fetch(modelUrl);
+    let response = await fetch(modelUrl, {
+      mode: "cors", 
+      credentials: "omit",
+      headers: {
+        "Cache-Control": "public, max-age=31536000",
+        "CDN-Cache-Control": "public, max-age=31536000"
+      }
+    });
     if (!response.ok)
       throw new Error(`Failed to fetch model: ${response.statusText}`);
 

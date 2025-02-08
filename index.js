@@ -1,5 +1,6 @@
 const express = require("express");
 const path = require("path");
+const compression = require("compression");
 require("dotenv").config();
 
 // Create Express app
@@ -30,8 +31,44 @@ const CONCORDIA_CONTEXT = formatConcordiaContext(concordiaInfo);
 
 // Middleware
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "public")));
+app.use(
+  express.static(path.join(__dirname, "public"), {
+    maxAge: "1y",
+    etag: true,
+    lastModified: true,
+  })
+);
 app.use("/js", express.static(path.join(__dirname, "js")));
+
+// Compression middleware
+app.use(
+  compression({
+    level: 6,
+    filter: (req, res) => {
+      if (req.url.startsWith("/assets/models/")) {
+        return true;
+      }
+      return compression.filter(req, res);
+    },
+  })
+);
+
+// Caching middleware
+app.use((req, res, next) => {
+  // Cache 3D models and assets aggressively
+  if (req.url.startsWith("/assets/models/") || req.url.startsWith("/assets/")) {
+    res.setHeader("Cache-Control", "public, max-age=31536000"); // 1 year
+    res.setHeader("CDN-Cache-Control", "public, max-age=31536000");
+  }
+
+  // Cache static files for a day
+  if (req.url.startsWith("/css/") || req.url.startsWith("/js/")) {
+    res.setHeader("Cache-Control", "public, max-age=86400"); // 1 day
+    res.setHeader("CDN-Cache-Control", "public, max-age=86400");
+  }
+
+  next();
+});
 
 // Chat endpoint
 app.post("/api/chat", async (req, res) => {
