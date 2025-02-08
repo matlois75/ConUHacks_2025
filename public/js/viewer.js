@@ -1008,6 +1008,7 @@ async function main() {
     carousel = false;
 
     if (!activeKeys.includes(e.code)) activeKeys.push(e.code);
+    /*
     if (/\d/.test(e.key)) {
       currentCameraIndex = parseInt(e.key);
       camera = cameras[currentCameraIndex];
@@ -1022,6 +1023,7 @@ async function main() {
       currentCameraIndex = (currentCameraIndex + 1) % cameras.length;
       viewMatrix = getViewMatrix(cameras[currentCameraIndex]);
     }
+    */
     camid.innerText = "cam  " + currentCameraIndex;
     if (e.code == "KeyV") {
       location.hash =
