@@ -55,18 +55,17 @@ app.use(
 
 // Caching middleware
 app.use((req, res, next) => {
-  // Cache 3D models and assets aggressively
   if (req.url.startsWith("/assets/models/") || req.url.startsWith("/assets/")) {
-    res.setHeader("Cache-Control", "public, max-age=31536000"); // 1 year
-    res.setHeader("CDN-Cache-Control", "public, max-age=31536000");
+    // Override any existing headers
+    res.setHeader("Cache-Control", "public, max-age=31536000, immutable");
+    res.setHeader("CDN-Cache-Control", "public, max-age=31536000, immutable");
+    // Tell Cloudflare explicitly to cache
+    res.setHeader("Surrogate-Control", "public, max-age=31536000");
+    // Remove headers that might prevent caching
+    res.removeHeader("x-powered-by");
+    res.removeHeader("rndr-id");
+    res.removeHeader("x-render-origin-server");
   }
-
-  // Cache static files for a day
-  if (req.url.startsWith("/css/") || req.url.startsWith("/js/")) {
-    res.setHeader("Cache-Control", "public, max-age=86400"); // 1 day
-    res.setHeader("CDN-Cache-Control", "public, max-age=86400");
-  }
-
   next();
 });
 
