@@ -130,6 +130,8 @@ class RoomManager {
       document.dispatchEvent(
         new CustomEvent("roomChanged", { detail: { roomId } })
       );
+      // Force canvas active after room change
+      window.canvasActive = true;
     } catch (error) {
       console.error("Error loading room:", error);
       document.getElementById("message").textContent =
