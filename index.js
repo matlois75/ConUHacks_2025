@@ -29,6 +29,20 @@ const formatConcordiaContext = (info) => {
 
 const CONCORDIA_CONTEXT = formatConcordiaContext(concordiaInfo);
 
+// Caching Middleware BEFORE express.static
+app.use((req, res, next) => {
+  if (req.url.startsWith("/assets/models/") || req.url.startsWith("/assets/")) {
+    res.setHeader("Cache-Control", "public, max-age=31536000, immutable");
+    res.setHeader("CDN-Cache-Control", "public, max-age=31536000, immutable");
+    res.setHeader("Surrogate-Control", "public, max-age=31536000");
+    // Remove headers that might prevent caching
+    res.removeHeader("x-powered-by");
+    res.removeHeader("rndr-id");
+    res.removeHeader("x-render-origin-server");
+  }
+  next();
+});
+
 // Middleware
 app.use(express.json());
 app.use(
@@ -52,22 +66,6 @@ app.use(
     },
   })
 );
-
-// Caching middleware
-app.use((req, res, next) => {
-  if (req.url.startsWith("/assets/models/") || req.url.startsWith("/assets/")) {
-    // Override any existing headers
-    res.setHeader("Cache-Control", "public, max-age=31536000, immutable");
-    res.setHeader("CDN-Cache-Control", "public, max-age=31536000, immutable");
-    // Tell Cloudflare explicitly to cache
-    res.setHeader("Surrogate-Control", "public, max-age=31536000");
-    // Remove headers that might prevent caching
-    res.removeHeader("x-powered-by");
-    res.removeHeader("rndr-id");
-    res.removeHeader("x-render-origin-server");
-  }
-  next();
-});
 
 // Chat endpoint
 app.post("/api/chat", async (req, res) => {
