@@ -668,7 +668,7 @@ function createWorker(self) {
         if (lastView !== viewProj) {
           throttledSort();
         }
-      }, 0);
+      }, 32);
     }
   };
 
@@ -840,6 +840,8 @@ async function main() {
 
   const gl = canvas.getContext("webgl2", {
     antialias: false,
+    powerPreference: "high-performance",
+    depth: false
   });
 
   const vertexShader = gl.createShader(gl.VERTEX_SHADER);
@@ -967,6 +969,11 @@ async function main() {
       vertexCount = e.data.vertexCount;
     }
   };
+  
+  // Add array comparison helper:
+  function arraysEqual(a, b) {
+    return a.length === b.length && a.every((v, i) => v === b[i]);
+  }
 
   let activeKeys = [];
   let currentCameraIndex = 0;
@@ -1450,12 +1457,6 @@ async function main() {
         start = Date.now() + 2000;
       }
       const progress = (100 * vertexCount) / (splatData.length / rowLength);
-      if (progress < 100) {
-        document.getElementById("progress").style.width = progress + "%";
-      } else {
-        document.getElementById("progress").style.display = "none";
-      }
-      fps.innerText = Math.round(avgFps) + " fps";
       
       if (progress < 100) {
         document.getElementById("progress").style.width = progress + "%";
