@@ -676,7 +676,7 @@ function createWorker(self) {
         if (lastView !== viewProj) {
           throttledSort();
         }
-      }, 0);
+      }, 32);
     }
   };
 
@@ -813,8 +813,12 @@ async function main() {
   } catch (err) {}
   const url = new URL("../assets/models/library-2nd.splat", location.href);
   const req = await fetch(url, {
-    mode: "cors", // no-cors, *cors, same-origin
-    credentials: "omit", // include, *same-origin, omit
+    mode: "cors",
+    credentials: "omit",
+    headers: {
+      "Cache-Control": "public, max-age=31536000", // 1 year
+      "CDN-Cache-Control": "public, max-age=31536000",
+    },
   });
   console.log(req);
   if (req.status != 200)
@@ -844,6 +848,8 @@ async function main() {
 
   const gl = canvas.getContext("webgl2", {
     antialias: false,
+    powerPreference: "high-performance",
+    depth: false,
   });
 
   const vertexShader = gl.createShader(gl.VERTEX_SHADER);
@@ -971,6 +977,11 @@ async function main() {
       vertexCount = e.data.vertexCount;
     }
   };
+
+  // Add array comparison helper:
+  function arraysEqual(a, b) {
+    return a.length === b.length && a.every((v, i) => v === b[i]);
+  }
 
   let activeKeys = [];
   let currentCameraIndex = 0;
@@ -1453,12 +1464,6 @@ async function main() {
       start = Date.now() + 2000;
     }
     const progress = (100 * vertexCount) / (splatData.length / rowLength);
-    if (progress < 100) {
-      document.getElementById("progress").style.width = progress + "%";
-    } else {
-      document.getElementById("progress").style.display = "none";
-    }
-    fps.innerText = Math.round(avgFps) + " fps";
 
     if (progress < 100) {
       document.getElementById("progress").style.width = progress + "%";
@@ -1589,7 +1594,14 @@ window.loadNewModel = async function (modelUrl, gl) {
     if (!modelUrl) throw new Error("Model URL is missing.");
 
     // Fetch new model
-    let response = await fetch(modelUrl);
+    let response = await fetch(modelUrl, {
+      mode: "cors",
+      credentials: "omit",
+      headers: {
+        "Cache-Control": "public, max-age=31536000",
+        "CDN-Cache-Control": "public, max-age=31536000",
+      },
+    });
     if (!response.ok)
       throw new Error(`Failed to fetch model: ${response.statusText}`);
 
