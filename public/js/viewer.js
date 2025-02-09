@@ -1,5 +1,6 @@
 let gl = null;
 let worker;
+const modelCache = new Map();
 
 // Popup control logic
 function initializePopupControls() {
@@ -1593,6 +1594,29 @@ window.loadNewModel = async function (modelUrl, gl) {
   try {
     if (!modelUrl) throw new Error("Model URL is missing.");
 
+    // Check cache first
+    if (modelCache.has(modelUrl)) {
+      console.log("Loading model from cache");
+      const cachedData = modelCache.get(modelUrl);
+      
+      // Clear WebGL context
+      if (gl) {
+        gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+      }
+
+      // Reset WebGL worker
+      worker.postMessage({ buffer: null, vertexCount: 0 });
+
+      // Use cached data
+      const rowLength = 3 * 4 + 3 * 4 + 4 + 4;
+      worker.postMessage({
+        buffer: cachedData,
+        vertexCount: Math.floor(cachedData.byteLength / rowLength),
+      });
+
+      return;
+    }
+    
     // Fetch new model
     let response = await fetch(modelUrl, {
       mode: "cors",
@@ -1606,6 +1630,10 @@ window.loadNewModel = async function (modelUrl, gl) {
       throw new Error(`Failed to fetch model: ${response.statusText}`);
 
     let modelData = await response.arrayBuffer();
+    
+    // Store in cache
+    modelCache.set(modelUrl, modelData.slice(0));
+
     console.log(
       "New model loaded successfully:",
       modelData.byteLength,

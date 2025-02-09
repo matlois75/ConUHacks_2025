@@ -28,33 +28,50 @@ const formatConcordiaContext = (info) => {
 };
 
 const CONCORDIA_CONTEXT = formatConcordiaContext(concordiaInfo);
+const CACHE_CONTROL_HEADERS = {
+  "Cache-Control": "public, max-age=31536000, immutable",
+  "CDN-Cache-Control": "public, max-age=31536000, immutable",
+  "Surrogate-Control": "public, max-age=31536000",
+  "Access-Control-Allow-Origin": "*",
+};
 
-// Caching Middleware BEFORE express.static
+// Add CORS middleware first
 app.use((req, res, next) => {
-  if (req.url.startsWith("/assets/models/") || req.url.startsWith("/assets/")) {
-    res.setHeader("Cache-Control", "public, max-age=31536000, immutable");
-    res.setHeader("CDN-Cache-Control", "public, max-age=31536000, immutable");
-    res.setHeader("Surrogate-Control", "public, max-age=31536000");
+  res.set("Access-Control-Allow-Origin", "*");
+  next();
+});
+
+// Then your caching middleware
+app.use((req, res, next) => {
+  // Cache control for static assets
+  if (req.url.startsWith("/assets/") || req.url.startsWith("/js/")) {
+    // Apply cache headers
+    Object.entries(CACHE_CONTROL_HEADERS).forEach(([key, value]) => {
+      res.setHeader(key, value);
+    });
+
     // Remove headers that might prevent caching
     res.removeHeader("x-powered-by");
     res.removeHeader("rndr-id");
     res.removeHeader("x-render-origin-server");
+    res.removeHeader("set-cookie");
+    res.removeHeader("pragma");
+    res.removeHeader("expires");
   }
   next();
 });
 
-// Middleware
-app.use(express.json());
+// Configure static file serving
 app.use(
   express.static(path.join(__dirname, "public"), {
-    maxAge: "1y",
-    etag: true,
-    lastModified: true,
+    maxAge: 31536000000, // 1 year in milliseconds
+    immutable: true,
+    etag: false, // Disable etag to prevent revalidation
+    lastModified: false, // Disable last-modified to prevent revalidation
   })
 );
-app.use("/js", express.static(path.join(__dirname, "js")));
 
-// Compression middleware
+// Compression middleware with correct order
 app.use(
   compression({
     level: 6,
@@ -67,8 +84,16 @@ app.use(
   })
 );
 
-// Chat endpoint
+// Chat endpoint with proper cache headers for dynamic content
 app.post("/api/chat", async (req, res) => {
+  // Set no-cache for dynamic content
+  res.set(
+    "Cache-Control",
+    "no-store, no-cache, must-revalidate, proxy-revalidate"
+  );
+  res.set("Pragma", "no-cache");
+  res.set("Expires", "0");
+
   try {
     const { messages } = req.body;
     const userMessage = messages.find((m) => m.role === "user").content;
