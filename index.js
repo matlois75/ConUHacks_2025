@@ -4,37 +4,58 @@ const compression = require("compression");
 require("dotenv").config();
 
 const app = express();
+app.use(express.json());
 app.set("view engine", "ejs");
+
+// Load Concordia info from JSON file
+const concordiaInfoPath = path.join(__dirname, "public/js/concordia-info.json");
+const concordiaInfo = require(concordiaInfoPath);
+
+const formatConcordiaContext = (info) => {
+  // Summary from several pieces of information
+  const history = info["concordia-general-info"].history.join("\n");
+  const campuses = info["concordia-general-info"].campuses.join(", ");
+  const faculties = info["concordia-general-info"].faculties.join(", ");
+  const dates = JSON.stringify(
+    info["concordia-general-info"].general_dates,
+    null,
+    2
+  );
+
+  return `History:\n${history}\n\nCampuses: ${campuses}\n\nFaculties: ${faculties}\n\nImportant Dates:\n${dates}`;
+};
+
+const CONCORDIA_CONTEXT = formatConcordiaContext(concordiaInfo);
 
 // Cache control headers
 const CACHE_CONTROL_HEADERS = {
-  'Cache-Control': 'public, max-age=31536000, immutable',
-  'CDN-Cache-Control': 'public, max-age=31536000, immutable',
-  'Surrogate-Control': 'public, max-age=31536000',
-  'Access-Control-Allow-Origin': '*',
-  'Vary': 'Accept-Encoding'
+  "Cache-Control": "public, max-age=31536000, immutable",
+  "CDN-Cache-Control": "public, max-age=31536000, immutable",
+  "Surrogate-Control": "public, max-age=31536000",
+  "Access-Control-Allow-Origin": "*",
+  Vary: "Accept-Encoding",
 };
 
 // Add CORS middleware first
 app.use((req, res, next) => {
-  res.set('Access-Control-Allow-Origin', '*');
+  res.set("Access-Control-Allow-Origin", "*");
   next();
 });
 
 // Single caching middleware
 app.use((req, res, next) => {
   // Log the incoming request
-  console.log('Request URL:', req.url);
-  
-  if (req.url.includes('.splat') || req.url.startsWith('/assets/')) {
+  console.log("Request URL:", req.url);
+
+  if (req.url.includes(".splat") || req.url.startsWith("/assets/")) {
     // Log headers before
-    console.log('Before setting headers:', res.getHeaders());
-    
+    console.log("Before setting headers:", res.getHeaders());
+
     // Force caching headers
     Object.entries(CACHE_CONTROL_HEADERS).forEach(([key, value]) => {
       res.setHeader(key, value);
     });
-    
+
     // Remove headers that might prevent caching
     res.removeHeader("x-powered-by");
     res.removeHeader("rndr-id");
@@ -42,43 +63,38 @@ app.use((req, res, next) => {
     res.removeHeader("set-cookie");
     res.removeHeader("pragma");
     res.removeHeader("expires");
-    
+
     // Log headers after
-    console.log('After setting headers:', res.getHeaders());
+    console.log("After setting headers:", res.getHeaders());
   }
   next();
 });
 
 // Configure static file serving - AFTER cache headers
-app.use(express.static(path.join(__dirname, "public"), {
-  maxAge: 31536000000, // 1 year in milliseconds
-  immutable: true,
-  etag: false,
-  lastModified: false
-}));
+app.use(
+  express.static(path.join(__dirname, "public"), {
+    maxAge: 31536000000, // 1 year in milliseconds
+    immutable: true,
+    etag: false,
+    lastModified: false,
+  })
+);
 
 // Compression middleware
-app.use(compression({
-  level: 6,
-  filter: (req, res) => {
-    if (req.url.startsWith("/assets/models/")) {
-      return true;
-    }
-    return compression.filter(req, res);
-  }
-}));
+app.use(
+  compression({
+    level: 6,
+    filter: (req, res) => {
+      if (req.url.startsWith("/assets/models/")) {
+        return true;
+      }
+      return compression.filter(req, res);
+    },
+  })
+);
 
-
-// Chat endpoint with proper cache headers for dynamic content
+// Chat endpoint
 app.post("/api/chat", async (req, res) => {
-  // Set no-cache for dynamic content
-  res.set(
-    "Cache-Control",
-    "no-store, no-cache, must-revalidate, proxy-revalidate"
-  );
-  res.set("Pragma", "no-cache");
-  res.set("Expires", "0");
-
   try {
     const { messages } = req.body;
     const userMessage = messages.find((m) => m.role === "user").content;
