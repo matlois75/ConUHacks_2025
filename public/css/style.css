@@ -24,6 +24,59 @@ body {
   height: auto;
 }
 
+/* Loading notification styles */
+#loading-notification.loading-notification {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 20px 30px;
+  border-radius: 8px;
+  z-index: 1001;
+  text-align: center;
+  backdrop-filter: blur(8px);
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+#loading-notification.loading-notification.hidden {
+  display: none;
+}
+
+#loading-notification .loading-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+#loading-notification .loading-spinner {
+  width: 30px;
+  height: 30px;
+  border: 3px solid #ffffff;
+  border-top: 3px solid transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+#loading-notification p {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+  color: white;
+}
+
 /* Room section layout */
 .rooms-section {
   display: flex;
@@ -362,6 +415,17 @@ body {
     display: none !important;
   }
 
+  /* Loading model notification */
+  #loading-notification.loading-notification {
+    width: 80%;
+    max-width: 300px;
+    padding: 15px 20px;
+  }
+
+  #loading-notification p {
+      font-size: 14px;
+  }
+
   .section {
     padding-left: 0;
     padding-right: 0;
@@ -414,6 +478,7 @@ body {
   }
 
   #viewer-display {
+    position: relative;
     width: 100vw;
     height: calc(var(--vh, 1vh) * 93);
     min-height: unset;

@@ -102,6 +102,10 @@ class RoomManager {
       return;
     }
 
+    // Show loading notification
+    const loadingNotification = document.getElementById('loading-notification');
+    loadingNotification.classList.remove('hidden');
+
     // Update the active state on room cards immediately.
     document.querySelectorAll(".room-card").forEach((card) => {
       card.classList.toggle("active", card.dataset.room === roomId);
@@ -125,6 +129,12 @@ class RoomManager {
     try {
       // Now load the model asynchronously.
       await this.loadRoomModel(roomId);
+
+      // Hide loading notification after 3 seconds
+      setTimeout(() => {
+        loadingNotification.classList.add('hidden');
+      }, 3000);
+
       window.history.pushState({ roomId }, "", `#${roomId}`);
       this.currentRoom = roomId;
       document.dispatchEvent(
@@ -136,6 +146,8 @@ class RoomManager {
       console.error("Error loading room:", error);
       document.getElementById("message").textContent =
         "Error loading room model";
+      // Hide loading notification immediately if there's an error
+      loadingNotification.classList.add('hidden');
     }
   }
 
