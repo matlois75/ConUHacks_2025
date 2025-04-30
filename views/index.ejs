@@ -17,25 +17,16 @@
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Concordia Virtual Tour++</title>
-    <link rel="icon" type="image/png" href="/assets/Concordia_Logo.png" />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/viewer.css" />
 
     <%- include('partials/header', { title: 'Home', css: 'public/css/header.css'
     }) %>
-
-    <div id="sgw_banner">
-      <img
-        src="/assets/sgw_banner.png"
-        alt="Sir George Williams Campus Banner"
-        class="full-width"
-      />
-    </div>
   </head>
 
   <body>
     <section id="about" class="section">
-      <h1>Explore Our University Spaces</h1>
+      <h1>Explore University Spaces</h1>
       <p>
         Welcome to our interactive 3D room explorer. Navigate through different
         spaces and learn about their features and purposes.
@@ -86,13 +77,7 @@
         <div id="viewer-display">
           <div id="fact-overlay" class="fact-overlay">
             <div class="fact-content">
-              <div class="fact-icon">
-                <img
-                  src="assets/Concordia_Logo.png"
-                  alt="Concordia Logo"
-                  class="fact-icon-img"
-                />
-              </div>
+              <div class="fact-icon"></div>
               <p id="fact-text"></p>
             </div>
           </div>
